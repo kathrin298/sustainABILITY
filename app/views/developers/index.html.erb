@@ -1,0 +1,13 @@
+<div class="banner">
+  <%= link_to "I'm a Developer", companies_path, style: "color: red"  %>
+  <%= link_to "I'm a Startup", developers_path%>
+</div>
+
+
+<h1>All developers</h1>
+
+<ul>
+<% @developers.each do |developer| %>
+  <li><%= link_to developer.first_name, developer_path(developer) %></li>
+ <% end %>
+</ul>

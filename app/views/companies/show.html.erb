@@ -11,5 +11,5 @@
 <% end %>
 
 <% if current_user && @company.user == current_user %>
-  <%= link_to 'delete', company_path(@company), method: :delete %>
+  <%= link_to 'Delete account', company_path(@company), method: :delete %>
 <% end %>
