@@ -1,0 +1,14 @@
+<%= simple_form_for(developer) do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :location %>
+  <%= f.input :slogan %>
+  <%= f.input :interests, placeholder: 'Reduce waste, save turtles, help minorities..' %>
+  <%= f.input :bio, input_html: { minlength: 100 } %>
+  <%= f.input :websites, placeholder: 'www.your_website.com' %>
+  <%= f.input :hireable, label: 'Availability' ,collection: Developer::HIREABLE_OPTIONS %>
+  <%= f.input :social_links %>
+  <%= f.input :github_profile_url %>
+
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

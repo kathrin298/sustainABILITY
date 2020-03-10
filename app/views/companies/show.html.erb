@@ -11,5 +11,5 @@
 <% end %>
 
 <% if policy(@company).destroy? %>
-  <%= link_to 'delete', company_path(@company), method: :delete %>
+  <%= link_to 'Delete account', company_path(@company), method: :delete %>
 <% end %>
