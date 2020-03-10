@@ -1,6 +1,10 @@
 class Company < ApplicationRecord
+  INDUSTRIES = ["Agriculture", "Banking & Finance", "Clothing & Textiles",
+                "Consumer Products", "Education", "Energy", "Food",
+                "Foreign Policy", "Health", "Law", "Non-profits",
+                "Research",  "Sport", "Tourism", "Transport", "Waste Management", "Other"]
   belongs_to :user
-  has_one_attached :photos
+  # has_one_attached :photos
 
   has_many :jobs, dependent: :destroy
 
@@ -9,7 +13,6 @@ class Company < ApplicationRecord
 
   has_many :conversations
   has_many :messages, through: :conversations
-
-  validates :photos, :name, :mission, :industry, presence: true
-
+  # photo needs to be added later
+  validates :name, :mission, :industry, presence: true
 end

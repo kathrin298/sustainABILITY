@@ -1,0 +1,15 @@
+<h1><%= @company.name %></h1>
+
+<p>Location: <%= @company.location %></p>
+<p>Mission: <%= @company.mission %></p>
+<p>Industry: <%= @company.industry %></p>
+<p>employees: <%= @company.employees %></p>
+<p>bio: <%= @company.bio %></p>
+
+<% if current_user && @company.user == current_user %>
+  <%= link_to 'edit', edit_company_path(@company) %>
+<% end %>
+
+<% if current_user && @company.user == current_user %>
+  <%= link_to 'delete', company_path(@company), method: :delete %>
+<% end %>
