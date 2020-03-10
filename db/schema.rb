@@ -50,6 +50,24 @@ ActiveRecord::Schema.define(version: 2020_03_10_043841) do
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
+  create_table "company_favourites", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "developer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_favourites_on_company_id"
+    t.index ["developer_id"], name: "index_company_favourites_on_developer_id"
+  end
+
+  create_table "developer_favourites", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "developer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_developer_favourites_on_company_id"
+    t.index ["developer_id"], name: "index_developer_favourites_on_developer_id"
+  end
+
   create_table "developer_skills", force: :cascade do |t|
     t.bigint "skill_id"
     t.bigint "developer_id"
@@ -130,6 +148,10 @@ ActiveRecord::Schema.define(version: 2020_03_10_043841) do
   add_foreign_key "applications", "developers"
   add_foreign_key "applications", "jobs"
   add_foreign_key "companies", "users"
+  add_foreign_key "company_favourites", "companies"
+  add_foreign_key "company_favourites", "developers"
+  add_foreign_key "developer_favourites", "companies"
+  add_foreign_key "developer_favourites", "developers"
   add_foreign_key "developer_skills", "developers"
   add_foreign_key "developer_skills", "skills"
   add_foreign_key "developers", "users"
