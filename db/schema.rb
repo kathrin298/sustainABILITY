@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_042713) do
+ActiveRecord::Schema.define(version: 2020_03_10_043841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.text "content"
+    t.bigint "question_id"
+    t.bigint "application_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_id"], name: "index_answers_on_application_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "applications", force: :cascade do |t|
+    t.bigint "developer_id"
+    t.bigint "job_id"
+    t.string "status", default: "pending"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["developer_id"], name: "index_applications_on_developer_id"
+    t.index ["job_id"], name: "index_applications_on_job_id"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -79,6 +99,14 @@ ActiveRecord::Schema.define(version: 2020_03_10_042713) do
     t.index ["company_id"], name: "index_jobs_on_company_id"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.text "content"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_questions_on_job_id"
+  end
+
   create_table "skills", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -97,6 +125,10 @@ ActiveRecord::Schema.define(version: 2020_03_10_042713) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "answers", "applications"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "applications", "developers"
+  add_foreign_key "applications", "jobs"
   add_foreign_key "companies", "users"
   add_foreign_key "developer_skills", "developers"
   add_foreign_key "developer_skills", "skills"
@@ -104,4 +136,5 @@ ActiveRecord::Schema.define(version: 2020_03_10_042713) do
   add_foreign_key "job_skills", "jobs"
   add_foreign_key "job_skills", "skills"
   add_foreign_key "jobs", "companies"
+  add_foreign_key "questions", "jobs"
 end
