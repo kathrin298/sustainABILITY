@@ -1,0 +1,12 @@
+<%= simple_form_for(company) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :location %>
+  <%= f.input :industry, collection: Company::INDUSTRIES %>
+  <%= f.input :employees, label: 'Number of employees' %>
+  <%= f.input :mission, placeholder: 'Reduce waste, save turtles, help minorities..' %>
+  <%= f.input :bio, input_html: { minlength: 100 } %>
+  <%= f.input :website, placeholder: 'www.company_website.com' %>
+  <%= f.input :video_url, label: 'Post video URL here if available' %>
+
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

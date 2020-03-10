@@ -12,9 +12,9 @@ class Company < ApplicationRecord
   has_many :company_favourites, dependent: :destroy
   has_many :developer_favourites, dependent: :destroy
 
-  # validates :photo, presence: true
-  validates :name, :mission, :industry, presence: true
-
   has_many :conversations
   has_many :messages, through: :conversations
+  
+  # validates :photo, presence: true
+  validates :name, :mission, :industry, presence: true
 end
