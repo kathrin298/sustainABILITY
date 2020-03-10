@@ -1,18 +1,21 @@
 class CompaniesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :find_company, only: [:show, :edit, :destroy, :update]
 
   def index
-    @companies = Company.all
+    @companies = policy_scope(Company).order(created_at: :desc)
   end
 
   def show; end
 
   def new
     @company = Company.new
+    authorize @company
   end
 
   def create
     @company = Company.new(company_params)
+    authorize @company
     @company.user = current_user
     if @company.save
       redirect_to company_path(@company)
@@ -44,5 +47,6 @@ class CompaniesController < ApplicationController
 
   def find_company
     @company = Company.find(params[:id])
+    authorize @company
   end
 end

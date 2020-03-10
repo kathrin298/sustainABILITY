@@ -6,10 +6,10 @@
 <p>employees: <%= @company.employees %></p>
 <p>bio: <%= @company.bio %></p>
 
-<% if current_user && @company.user == current_user %>
-  <%= link_to 'edit', edit_company_path(@company) %>
+<% if policy(@company).edit? %>
+  <%= link_to "edit", edit_company_path(@company) %>
 <% end %>
 
-<% if current_user && @company.user == current_user %>
+<% if policy(@company).destroy? %>
   <%= link_to 'Delete account', company_path(@company), method: :delete %>
 <% end %>
