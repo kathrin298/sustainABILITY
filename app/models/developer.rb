@@ -18,6 +18,9 @@ class Developer < ApplicationRecord
   has_many :developer_skills, dependent: :destroy
   has_many :skills, through: :developer_skills, dependent: :destroy
 
+  has_many :conversations
+  has_many :messages, through: :conversations
+
   validates :first_name, :last_name, presence: true
   validates :hireable, inclusion: { in: HIREABLE_OPTIONS }, presence: true
 

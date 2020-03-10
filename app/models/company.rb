@@ -15,4 +15,6 @@ class Company < ApplicationRecord
   # validates :photo, presence: true
   validates :name, :mission, :industry, presence: true
 
+  has_many :conversations
+  has_many :messages, through: :conversations
 end
