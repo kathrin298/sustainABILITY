@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_043841) do
+ActiveRecord::Schema.define(version: 2020_03_10_065341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,33 @@ ActiveRecord::Schema.define(version: 2020_03_10_043841) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "company_favourites", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "developer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_favourites_on_company_id"
+    t.index ["developer_id"], name: "index_company_favourites_on_developer_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "developer_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_conversations_on_company_id"
+    t.index ["developer_id"], name: "index_conversations_on_developer_id"
+  end
+
+  create_table "developer_favourites", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "developer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_developer_favourites_on_company_id"
+    t.index ["developer_id"], name: "index_developer_favourites_on_developer_id"
   end
 
   create_table "developer_skills", force: :cascade do |t|
@@ -99,12 +126,32 @@ ActiveRecord::Schema.define(version: 2020_03_10_043841) do
     t.index ["company_id"], name: "index_jobs_on_company_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "conversation_id"
+    t.text "content"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "content"
     t.bigint "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["job_id"], name: "index_questions_on_job_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "application_id"
+    t.text "content"
+    t.integer "rating"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_id"], name: "index_reviews_on_application_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -130,11 +177,20 @@ ActiveRecord::Schema.define(version: 2020_03_10_043841) do
   add_foreign_key "applications", "developers"
   add_foreign_key "applications", "jobs"
   add_foreign_key "companies", "users"
+  add_foreign_key "company_favourites", "companies"
+  add_foreign_key "company_favourites", "developers"
+  add_foreign_key "conversations", "companies"
+  add_foreign_key "conversations", "developers"
+  add_foreign_key "developer_favourites", "companies"
+  add_foreign_key "developer_favourites", "developers"
   add_foreign_key "developer_skills", "developers"
   add_foreign_key "developer_skills", "skills"
   add_foreign_key "developers", "users"
   add_foreign_key "job_skills", "jobs"
   add_foreign_key "job_skills", "skills"
   add_foreign_key "jobs", "companies"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "questions", "jobs"
+  add_foreign_key "reviews", "applications"
 end
