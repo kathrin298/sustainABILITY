@@ -4,6 +4,7 @@ class Application < ApplicationRecord
   belongs_to :job
   has_many :answers, dependent: :destroy
   has_one :review, dependent: :destroy
+  has_many :questions, through: :job
 
   validates :status, inclusion: [ in: STATUS]
 end
