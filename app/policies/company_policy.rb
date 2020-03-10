@@ -5,7 +5,7 @@ class CompanyPolicy < ApplicationPolicy
     end
   end
 
-  def index?
+  def create?
     return true
   end
 
@@ -13,7 +13,15 @@ class CompanyPolicy < ApplicationPolicy
     return true
   end
 
-  def create?
-    return true
+  def edit?
+    record.user == user
+  end
+
+  def update?
+    record.user == user
+  end
+
+  def destroy?
+    record.user == user
   end
 end
