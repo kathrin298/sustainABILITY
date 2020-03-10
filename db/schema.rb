@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_004428) do
+ActiveRecord::Schema.define(version: 2020_03_10_034451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.bigint "user_id"
+    t.text "mission"
+    t.integer "employees"
+    t.string "industry"
+    t.text "bio"
+    t.string "website"
+    t.string "video_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "developer_skills", force: :cascade do |t|
+    t.bigint "skill_id"
+    t.bigint "developer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["developer_id"], name: "index_developer_skills_on_developer_id"
+    t.index ["skill_id"], name: "index_developer_skills_on_skill_id"
+  end
 
   create_table "developers", force: :cascade do |t|
     t.string "first_name"
@@ -32,6 +56,35 @@ ActiveRecord::Schema.define(version: 2020_03_10_004428) do
     t.index ["user_id"], name: "index_developers_on_user_id"
   end
 
+  create_table "job_skills", force: :cascade do |t|
+    t.bigint "skill_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_job_skills_on_job_id"
+    t.index ["skill_id"], name: "index_job_skills_on_skill_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string "job_title"
+    t.text "job_description"
+    t.boolean "active"
+    t.bigint "company_id"
+    t.string "location"
+    t.boolean "remote"
+    t.date "start_date"
+    t.string "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_jobs_on_company_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -44,5 +97,11 @@ ActiveRecord::Schema.define(version: 2020_03_10_004428) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "companies", "users"
+  add_foreign_key "developer_skills", "developers"
+  add_foreign_key "developer_skills", "skills"
   add_foreign_key "developers", "users"
+  add_foreign_key "job_skills", "jobs"
+  add_foreign_key "job_skills", "skills"
+  add_foreign_key "jobs", "companies"
 end

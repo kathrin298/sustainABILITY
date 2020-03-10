@@ -10,14 +10,13 @@ class Developer < ApplicationRecord
   has_many :conversations, dependent: :destroy
   has_many :messages, through: :conversations, dependent: :destroy
 
+  has_many :company_favourites, dependent: :destroy
   has_many :developer_favourites, dependent: :destroy
-  has_many :companies, through: :developer_favourites, dependent: :destroy
 
   has_many :developer_skills, dependent: :destroy
   has_many :skills, through: :developer_skills, dependent: :destroy
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :first_name, :last_name, presence: true
   validates :hireable, inclusion: { in: HIREABLE_OPTIONS }, presence: true
 
   def social_icon(social_link)
