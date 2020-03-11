@@ -13,9 +13,11 @@ Rails.application.routes.draw do
 
   resources :jobs, only: [:show, :index, :edit, :update, :destroy] do
     resources :applications, only: [:new, :create]
+    resources :questions, only: [:new, :create]
   end
 
   resources :applications, only: [:show, :edit, :update, :destroy]
+  resources :questions, only: [:edit, :update, :destroy]
   resources :conversations, only: [:index, :create, :destroy]
   resources :developer_favorites, only: [:index]
   resources :company_favorites, only: [:index]

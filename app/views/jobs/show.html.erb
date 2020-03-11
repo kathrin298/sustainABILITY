@@ -3,5 +3,17 @@
 <p><%= @job.job_description %> </p>
 
 <!-- pundit needs to be set up here -->
-<%= link_to 'edit', edit_job_path(@job) %>
-<%= link_to 'delete', job_path(@job), method: :delete %>
+<%= link_to 'edit job posting', edit_job_path(@job) %>
+<br>
+<%= link_to 'delete job posting', job_path(@job), method: :delete %>
+
+<!-- only showing application questions and edit/delete if the company owns the jobs posting -->
+<% if current_user && current_user == @job.company.user %>
+  <h3>Application questions</h3>
+  <%= link_to 'Add new question', new_job_question_path(@job) %>
+  <ul>
+    <% @questions.each do |question| %>
+      <li> <%= question.content %> <%= link_to 'edit', edit_question_path(question) %> <%= link_to 'delete', question_path(question), method: :delete %></li>
+    <% end %>
+  </ul>
+<% end %>
