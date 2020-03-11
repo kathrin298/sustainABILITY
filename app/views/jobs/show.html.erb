@@ -2,6 +2,8 @@
 
 <p><%= @job.job_description %> </p>
 
+<p>Company: <%= @job.company.name %></p>
+
 <!-- Apply button only showing to developers -->
 <% if current_user && current_user.developer %>
   <%= link_to 'Apply now', new_job_application_path(@job) %>
