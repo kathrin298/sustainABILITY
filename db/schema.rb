@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_065341) do
+ActiveRecord::Schema.define(version: 2020_03_11_024247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 2020_03_10_065341) do
   create_table "jobs", force: :cascade do |t|
     t.string "job_title"
     t.text "job_description"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.bigint "company_id"
     t.string "location"
     t.boolean "remote"
