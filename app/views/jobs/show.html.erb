@@ -2,6 +2,12 @@
 
 <p><%= @job.job_description %> </p>
 
+<!-- Apply button only showing to developers -->
+<% if current_user && current_user.developer %>
+  <%= link_to 'Apply now', new_job_application_path(@job) %>
+<% end %>
+<br>
+
 <!-- pundit needs to be set up here -->
 <%= link_to 'edit job posting', edit_job_path(@job) %>
 <br>

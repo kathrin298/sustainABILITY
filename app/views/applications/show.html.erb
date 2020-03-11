@@ -1,0 +1,10 @@
+<h1>Application for <%= @application.job.job_title %> </h1>
+
+  <% @questions.each do |question| %>
+    <p><%= question.content %></p>
+    <p><%= question.answers.where(developer: current_user.developer).last.content %></p>
+  <% end %>
+
+  <p>Status: <%= @application.status %></p>
+
+

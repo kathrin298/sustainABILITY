@@ -7,5 +7,6 @@ class PagesController < ApplicationController
   def dashboard
     @company = current_user.company
     @jobs = Job.where(company: @company)
+    @applications = Application.where(developer: current_user.developer)
   end
 end
