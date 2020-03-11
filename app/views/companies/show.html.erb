@@ -1,15 +1,55 @@
-<h1><%= @company.name %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <div style="width:500px; height:300px;">
+         <img class="avatar-huge" alt="avatar-huge" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" />
+      </div>
+    </div>
+      <div class="col-6">
+        <h1><%= @company.name %></h1>
+        <p>Location: <%= @company.location %></p>
+        <p>Mission: <%= @company.mission %></p>
+        <p>Industry: <%= @company.industry %></p>
+        <p>employees: <%= @company.employees %></p>
+        <p>bio: <%= @company.bio %></p>
+      </div>
+        <div class="col-3">
+          <a class="btn btn-flat d-block" href="#"> <i class="fab fa-telegram-plane"></i> Send message</a>
+          <a class="btn btn-flat d-block" href="#"> <i class="far fa-heart"></i> </a>
+          <i class="fab fa-github"></i>
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-twitter"></i>
+        </div>
+  </div>
+    <div>
 
-<p>Location: <%= @company.location %></p>
-<p>Mission: <%= @company.mission %></p>
-<p>Industry: <%= @company.industry %></p>
-<p>employees: <%= @company.employees %></p>
-<p>bio: <%= @company.bio %></p>
+    </div>
+    <div class="card-product">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+        <div class="card-product-infos">
+          <h2>Product name</h2>
+          <p>Posted date</p>
+          <p>Description</p>
+        </div>
+    </div>
+    <div class="card-product">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+        <div class="card-product-infos">
+          <h2>Product name</h2>
+          <p>Posted date</p>
+          <p>Description</p>
+        </div>
+    </div>
 
-<% if policy(@company).edit? %>
-  <%= link_to "edit", edit_company_path(@company) %>
-<% end %>
 
-<% if policy(@company).destroy? %>
-  <%= link_to 'Delete account', company_path(@company), method: :delete %>
-<% end %>
+
+
+
+  <% if policy(@company).edit? %>
+    <%= link_to "edit", edit_company_path(@company) %>
+  <% end %>
+
+  <% if policy(@company).destroy? %>
+    <%= link_to 'Delete account', company_path(@company), method: :delete %>
+  <% end %>
+</div>
