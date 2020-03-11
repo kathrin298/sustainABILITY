@@ -2,14 +2,14 @@ class QuestionsController < ApplicationController
   before_action :find_question, only: [:edit, :update, :destroy]
 
   def new
-    skip_authorization
     @question = Question.new
+    authorize @question
     @job = Job.find(params[:job_id].to_i)
   end
 
   def create
-    skip_authorization
     @question = Question.new(question_params)
+    authorize @question
     @job = Job.find(params[:job_id].to_i)
     @question.job = @job
 
@@ -21,12 +21,9 @@ class QuestionsController < ApplicationController
 
   end
 
-  def edit
-    skip_authorization
-  end
+  def edit; end
 
   def update
-    skip_authorization
     if @question.update(question_params)
       redirect_to job_path(@question.job)
     else
@@ -35,7 +32,6 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    skip_authorization
     @question.destroy
     redirect_to job_path(@question.job)
   end
@@ -48,5 +44,6 @@ class QuestionsController < ApplicationController
 
   def find_question
     @question = Question.find(params[:id])
+    authorize @question
   end
 end

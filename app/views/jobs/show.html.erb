@@ -1,14 +1,18 @@
-<h1> <%= @job.job_title %></h1>
+<h1> <%= @job.job_title %>  (job owned by <%= @job.company.user.email%> )</h1>
 
 <p><%= @job.job_description %> </p>
 
 <!-- pundit needs to be set up here -->
-<%= link_to 'edit job posting', edit_job_path(@job) %>
+<% if policy(@job).edit? %>
+  <%= link_to 'edit job posting', edit_job_path(@job) %>
+<% end %>
 <br>
-<%= link_to 'delete job posting', job_path(@job), method: :delete %>
-
+<% if policy(@job).destroy? %>
+  <%= link_to 'delete job posting', job_path(@job), method: :delete %>
+<% end %>
 <!-- only showing application questions and edit/delete if the company owns the jobs posting -->
-<% if current_user && current_user == @job.company.user %>
+<%# if current_user && current_user == @job.company.user %>
+<% if policy(@job).edit? %>
   <h3>Application questions</h3>
   <%= link_to 'Add new question', new_job_question_path(@job) %>
   <ul>
