@@ -1,22 +1,64 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80);">
   <div class="customer-segment-selector">
-    <%= link_to "I'm a Developer", companies_path, class: "btn btn-developer current" %>
-    <%= link_to "I'm a Startup", developers_path, class: "btn btn-startup" %>
+    <%= link_to "I'm a Developer", companies_path, class: "btn banner-button developer-button-current" %>
+    <%= link_to "I'm a Startup", developers_path, class: "btn banner-button startup-button" %>
   </div>
   <div class="banner-text">
     <h1>Do You Want to Gain Experience While Supporting Projects You Love?</h1>
     <p>Find Your Match Now!</p>
-    <a class="btn btn-flat" href="#">Search</a>
+    <div class="banner-search-bar">
+      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+      <a class="btn btn-flat" href="#">Search</a>
+    </div>
   </div>
 </div>
 <div class="container">
-  <hr>
-  <div class="banner">
+  <div class="unique-value-proposition">
+    <h1>Improve Your Coding and Support Mission-Driven Companies!</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem reiciendis corporis officia aut, fuga cumque odio cupiditate minus voluptatem consectetur, quam mollitia eum suscipit, sunt quas magni vel ab commodi!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat incidunt nemo in quasi praesentium est ratione officiis sed unde, excepturi sit, rerum id aperiam consequatur commodi reiciendis aliquam quis veritatis.</p>
   </div>
-
-
+</div>
+<div class="city-carousel">
+  <div class="container">
+    <div class="carousel-title">
+      <h1>Find a startup in your city:</h1>
+    </div>
+    <div class="carousel">
+      <% @companies.each do |company| %>
+      <%= link_to company_path(company) do %>
+        <div class="landing-page-card d-block">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto">
+          <h1><%= company.name %></h1>
+          <p class="mission"><%= company.industry %></p>
+          <p><%= company.location %></p>
+        </div>
+      <% end %>
+      <% end %>
+      <% @companies.each do |company| %>
+        <div class="landing-page-card d-block">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto">
+          <h1><%= company.name %></h1>
+          <p class="mission"><%= company.industry %></p>
+          <p><%= company.location %></p>
+        </div>
+      <% end %>
+      <% @companies.each do |company| %>
+        <div class="landing-page-card d-block ">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto">
+          <h1><%= company.name %></h1>
+          <p class="mission"><%= company.industry %></p>
+          <p><%= company.location %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <br>
+  <hr>
+  <br>
   <h1>All companies</h1>
-
   <ul>
   <% @companies.each do |company| %>
     <li><%= link_to company.name, company_path(company) %></li>

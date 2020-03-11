@@ -17,6 +17,8 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'faker'
 gem 'pundit'
+gem 'jquery-slick-rails'
+gem 'jquery-rails'
 
 
 group :development do
