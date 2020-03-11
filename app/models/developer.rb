@@ -1,7 +1,7 @@
 class Developer < ApplicationRecord
   HIREABLE_OPTIONS = ['Currently available', 'Open to offers', 'Not available']
   belongs_to :user
-  # has_one_attached :photos
+  has_one_attached :photo
 
   # These will await the application models
   # has_many :applications, dependent: :destroy

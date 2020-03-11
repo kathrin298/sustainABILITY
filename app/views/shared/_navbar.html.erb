@@ -21,7 +21,13 @@
           <%= link_to "New dev profile", new_developer_path, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <% if current_user.company && current_user.company.photo.attached? %>
+            <%= cl_image_tag current_user.company.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <% elsif current_user.developer && current_user.developer.photo.attached? %>
+            <%= cl_image_tag current_user.developer.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <% else %>
+            <%= image_tag "user.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <% end %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "My profile", "#", class: "dropdown-item" %>
             <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
