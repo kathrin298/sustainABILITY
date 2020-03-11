@@ -1,13 +1,25 @@
-<div class="banner">
-  <%= link_to "I'm a Developer", companies_path %>
-  <%= link_to "I'm a Startup", developers_path, style: "color: red" %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80);">
+  <div class="customer-segment-selector">
+    <%= link_to "I'm a Developer", companies_path, class: "btn btn-developer current" %>
+    <%= link_to "I'm a Startup", developers_path, class: "btn btn-startup" %>
+  </div>
+  <div class="banner-text">
+    <h1>Do You Want to Gain Experience While Supporting Projects You Love?</h1>
+    <p>Find Your Match Now!</p>
+    <a class="btn btn-flat" href="#">Search</a>
+  </div>
 </div>
+<div class="container">
+  <hr>
+  <div class="banner">
+  </div>
 
 
-<h1>All companies</h1>
+  <h1>All companies</h1>
 
-<ul>
-<% @companies.each do |company| %>
-  <li><%= link_to company.name, company_path(company) %></li>
- <% end %>
-</ul>
+  <ul>
+  <% @companies.each do |company| %>
+    <li><%= link_to company.name, company_path(company) %></li>
+   <% end %>
+  </ul>
+</div>
