@@ -7,4 +7,4 @@
 
   <p>Status: <%= @application.status %></p>
 
-
+  <p>Applicant: <%= link_to @application.developer.first_name + ' ' + @application.developer.last_name, developer_path(@application.developer) %></p>
