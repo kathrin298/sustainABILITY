@@ -1,49 +1,53 @@
 <div class="container">
-  <div class="row">
-    <div class="col-3">
-      <div style="width:500px; height:300px;">
-         <img class="avatar-huge" alt="avatar-huge" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" />
-      </div>
-    </div>
-      <div class="col-6">
-        <h1><%= @company.name %></h1>
-        <p>Location: <%= @company.location %></p>
-        <p>Mission: <%= @company.mission %></p>
-        <p>Industry: <%= @company.industry %></p>
-        <p>employees: <%= @company.employees %></p>
-        <p>bio: <%= @company.bio %></p>
-      </div>
-         <!-- button for send message and add favrite, and social media icon -->
-        <div class="col-3">
-          <div class="text-center">
-            <a class="btn btn-flat" href="#"> <i class="fab fa-telegram-plane"></i> Send message</a>
-            <a class="btn btn-flat" href="#"> <i class="far fa-heart"></i> </a>
-          </div>
-          <div class="d-flex justify-content-between icon-wrapper mx-auto">
-            <i class="fab fa-github fa-lg"></i>
-            <i class="fab fa-facebook fa-lg"></i>
-            <i class="fab fa-twitter fa-lg"></i>
-            <i class="fab fa-linkedin fa-lg"></i>
-          </div>
+  <div class="card-trip">
+    <div class="row my-5">
+      <div class="col-3">
+        <div style="width:500px; height:300px;">
+           <img class="avatar-huge" alt="avatar-huge" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" />
         </div>
+      </div>
+        <div class="col-6">
+          <h2><%= @company.name %></h2>
+          <h5><strong>Location:</strong> <%= @company.location %></h5>
+          <h5><strong>Mission:</strong> <%= @company.mission %></h5>
+          <h5><strong>Industry:</strong> <%= @company.industry %></h5>
+          <h5><strong>Employees:</strong> <%= @company.employees %></h5>
+        </div>
+           <!-- button for send message and add favrite, and social media icon -->
+          <div class="col-3">
+            <div class="text-center">
+              <a class="btn btn-flat favorite" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
+              <a class="btn btn-flat message" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+            </div>
+              <div class="d-flex justify-content-between icon-wrapper">
+                <i class="fab fa-github fa-2x"></i>
+                <i class="fab fa-facebook fa-2x"></i>
+                <i class="fab fa-twitter fa-2x"></i>
+                <i class="fab fa-linkedin fa-2x"></i>
+              </div>
+          </div>
+    </div>
   </div>
-          <!-- video -->
-    <div class="video-section">
-      <img src="https://cloud.addictivetips.com/wp-content/uploads/2018/12/screenshot-youtube.jpg" alt="">
+    <div class="col-14">
+                <!-- video -->
+      <div class="video-section">
+         <img class="video" src="https://cloud.addictivetips.com/wp-content/uploads/2018/12/screenshot-youtube.jpg" alt="">
+      </div>
     </div>
-      <!-- bio about company -->
-    <div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum tempora itaque, nobis impedit quo sint officiis placeat tenetur, adipisci debitis culpa nulla explicabo praesentium laboriosam velit ea dolore blanditiis incidunt!</p>
-    </div>
-        <!-- startup project card -->
-    <div class="card-product">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
-        <div class="card-product-infos">
-          <h2>Product name</h2>
-          <p>Posted date</p>
-          <p>Description</p>
+       <!-- bio about company -->
+      <div>
+        <p>bio: <%= @company.bio %> - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eum maiores sequi, laboriosam expedita quisquam recusandae placeat veniam vero, ratione optio nisi hic voluptas dignissimos, assumenda nemo ab quidem cupiditate.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam praesentium fugit perspiciatis, quasi quae magni amet minus iure et quia obcaecati labore voluptatum porro a, error aliquid ullam adipisci pariatur.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam delectus aliquam molestias quo eveniet iure, dolorem, quis magni non dolore aut distinctio odit consequatur fugit ipsa laboriosam quia labore. Temporibus.</p>
+      </div>
+          <!-- startup project card -->
+        <div class="card-product">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+          <div class="card-product-infos">
+            <h2>Product name</h2>
+            <p>Description</p>
+          </div>
         </div>
-    </div>
         <div class="card-product">
           <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
             <div class="card-product-infos">

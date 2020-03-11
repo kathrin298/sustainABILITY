@@ -2,11 +2,12 @@
   overflow: hidden;
   height: 120px;
   background: white;
+  border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .card-product img {
@@ -31,4 +32,25 @@
 
 .card-product .card-product-infos {
   padding: 16px;
+}
+
+.video {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+h2 {
+  margin-top: 20px;
+}
+h5 {
+  margin-top: 20px;
+}
+
+.video {
+  padding: 0px;
+}
+
+.card-trip {
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 15px;
 }
