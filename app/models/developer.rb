@@ -21,6 +21,8 @@ class Developer < ApplicationRecord
   has_many :conversations
   has_many :messages, through: :conversations
 
+  has_many :answers
+
   validates :first_name, :last_name, presence: true
   validates :hireable, inclusion: { in: HIREABLE_OPTIONS }, presence: true
 
