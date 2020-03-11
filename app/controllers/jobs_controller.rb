@@ -3,6 +3,7 @@ class JobsController < ApplicationController
 
   def show
     skip_authorization
+    @questions = @job.questions
   end
 
   def new
@@ -16,6 +17,14 @@ class JobsController < ApplicationController
     @job = Job.new(job_params)
     @company = Company.find(params[:company_id])
     @job.company = @company
+
+    Question::DEFAULT_QUESTIONS.each do |question|
+      @question = Question.new(content: question)
+      @question.job = @job
+      @question.save
+      @job.questions << @question
+    end
+
     if @job.save
       redirect_to job_path(@job)
     else
