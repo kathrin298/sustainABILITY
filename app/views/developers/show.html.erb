@@ -13,3 +13,15 @@
 <% if current_user && @developer.user == current_user %>
   <%= link_to 'Delete account', developer_path(@developer), method: :delete %>
 <% end %>
+
+<hr>
+<h3>Pundit test</h3>
+<% if policy(@developer).edit? %>
+  <%= link_to 'edit', edit_developer_path(@developer) %>
+<% end %>
+
+<% if policy(@developer).destroy? %>
+  <%= link_to "DeleteAccount", registration_path(:user),
+    method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }  %>
+<% end %>
+
