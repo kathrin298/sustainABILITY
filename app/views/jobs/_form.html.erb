@@ -1,0 +1,11 @@
+<%= simple_form_for([company, job]) do |f| %>
+
+  <%= f.input :job_title %>
+  <%= f.input :job_description %>
+  <%= f.input :location %>
+  <%= f.input :remote, collection: Job::REMOTE %>
+  <%= f.input :start_date, collection: Job::START_DATES %>
+  <%= f.input :duration, collection: Job::DURATIONS %>
+
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

@@ -5,32 +5,27 @@ Developer.destroy_all
 User.destroy_all
 # .destroy_all
 
-DEV_EMAILS = ['ivan@email.com', 'brandon@email.com', 'john@email.com', 'kathrin@email.com']
+DEV_NAMES = ['ivan', 'brandon', 'john', 'kathrin',]
 COMPANY_EMAILS = ['jimmy@saveworld.com', 'tommy@renewables.com', 'sven@infotech.com', 'bruce@turbines.com']
 INTERESTS = ['Environmentalism', 'Clean Oceans', 'Plastic reduction', 'Climate Change', 'Eco-tourism',
              'Renewable Energy', 'Health Sciences', 'Waste Managment']
 
 puts "seeding developer users..."
-DEV_USERS = []
-DEV_EMAILS.each do |email|
+
+DEV_NAMES.each do |name|
   user = User.new
-  user.email = email
+  user.email = "#{name}@email.com"
   user.password = 'password'
   user.save
-  DEV_USERS << user
-end
-puts "Seeded dev #{User.all.size} Users"
 
-puts "seeding developers..."
-9.times do
   dev = Developer.new
-  dev.first_name = Faker::Name.name.split[0]
+  dev.first_name = name
   dev.last_name = Faker::Name.name.split[1]
   dev.hireable = Developer::HIREABLE_OPTIONS.sample
-  dev.user = DEV_USERS.sample
   dev.bio = Faker::Lorem.paragraph(sentence_count: rand(10), supplemental: false, random_sentences_to_add: rand(6))
   dev.location = Faker::Address.city
   dev.interests = INTERESTS.sample
+  dev.user = user
   rand(3).times do
     dev.websites = Faker::Internet.domain_name
   end
@@ -43,21 +38,16 @@ puts "Seeded #{Developer.all.size} Developers"
 
 
 puts "seeding company users..."
-COMPANY_USERS = []
+
 COMPANY_EMAILS.each do |email|
   user = User.new
   user.email = email
   user.password = 'password'
   user.save
-  COMPANY_USERS << user
-end
-puts "Seeded #{User.all.size} Company Users"
 
-puts "seeding companies..."
-3.times do
   company = Company.new
   company.name = Faker::Company.name
-  company.user = COMPANY_USERS.sample
+  company.user = user
   company.bio = Faker::Lorem.paragraph(sentence_count: rand(10), supplemental: false, random_sentences_to_add: rand(6))
   company.location = Faker::Address.city
   company.mission = Faker::Lorem.paragraph(sentence_count: rand(9), supplemental: false, random_sentences_to_add: rand(6))
@@ -66,8 +56,6 @@ puts "seeding companies..."
   company.website = Faker::Internet.domain_name
   company.save
 
-  # Give some jobs to that company
-  puts "seeding jobs..."
   rand(0..4).times do
     job = Job.new
     job.job_title = "#{Faker::ProgrammingLanguage.name} developer"
