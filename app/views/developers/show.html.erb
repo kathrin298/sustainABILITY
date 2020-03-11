@@ -5,16 +5,9 @@
 <p>slogan: <%= @developer.slogan %></p>
 <p>hireable: <%= @developer.hireable %></p>
 <p>bio: <%= @developer.bio %></p>
+<p>websites: <%= @developer.websites %></p>
 
-<% if current_user && @developer.user == current_user %>
-  <%= link_to 'edit', edit_developer_path(@developer) %>
-<% end %>
 
-<% if current_user && @developer.user == current_user %>
-  <%= link_to 'Delete account', developer_path(@developer), method: :delete %>
-<% end %>
-
-<hr>
 <h3>Pundit test</h3>
 <% if policy(@developer).edit? %>
   <%= link_to 'edit', edit_developer_path(@developer) %>
