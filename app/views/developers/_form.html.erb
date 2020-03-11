@@ -9,6 +9,7 @@
   <%= f.input :hireable, label: 'Availability' ,collection: Developer::HIREABLE_OPTIONS %>
   <%= f.input :social_links %>
   <%= f.input :github_profile_url %>
+  <%= f.input :photo, as: :file %>
 
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
