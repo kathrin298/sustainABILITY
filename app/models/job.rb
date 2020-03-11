@@ -5,6 +5,8 @@ class Job < ApplicationRecord
 
   belongs_to :company
   has_many :questions, dependent: :destroy
+  has_many :answers, through: :questions, dependent: :destroy
+  has_many :applications, dependent: :destroy
 
   validates :job_title, :job_description, presence: true
 end

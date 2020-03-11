@@ -10,3 +10,10 @@
     <li><%= link_to job.job_title, job_path(job) %></li>
   <% end %>
 </ul>
+
+<h2>My Applications</h2>
+<ul>
+  <% @applications.each do |application| %>
+    <li><%= link_to application.job.job_title, application_path(application) %> </li>
+  <% end %>
+</ul>
