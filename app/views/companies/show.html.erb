@@ -45,11 +45,14 @@
 
 
 
+
   <% if policy(@company).edit? %>
     <%= link_to "edit", edit_company_path(@company) %>
   <% end %>
 
+
   <% if policy(@company).destroy? %>
-    <%= link_to 'Delete account', company_path(@company), method: :delete %>
+    <%= link_to "DeleteAccount", registration_path(:user),
+      method: :delete, data: { confirm: "Are you sure you want to delete your company account?" }  %>
   <% end %>
 </div>

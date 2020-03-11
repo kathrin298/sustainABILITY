@@ -1,18 +1,21 @@
 class DevelopersController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :find_developer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @developers = Developer.all
+    @developers = policy_scope(Developer).order(created_at: :desc)
   end
 
   def show; end
 
   def new
     @developer = Developer.new
+    authorize @developer
   end
 
   def create
     @developer = Developer.new(developer_params)
+    authorize @developer
     @developer.user = current_user
     if @developer.save
       redirect_to developer_path(@developer)
@@ -31,18 +34,17 @@ class DevelopersController < ApplicationController
     end
   end
 
-  def destroy
-    @developer.destroy
-    redirect_to destroy_user_session_path
-  end
+  def destroy; end
 
   private
 
   def developer_params
-    params.require(:developer).permit(:first_name, :last_name, :location, :bio, :slogan, :interests, :hireable, :websites, :social_links, :user, :github_profile_url)
+    params.require(:developer).permit(:first_name, :last_name, :location, :bio, :slogan, :interests,
+                                      :hireable, :websites, :social_links, :user, :github_profile_url)
   end
 
   def find_developer
     @developer = Developer.find(params[:id])
+    authorize @developer
   end
 end
