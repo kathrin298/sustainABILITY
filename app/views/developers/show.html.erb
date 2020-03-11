@@ -1,20 +1,93 @@
-<h1><%= @developer.first_name %> <%= @developer.last_name %></h1>
+<div class="container">
+  <div class="card-trip">
+    <div class="row my-5">
+      <div class="col-3">
+          <div style="width:500px; height:300px;">
+             <img class="avatar-huge" alt="avatar-huge" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" />
+          </div>
+        </div>
+          <div class="col-6">
+            <h2><%= @developer.first_name %> <%= @developer.last_name %></h2>
+            <p><strong>Location:</strong> <%= @developer.location %></p>
+            <p><strong>Interests:</strong> <%= @developer.interests %></p>
+            <p><strong>Slogan:</strong> <%= @developer.slogan %></p>
+            <p><strong>Hireable:</strong> <%= @developer.hireable %></p>
+              <div class="d-flex justify-content-start icon-wrapper ml-0 mt-0">
+                <i class="fab fa-github fa-2x mr-3"></i>
+                <i class="fab fa-facebook fa-2x mr-3"></i>
+                <i class="fab fa-twitter fa-2x mr-3"></i>
+                <i class="fab fa-linkedin fa-2x mr-3"></i>
+              </div>
+          </div>
+          <div class="col-3">
+            <div class="text-center">
+                <a class="btn btn-flat favorite" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
+                <a class="btn btn-flat message" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+                <p class="mt-3 mr-5"><strong>SKILLS</strong></p>
+                <hr>
+                <div>
+                  <% @developer.skills.each do |skill| %>
+                    <div class="bg-dark p-2 text-white d-inline"><%= skill.name %></div>
+                  <% end %>
+                </div>
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="bio col-8">
+      <p><strong>Bio:</strong> <%= @developer.bio %></p>
+    </div>
 
-<p>Location: <%= @developer.location %></p>
-<p>Interests: <%= @developer.interests %></p>
-<p>slogan: <%= @developer.slogan %></p>
-<p>hireable: <%= @developer.hireable %></p>
-<p>bio: <%= @developer.bio %></p>
-<p>websites: <%= @developer.websites %></p>
+    <div class="intersts col-4 pl-0">
+      <p class="text-center"><strong>INTERSTS</strong></p>
+      <hr>
+    </div>
+  </div>
+  <p><strong>Websites:</strong> <%= @developer.websites %></p>
+  <div class="row">
+    <div class="web col-4">
+      <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+      <div class="web col-4">
+        <div class="card" style="width: 18rem;">
+           <img class="card-img-top" src="..." alt="Card image cap">
+          <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+      <div class="web col-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+          <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+  </div>
+
+    <h3>Pundit test</h3>
+    <% if policy(@developer).edit? %>
+      <%= link_to 'edit', edit_developer_path(@developer) %>
+    <% end %>
+
+    <% if policy(@developer).destroy? %>
+      <%= link_to "DeleteAccount", registration_path(:user),
+        method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }  %>
+    <% end %>
+</div>
 
 
-<h3>Pundit test</h3>
-<% if policy(@developer).edit? %>
-  <%= link_to 'edit', edit_developer_path(@developer) %>
-<% end %>
 
-<% if policy(@developer).destroy? %>
-  <%= link_to "DeleteAccount", registration_path(:user),
-    method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }  %>
-<% end %>
+
+
+
+
+
 
