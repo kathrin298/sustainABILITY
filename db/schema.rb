@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_084625) do
+ActiveRecord::Schema.define(version: 2020_03_11_104650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,12 +117,14 @@ ActiveRecord::Schema.define(version: 2020_03_11_084625) do
     t.text "slogan"
     t.text "interests"
     t.string "hireable"
-    t.text "websites", default: [], array: true
-    t.text "social_links", default: [], array: true
     t.bigint "user_id"
-    t.string "github_profile_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "facebook"
+    t.string "github"
+    t.string "twitter"
+    t.string "linkedin"
+    t.string "website"
     t.index ["user_id"], name: "index_developers_on_user_id"
   end
 
@@ -183,6 +185,17 @@ ActiveRecord::Schema.define(version: 2020_03_11_084625) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "socials", force: :cascade do |t|
+    t.bigint "developer_id"
+    t.string "github"
+    t.string "linkedin"
+    t.string "twitter"
+    t.string "facebook"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["developer_id"], name: "index_socials_on_developer_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -218,4 +231,5 @@ ActiveRecord::Schema.define(version: 2020_03_11_084625) do
   add_foreign_key "messages", "users"
   add_foreign_key "questions", "jobs"
   add_foreign_key "reviews", "applications"
+  add_foreign_key "socials", "developers"
 end
