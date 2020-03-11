@@ -2,21 +2,22 @@ class JobsController < ApplicationController
   before_action :find_job, only: [:show, :edit, :update, :destroy]
 
   def show
-    skip_authorization
+    authorize @job
     @questions = @job.questions
+    authorize @questions
   end
 
   def new
     @job = Job.new
     @company = current_user.company
-    skip_authorization
+    authorize @job
   end
 
   def create
-    skip_authorization
     @job = Job.new(job_params)
     @company = Company.find(params[:company_id])
     @job.company = @company
+    authorize @job
 
     Question::DEFAULT_QUESTIONS.each do |question|
       @question = Question.new(content: question)
@@ -32,12 +33,9 @@ class JobsController < ApplicationController
     end
   end
 
-  def edit
-    skip_authorization
-  end
+  def edit; end
 
   def update
-    skip_authorization
     if @job.update(job_params)
       redirect_to job_path(@job)
     else
@@ -46,7 +44,6 @@ class JobsController < ApplicationController
   end
 
   def destroy
-    skip_authorization
     @job.destroy
     redirect_to dashboard_path
   end
@@ -59,5 +56,6 @@ class JobsController < ApplicationController
 
   def find_job
     @job = Job.find(params[:id])
+    authorize @job
   end
 end
