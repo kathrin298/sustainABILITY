@@ -16,7 +16,7 @@
 <% end %>
 
 <!-- if company has applications, show them here -->
-<% if current_user %>
+<% if current_user && current_user.company %>
   <h2>Applications for your outstanding jobs</h2>
   <ul>
     <% @jobs.each do |job| %>
@@ -29,7 +29,7 @@
 
 
 <!-- if user applied to a job, show job applications -->
-<% if current_user && current_user.developer.applications.length >= 1 %>
+<% if current_user.developer && current_user.developer.applications.length >= 1 %>
   <h2>My Applications</h2>
   <ul>
     <% @applications.each do |application| %>
