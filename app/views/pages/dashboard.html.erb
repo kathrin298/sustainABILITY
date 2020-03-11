@@ -1,19 +1,39 @@
 <h1>Your Dashboard</h1>
 
+<!-- if user has company, be able to add new job to that company -->
 <% if current_user && current_user.company %>
   <%= link_to 'Create new job posting', new_company_job_path(@company.id) %>
 <% end %>
 
-<h2>My Company's Job Postings</h2>
-<ul>
-  <% @jobs.each do |job| %>
-    <li><%= link_to job.job_title, job_path(job) %></li>
-  <% end %>
-</ul>
+<!-- If user has a company, show that company's job postings -->
+<% if current_user && current_user.company %>
+  <h2>My Company's Job Postings</h2>
+  <ul>
+    <% @jobs.each do |job| %>
+      <li><%= link_to job.job_title, job_path(job) %></li>
+    <% end %>
+  </ul>
+<% end %>
 
-<h2>My Applications</h2>
-<ul>
-  <% @applications.each do |application| %>
-    <li><%= link_to application.job.job_title, application_path(application) %> </li>
-  <% end %>
-</ul>
+<!-- if company has applications, show them here -->
+<% if current_user && current_user.company %>
+  <h2>Applications for your outstanding jobs</h2>
+  <ul>
+    <% @jobs.each do |job| %>
+      <% job.applications.each do |application| %>
+        <li><%= link_to application.developer.first_name + " " + application.developer.last_name, application_path(application) %> </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<!-- if user applied to a job, show job applications -->
+<% if current_user.developer && current_user.developer.applications.length >= 1 %>
+  <h2>My Applications</h2>
+  <ul>
+    <% @applications.each do |application| %>
+      <li><%= link_to application.job.job_title, application_path(application) %> </li>
+    <% end %>
+  </ul>
+<% end %>

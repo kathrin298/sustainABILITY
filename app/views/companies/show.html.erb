@@ -14,3 +14,10 @@
   <%= link_to "DeleteAccount", registration_path(:user),
     method: :delete, data: { confirm: "Are you sure you want to delete your company account?" }  %>
 <% end %>
+
+<h2>Open jobs</h2>
+<ul>
+<% @company.jobs.each do |job| %>
+  <li><%= link_to job.job_title, job_path(job) %></li>
+<% end %>
+</ul>
