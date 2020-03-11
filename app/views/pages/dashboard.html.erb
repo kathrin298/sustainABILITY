@@ -3,3 +3,10 @@
 <% if current_user && current_user.company %>
   <%= link_to 'Create new job posting', new_company_job_path(@company.id) %>
 <% end %>
+
+<h2>My Company's Job Postings</h2>
+<ul>
+  <% @jobs.each do |job| %>
+    <li><%= link_to job.job_title, job_path(job) %></li>
+  <% end %>
+</ul>

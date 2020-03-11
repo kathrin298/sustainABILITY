@@ -1,2 +1,7 @@
-<h1>Jobs#show</h1>
-<p>Find me in app/views/jobs/show.html.erb</p>
+<h1> <%= @job.job_title %></h1>
+
+<p><%= @job.job_description %> </p>
+
+<!-- pundit needs to be set up here -->
+<%= link_to 'edit', edit_job_path(@job) %>
+<%= link_to 'delete', job_path(@job), method: :delete %>

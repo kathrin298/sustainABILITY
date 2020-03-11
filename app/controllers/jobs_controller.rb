@@ -1,14 +1,18 @@
 class JobsController < ApplicationController
   before_action :find_job, only: [:show, :edit, :update, :destroy]
 
-  def show; end
+  def show
+    skip_authorization
+  end
 
   def new
     @job = Job.new
     @company = current_user.company
+    skip_authorization
   end
 
   def create
+    skip_authorization
     @job = Job.new(job_params)
     @company = Company.find(params[:company_id])
     @job.company = @company
@@ -19,9 +23,12 @@ class JobsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    skip_authorization
+  end
 
   def update
+    skip_authorization
     if @job.update(job_params)
       redirect_to job_path(@job)
     else
@@ -30,6 +37,7 @@ class JobsController < ApplicationController
   end
 
   def destroy
+    skip_authorization
     @job.destroy
     redirect_to dashboard_path
   end
@@ -37,7 +45,7 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:job_title, :job_desciption, :active, :company, :location, :remote, :start_date, :duration)
+    params.require(:job).permit(:job_title, :job_description, :active, :company, :location, :remote, :start_date, :duration)
   end
 
   def find_job
