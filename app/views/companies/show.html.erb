@@ -3,15 +3,19 @@
     <div class="row my-5">
       <div class="col-3">
         <div style="width:500px; height:300px;">
-           <img class="avatar-huge" alt="avatar-huge" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" />
+          <% if @company.photo.attached? %>
+            <%= cl_image_tag current_user.company.photo.key, height: 200, width: 200, crop: :thumb %>
+          <% else %>
+            <%= image_tag "user.jpg", class: "avatar-huge" %>
+          <% end %>
         </div>
       </div>
         <div class="col-6">
           <h2><%= @company.name %></h2>
-          <h5><strong>Location:</strong> <%= @company.location %></h5>
-          <h5><strong>Mission:</strong> <%= @company.mission %></h5>
-          <h5><strong>Industry:</strong> <%= @company.industry %></h5>
-          <h5><strong>Employees:</strong> <%= @company.employees %></h5>
+          <p><strong>Location:</strong> <%= @company.location %></p>
+          <p><strong>Mission:</strong> <%= @company.mission %></p>
+          <p><strong>Industry:</strong> <%= @company.industry %></p>
+          <p><strong>Employees:</strong> <%= @company.employees %></p>
         </div>
            <!-- button for send message and add favrite, and social media icon -->
           <div class="col-3">
