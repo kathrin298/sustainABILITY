@@ -1,4 +1,11 @@
-
+CompanyFavourite.destroy_all
+DeveloperFavourite.destroy_all
+JobSkill.destroy_all
+Message.destroy_all
+Review.destroy_all
+Application.destroy_all
+Answer.destroy_all
+Question.destroy_all
 Job.destroy_all
 Company.destroy_all
 Developer.destroy_all
