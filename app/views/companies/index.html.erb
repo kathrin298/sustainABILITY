@@ -58,8 +58,12 @@
           <div class="landing-page-card d-block">
             <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
             <div class="card-info">
-              <h1><%= job.company.name %></h1>
-              <p class="mission"><%= job.job_title.truncate(60) %></p>
+              <h1><%= job.job_title.truncate(25) %></h1>
+              <p class="mission">
+                Company:
+                <br>
+                <%= job.company.name %>
+              </p>
             </div>
           </div>
         <% end %>
