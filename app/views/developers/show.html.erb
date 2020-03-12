@@ -13,33 +13,45 @@
             <p><strong>Slogan:</strong> <%= @developer.slogan %></p>
             <p><strong>Hireable:</strong> <%= @developer.hireable %></p>
             <p><strong>Intersts:</strong></p>
-<p>social: <%= @developer.facebook %> :: <%= @developer.github %></p>
+
               <div class="d-flex justify-content-start icon-wrapper ml-0 mt-0 mb-4">
+                <% if !@developer.github.nil?  %>
                 <i class="fab fa-github fa-2x mr-3"></i>
+                <% end %>
+                <% if !@developer.facebook.nil?  %>
                 <i class="fab fa-facebook fa-2x mr-3"></i>
+                <% end %>
+                <% if !@developer.twitter.nil?  %>
                 <i class="fab fa-twitter fa-2x mr-3"></i>
+                <% end %>
+                <% if !@developer.linkedin.nil?  %>
                 <i class="fab fa-linkedin fa-2x mr-3"></i>
+                <% end %>
               </div>
           </div>
           <div class="col-3">
                 <div class="d-row text-center">
-                    <% if current_user.developer == @developer %>
-              <div class="d-row my-5">
-                    <% if policy(@developer).edit? %>
-                     <a class="btn-flat edit" <%= link_to 'Edit', edit_developer_path(@developer) %>
-                    <% end %> </a>
+                        <% if current_user.developer == @developer %>
+                  <div class="d-row my-2">
+                    <div class="mb-0">
+                        <% if policy(@developer).edit? %>
+                         <%= link_to 'Edit', edit_developer_path(@developer), class: "btn-flat edit" %>
 
-                    <% if policy(@developer).destroy? %>
-                      <a class="btn-flat delete" <%= link_to "DeleteAccount", registration_path(:user),
-                        method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }  %>
-                    <% end %> </a>
-              </div>
-                     <% else %>
-                    <a class="btn btn-flat favorite" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                    <a class="btn btn-flat message" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
-                    <% end %>
-                    <p class="mt-3 mr-5"><strong>SKILLS</strong></p>
-                    <hr>
+                        <% end %>
+                    </div>
+                        <div class="mt-0">
+                          <% if policy(@developer).destroy? %>
+                            <%= link_to "Delete Account", registration_path(:user),
+                              method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }, class: "btn-flat delete"  %>
+                          <% end %>
+                        </div>
+                  </div>
+                         <% else %>
+                        <a class="btn btn-flat favorite" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
+                        <a class="btn btn-flat message" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+                        <% end %>
+                        <p class="mt-3 mr-5"><strong>SKILLS</strong></p>
+                        <hr>
                 </div>
           </div>
     </div>
@@ -55,7 +67,7 @@
                     <p><strong>Bio:</strong> <%= @developer.bio %></p>
                   </div>
                 </div>
-                <p><strong>Websites:</strong> <%= @developer.websites %></p>
+                <p><strong>Website:</strong> <%= @developer.website %></p>
                 <div class="row mb-4">
                   <div class="web col-4">
                     <div class="card" style="width: 18rem;">
