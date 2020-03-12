@@ -16,7 +16,10 @@ Rails.application.routes.draw do
     resources :questions, only: [:new, :create]
   end
 
-  resources :applications, only: [:show, :update]
+  resources :applications, only: [:show, :update] do
+    resources :reviews, only: [:new, :create]
+  end
+
 
   resources :questions, only: [:edit, :update, :destroy] do
     resources :answers, only: [:update]

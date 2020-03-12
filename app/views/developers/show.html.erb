@@ -67,7 +67,7 @@
                     <p><strong>Bio:</strong> <%= @developer.bio %></p>
                   </div>
                 </div>
-                <p><strong>Website:</strong> <%= @developer.website %></p>
+                  <p><<strong>website:</strong> <%= @developer.website %></p>
                 <div class="row mb-4">
                   <div class="web col-4">
                     <div class="card" style="width: 18rem;">
@@ -108,3 +108,26 @@
 
 
 
+<p>social: <%= @developer.facebook %> :: <%= @developer.github %></p>
+
+
+
+
+
+<h2>Current & past jobs</h2>
+<ul>
+  <% @hired_jobs.each do |job| %>
+    <li><%= job.job_title %>
+    <% if current_user && job.company == current_user.company %>
+      <%= link_to 'Add review', new_application_review_path(job.applications.where(developer: @developer).first) %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h2>Reviews</h2>
+
+  <% @reviews.each do |review| %>
+    <h4><%= review.title %> </h4>
+    <p><%= review.content %> </p>
+    <p><%= review.rating %>/5</p>
+  <% end %>
