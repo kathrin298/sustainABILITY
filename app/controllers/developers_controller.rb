@@ -11,11 +11,7 @@ class DevelopersController < ApplicationController
     @developer.applications.where(status: 'accepted').each do |application|
       @hired_jobs << application.job
     end
-    # @review = Review.new
     @reviews = Review.where(application: @developer.applications)
-    # @developer.applications.each do |application|
-    #   @reviews << application.review
-    # end
   end
 
   def new
