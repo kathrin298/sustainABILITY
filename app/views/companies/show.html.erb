@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="container">
   <div class="card-trip">
     <div class="row my-5">
@@ -16,16 +15,32 @@
         </div>
            <!-- button for send message and add favrite, and social media icon -->
           <div class="col-3">
-            <div class="text-center">
-              <a class="btn btn-flat favorite" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
-              <a class="btn btn-flat message" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
-            </div>
-              <div class="d-flex justify-content-between icon-wrapper">
-                <i class="fab fa-github fa-2x"></i>
-                <i class="fab fa-facebook fa-2x"></i>
-                <i class="fab fa-twitter fa-2x"></i>
-                <i class="fab fa-linkedin fa-2x"></i>
+            <% unless @company.user == current_user %>
+              <div class="text-center">
+                <a class="btn btn-flat favorite" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
+                <a class="btn btn-flat message" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
               </div>
+            <% end %>
+            <div class="row">
+              <div class="col-12">
+              <% if policy(@company).edit? %>
+                <%= link_to "edit", edit_company_path(@company), class: "btn-flat" %>
+              <% end %>
+              </div>
+
+              <div class="col-12">
+                <% if policy(@company).destroy? %>
+                  <%= link_to "Delete Account", registration_path(:user), class: "btn-flat",
+                    method: :delete, data: { confirm: "Are you sure you want to delete your company account?" }  %>
+                <% end %>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between icon-wrapper">
+              <i class="fab fa-github fa-2x"></i>
+              <i class="fab fa-facebook fa-2x"></i>
+              <i class="fab fa-twitter fa-2x"></i>
+              <i class="fab fa-linkedin fa-2x"></i>
+            </div>
           </div>
     </div>
   </div>
@@ -62,15 +77,9 @@
 
 
 
-  <% if policy(@company).edit? %>
-    <%= link_to "edit", edit_company_path(@company) %>
-  <% end %>
 
 
-  <% if policy(@company).destroy? %>
-    <%= link_to "DeleteAccount", registration_path(:user),
-      method: :delete, data: { confirm: "Are you sure you want to delete your company account?" }  %>
-  <% end %>
+
 </div>
 
 
