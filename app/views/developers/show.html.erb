@@ -6,9 +6,9 @@
 <p>hireable: <%= @developer.hireable %></p>
 <p>bio: <%= @developer.bio %></p>
 <p>websites: <%= @developer.websites %></p>
+<p>social: <%= @developer.facebook %> :: <%= @developer.github %></p>
 
 
-<h3>Pundit test</h3>
 <% if policy(@developer).edit? %>
   <%= link_to 'edit', edit_developer_path(@developer) %>
 <% end %>

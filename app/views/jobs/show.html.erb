@@ -5,9 +5,14 @@
 <p>Company: <%= @job.company.name %></p>
 
 <!-- Apply button only showing to developers -->
-<% if current_user && current_user.developer %>
-  <%= link_to 'Apply now', new_job_application_path(@job) %>
+<% if !@developer_application %>
+  <% if current_user && current_user.developer %>
+    <%= link_to 'Apply now', new_job_application_path(@job) %>
+  <% end %>
+<% else %>
+  <p>You have already applied to this job. View your <%= link_to 'application', application_path(@developer_application) %></p>
 <% end %>
+
 <br>
 
 <!-- pundit needs to be set up here -->
