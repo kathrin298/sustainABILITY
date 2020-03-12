@@ -24,13 +24,13 @@
             <div class="row">
               <div class="col-12">
               <% if policy(@company).edit? %>
-                <%= link_to "edit", edit_company_path(@company), class: "btn-flat" %>
+                <%= link_to "Edit", edit_company_path(@company), class: "d-block btn-flat text-center" %>
               <% end %>
               </div>
 
               <div class="col-12">
                 <% if policy(@company).destroy? %>
-                  <%= link_to "Delete Account", registration_path(:user), class: "btn-flat",
+                  <%= link_to "Delete Account", registration_path(:user), class: "d-block btn-flat text-center",
                     method: :delete, data: { confirm: "Are you sure you want to delete your company account?" }  %>
                 <% end %>
               </div>
@@ -52,41 +52,23 @@
     </div>
        <!-- bio about company -->
       <div>
-        <p>bio: <%= @company.bio %> - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eum maiores sequi, laboriosam expedita quisquam recusandae placeat veniam vero, ratione optio nisi hic voluptas dignissimos, assumenda nemo ab quidem cupiditate.</p>
+        <h5><strong>Bio:</strong></h5> <%= @company.bio %> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eum maiores sequi, laboriosam expedita quisquam recusandae placeat veniam vero, ratione optio nisi hic voluptas dignissimos, assumenda nemo ab quidem cupiditate.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam praesentium fugit perspiciatis, quasi quae magni amet minus iure et quia obcaecati labore voluptatum porro a, error aliquid ullam adipisci pariatur.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam delectus aliquam molestias quo eveniet iure, dolorem, quis magni non dolore aut distinctio odit consequatur fugit ipsa laboriosam quia labore. Temporibus.</p>
       </div>
           <!-- startup project card -->
-        <div class="card-product">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
-          <div class="card-product-infos">
-            <h2>Product name</h2>
-            <p>Description</p>
-          </div>
-        </div>
+         <% @company.jobs.each do |job| %>
+          <%= link_to job_path(job) do  %>
         <div class="card-product">
           <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
             <div class="card-product-infos">
-              <h2>Product name</h2>
+              <h7><%= job.job_title %></h7>
               <p>Description</p>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
+        <% end %>
+      <% end %>
 </div>
 
 
 
-<h2>Open jobs</h2>
-<ul>
-<% @company.jobs.each do |job| %>
-  <li><%= link_to job.job_title, job_path(job) %></li>
-<% end %>
-</ul>
