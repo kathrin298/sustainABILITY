@@ -17,7 +17,6 @@
   color: white;
   padding: 8px 24px;
   border-radius: 8px;
-  margin-top: 0px;
   background: $green;
   width: 192px;
   height: 42px;
@@ -26,6 +25,7 @@
 
 .favorite {
   background-color: #D64041;
+  margin-top: 40px;
   &:hover {
     background-color: #F14849;
     color: white;
@@ -34,6 +34,7 @@
 
 .message {
   background-color: #39A0DB;
+  margin-top: 40px;
   &:hover {
     background-color: #40B2F4;
     color: white;

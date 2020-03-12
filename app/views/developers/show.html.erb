@@ -3,7 +3,11 @@
     <div class="row my-5">
       <div class="col-3">
           <div style="width:500px; height:300px;">
-             <img class="avatar-huge" alt="avatar-huge" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" />
+                <% if @developer.photo.attached? %>
+                <%= cl_image_tag current_user.company.photo.key, height: 200, width: 200, crop: :thumb %>
+                 <% else %>
+              <%= image_tag "user.jpg", class: "avatar-huge" %>
+            <% end %>
           </div>
         </div>
           <div class="col-6">
@@ -94,8 +98,8 @@
                     </div>
                   </div>
                 </div>
+                <% if @hired_jobs.present? %>
           <h2>Current & past jobs</h2>
-
             <% @hired_jobs.each do |job| %>
               <div class="card-product">
                 <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
@@ -109,14 +113,16 @@
                 <%= link_to 'Add review', new_application_review_path(job.applications.where(developer: @developer).first) %>
               <% end %>
             <% end %>
+            <% end %>
 
-
+          <% if @reviews.present? %>
           <h2>Reviews</h2>
 
             <% @reviews.each do |review| %>
               <h4><%= review.title %> </h4>
               <p><%= review.content %> </p>
               <p><%= review.rating %>/5</p>
+            <% end %>
             <% end %>
 </div>
 
