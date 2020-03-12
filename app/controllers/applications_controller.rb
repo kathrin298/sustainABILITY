@@ -28,10 +28,15 @@ class ApplicationsController < ApplicationController
 
   def update
     skip_authorization
-
+    @application.update(application_params)
+    redirect_to application_path(@application)
   end
 
   private
+
+  def application_params
+    params.require(:application).permit(:status)
+  end
 
   def find_application
     @application = Application.find(params[:id])
