@@ -59,10 +59,9 @@ COMPANY_EMAILS.each do |email|
 
   rand(0..4).times do
     job = Job.new
-    {Faker::ProgrammingLanguage.name}
-    job.job_title = "# developer"
-    job.job_description = "#{company.name} is a startup created on the principles of doing some good, encouraging growth, sustainability, and progress in all facets of our business. \nWe are a small startup, and currently need some talent to work on our web presence. Currently our tech stack is focused "
-    job.job_description = Faker::Lorem.paragraph(sentence_count: rand(7), supplemental: false, random_sentences_to_add: rand(7))
+    stack = Faker::ProgrammingLanguage.name
+    job.job_title = "#{stack} developer"
+    job.job_description = "#{company.name} is a startup created on the principles of doing some good, encouraging growth, sustainability, and progress in all facets of our business. \nWe are a small startup, and currently need some talent to work on our web presence. Currently our tech stack is focused on #{stack}, but we're open to other technologies."
     job.active = !(rand(1..3) == 1)
     job.company = company
     job.location = Faker::Address.city
