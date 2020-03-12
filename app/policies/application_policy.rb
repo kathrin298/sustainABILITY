@@ -9,23 +9,11 @@ class ApplicationPolicy < GeneralPolicy
     return true
   end
 
-  # def create?
-  #   return true
-  # end
-
   def show?
     return true
   end
 
-  # def edit?
-  #   record.job.company.user == user
-  # end
-
-  # def update?
-  #   record.job.company.user == user
-  # end
-
-  # def destroy?
-  #   record.job.company.user == user
-  # end
+  def update?
+    record.job.company.user == user
+  end
 end

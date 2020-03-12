@@ -5,6 +5,7 @@ class JobsController < ApplicationController
     authorize @job
     @questions = @job.questions
     authorize @questions
+    @developer_application = current_user.developer.applications.where(job: @job).first if current_user.developer
   end
 
   def new

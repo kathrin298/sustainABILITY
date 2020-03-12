@@ -9,6 +9,7 @@ class ApplicationsController < ApplicationController
     @application = Application.new
     authorize @application
     @job = Job.find(params[:job_id])
+    authorize @job
     @answer = Answer.new
   end
 
@@ -16,6 +17,7 @@ class ApplicationsController < ApplicationController
     @application = Application.new
     authorize @application
     @job = Job.find(params[:job_id])
+    authorize @application
     @application.job = @job
     @application.developer = current_user.developer
     if @application.save
@@ -25,9 +27,17 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    authorize @application
+    @application.update(application_params)
+    redirect_to application_path(@application)
+  end
 
   private
+
+  def application_params
+    params.require(:application).permit(:status)
+  end
 
   def find_application
     @application = Application.find(params[:id])

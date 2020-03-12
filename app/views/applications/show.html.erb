@@ -1,11 +1,23 @@
 <h1>Application for <%= @application.job.job_title %> </h1>
 
-
-  <% @application.answers.each do |answer| %>
+<% @application.answers.each do |answer| %>
   <p><%= answer.question.content %></p>
   <p><%= answer.content %></p>
-  <% end %>
+<% end %>
 
-  <p>Status: <%= @application.status %></p>
+<p>Status: <%= @application.status %></p>
 
-  <p>Applicant: <%= link_to @application.developer.first_name + ' ' + @application.developer.last_name, developer_path(@application.developer) %></p>
+<p>Applicant: <%= link_to "#{@application.developer.first_name} #{@application.developer.last_name}", developer_path(@application.developer) %></p>
+
+<!-- Buttons to accept/reject offers if your company recieved application -->
+<% if @application.job.company == current_user.company %>
+  <%= link_to 'Accept application',
+               application_path(@application,
+                                :application => {status: 'accepted'}),
+               method: :patch %>
+  <br>
+  <%= link_to 'Reject application',
+               application_path(@application,
+                                :application => {status: 'rejected'}),
+               method: :patch %>
+<% end %>
