@@ -26,10 +26,11 @@ DEV_NAMES.each do |name|
   dev.location = Faker::Address.city
   dev.interests = INTERESTS.sample
   dev.user = user
-  rand(3).times do
-    dev.websites = Faker::Internet.domain_name
-  end
-  dev.social_links = ['twitter.com', 'facebook.com', 'github.com', 'linkedin.com'].sample(rand(1..4))
+  dev.websites = Faker::Internet.domain_name
+  dev.facebook =  'facebook.com/3453464'
+  dev.twitter = 'twitter.com/2534643'
+  dev.linkedin = 'linkedin.com/users/23443'
+  dev.github = 'github.com/45443'
   dev.save
 end
 puts "Seeded #{Developer.all.size} Developers"
