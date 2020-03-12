@@ -5,7 +5,7 @@
   <%= f.input :slogan %>
   <%= f.input :interests, placeholder: 'Reduce waste, save turtles, help minorities..' %>
   <%= f.input :bio, input_html: { minlength: 100 } %>
-  <%= f.input :websites, placeholder: 'www.your_website.com' %>
+  <%= f.input :website, placeholder: 'www.your_website.com' %>
   <%= f.input :hireable, label: 'Availability' ,collection: Developer::HIREABLE_OPTIONS %>
   <%= f.input :github, placeholder: "Enter your github profile URL..." %>
   <%= f.input :facebook, placeholder: "Enter your facebook profile URL..." %>
