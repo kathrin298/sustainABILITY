@@ -22,7 +22,7 @@
 <ul>
   <% @hired_jobs.each do |job| %>
     <li><%= job.job_title %>
-    <% if job.company == current_user.company %>
+    <% if current_user && job.company == current_user.company %>
       <%= link_to 'Add review', new_application_review_path(job.applications.where(developer: @developer).first) %></li>
     <% end %>
   <% end %>
