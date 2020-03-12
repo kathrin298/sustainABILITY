@@ -1,3 +1,4 @@
+Skill.destroy_all
 CompanyFavourite.destroy_all
 DeveloperFavourite.destroy_all
 JobSkill.destroy_all
@@ -89,6 +90,13 @@ COMPANY_EMAILS.each do |email|
   end
 end
 puts "Seeded #{Company.all.size} Companies"
+
+puts 'Seeding skills'
+
+Skill::BASIC_SKILLS.each do |skill|
+  new_skill = Skill.new(name: skill)
+  new_skill.save
+end
 
 
 

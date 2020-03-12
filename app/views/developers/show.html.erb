@@ -8,6 +8,19 @@
 <p>website: <%= @developer.website %></p>
 <p>social: <%= @developer.facebook %> :: <%= @developer.github %></p>
 
+<!-- Section to add skills -->
+<h2>Skills</h2>
+<%= link_to 'Add skill', new_developer_developer_skill_path(@developer) %>
+<ul>
+<% @developer.developer_skills.each do |developer_skill| %>
+  <li>
+    <%= developer_skill.skill.name %>
+    <%= link_to 'delete', developer_developer_skill_path(@developer, developer_skill), method: :delete %>
+  </li>
+<% end %>
+</ul>
+
+<br>
 
 <% if policy(@developer).edit? %>
   <%= link_to 'edit', edit_developer_path(@developer) %>
