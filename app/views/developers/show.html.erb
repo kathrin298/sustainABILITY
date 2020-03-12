@@ -5,7 +5,7 @@
 <p>slogan: <%= @developer.slogan %></p>
 <p>hireable: <%= @developer.hireable %></p>
 <p>bio: <%= @developer.bio %></p>
-<p>websites: <%= @developer.website %></p>
+<p>website: <%= @developer.website %></p>
 <p>social: <%= @developer.facebook %> :: <%= @developer.github %></p>
 
 
@@ -22,7 +22,7 @@
 <ul>
   <% @hired_jobs.each do |job| %>
     <li><%= job.job_title %>
-    <% if job.company == current_user.company %>
+    <% if current_user && job.company == current_user.company %>
       <%= link_to 'Add review', new_application_review_path(job.applications.where(developer: @developer).first) %></li>
     <% end %>
   <% end %>
