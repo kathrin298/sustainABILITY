@@ -17,6 +17,7 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'faker'
 gem 'pundit'
+gem 'cloudinary', '~> 1.12.0'
 
 
 group :development do

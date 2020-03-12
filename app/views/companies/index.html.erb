@@ -11,3 +11,13 @@
   <li><%= link_to company.name, company_path(company) %></li>
  <% end %>
 </ul>
+
+<h2>All Jobs</h2>
+<ul>
+  <% @companies.each do |company| %>
+    <% company.jobs.each do |job| %>
+      <li><%= link_to job.job_title, job_path(job) %></li>
+    <% end %>
+ <% end %>
+</ul>
+

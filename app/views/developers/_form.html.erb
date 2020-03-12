@@ -7,8 +7,11 @@
   <%= f.input :bio, input_html: { minlength: 100 } %>
   <%= f.input :websites, placeholder: 'www.your_website.com' %>
   <%= f.input :hireable, label: 'Availability' ,collection: Developer::HIREABLE_OPTIONS %>
-  <%= f.input :social_links %>
-  <%= f.input :github_profile_url %>
+  <%= f.input :github, placeholder: "Enter your github profile URL..." %>
+  <%= f.input :facebook, placeholder: "Enter your facebook profile URL..." %>
+  <%= f.input :twitter, placeholder: "Enter your twitter profile URL..." %>
+  <%= f.input :linkedin, placeholder: "Enter your linkedin profile URL..." %>
+  <%= f.input :photo, as: :file %>
 
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
