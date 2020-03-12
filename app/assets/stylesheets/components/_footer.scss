@@ -9,6 +9,7 @@
 .footer-links {
   display: flex;
   align-items: center;
+  width: 250px;
 }
 .footer-links a {
   color: $green;
@@ -22,7 +23,8 @@
 }
 
 .footer .menu-links {
-  margin: 20px;
+  margin: 20px 0;
+  width: 250px;
 }
 
 .footer .menu-links a {
