@@ -14,12 +14,6 @@
         <li class="nav-item">
           <%= link_to "Messages", "#", class: "nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "New company", new_company_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "New dev profile", new_developer_path, class: "nav-link" %>
-        </li>
         <li class="nav-item dropdown">
           <% if current_user.company && current_user.company.photo.attached? %>
             <%= cl_image_tag current_user.company.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
