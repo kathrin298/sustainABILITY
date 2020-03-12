@@ -10,7 +10,7 @@ class PagesController < ApplicationController
     @applications = Application.where(developer: current_user.developer)
     @developers = []
     Application.where(status:'accepted', job: @jobs).each do |application|
-      @developers << application.developers
+      @developers << application.developer
       @developers.flatten
     end
   end
