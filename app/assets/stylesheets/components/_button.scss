@@ -13,7 +13,6 @@
 }
 
 .btn-flat {
-<<<<<<< HEAD
   display: inline-block;
   color: white;
   padding: 8px 24px;
@@ -40,19 +39,20 @@
     color: white;
   }
 }
+
 .icon-wrapper{
   // width: 192px;
   margin-top: 40px;
   margin-left: 10px;
 }
 
-=======
-  color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
-  background: $green;
-  transition: background 0.3s ease;
-}
+
+//   color: white;
+//   padding: 8px 24px;
+//   border-radius: 4px;
+//   background: $green;
+//   transition: background 0.3s ease;
+// }
 
 .btn-flat:hover {
   background-color: #67B353;
@@ -71,7 +71,6 @@
   background-color: #F4F4F4;
   color: #67B353;
 }
->>>>>>> b762f21e521b02000b19b31397de25c6558494c7
 
 .btn-gradient {
   color: white;
@@ -88,7 +87,6 @@
   color: white;
 }
 
-<<<<<<< HEAD
 .text-center a {
   font-size: 0.9rem;
   margin-right: 40px;
@@ -111,7 +109,9 @@
     color: white;
     text-decoration: none;
   }
-=======
+}
+
+
 .customer-segment-selector {
   display: flex;
   margin-bottom: 50px;
@@ -157,6 +157,4 @@
   &:hover {
     background-color: $green;
   }
-
->>>>>>> b762f21e521b02000b19b31397de25c6558494c7
 }
