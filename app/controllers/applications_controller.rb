@@ -2,20 +2,19 @@ class ApplicationsController < ApplicationController
   before_action :find_application, only: [:show, :update]
 
   def show
-    skip_authorization
     @questions = @application.job.questions
   end
 
   def new
-    skip_authorization
     @application = Application.new
+    authorize @application
     @job = Job.find(params[:job_id])
     @answer = Answer.new
   end
 
   def create
-    skip_authorization
     @application = Application.new
+    authorize @application
     @job = Job.find(params[:job_id])
     @application.job = @job
     @application.developer = current_user.developer
@@ -26,14 +25,12 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  def update
-    skip_authorization
-
-  end
+  def update; end
 
   private
 
   def find_application
     @application = Application.find(params[:id])
+    authorize @application
   end
 end

@@ -1,49 +1,31 @@
-class ApplicationPolicy
-  attr_reader :user, :record
-
-  def initialize(user, record)
-    @user = user
-    @record = record
-  end
-
-  def index?
-    false
-  end
-
-  def show?
-    false
-  end
-
-  def create?
-    false
-  end
-
-  def new?
-    create?
-  end
-
-  def update?
-    false
-  end
-
-  def edit?
-    update?
-  end
-
-  def destroy?
-    false
-  end
-
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
+class ApplicationPolicy < GeneralPolicy
+  class Scope < Scope
     def resolve
       scope.all
     end
   end
+
+  def new?
+    return true
+  end
+
+  # def create?
+  #   return true
+  # end
+
+  def show?
+    return true
+  end
+
+  # def edit?
+  #   record.job.company.user == user
+  # end
+
+  # def update?
+  #   record.job.company.user == user
+  # end
+
+  # def destroy?
+  #   record.job.company.user == user
+  # end
 end

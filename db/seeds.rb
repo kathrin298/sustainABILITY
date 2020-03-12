@@ -26,7 +26,7 @@ DEV_NAMES.each do |name|
   dev.location = Faker::Address.city
   dev.interests = INTERESTS.sample
   dev.user = user
-  dev.websites = Faker::Internet.domain_name
+  dev.website = Faker::Internet.domain_name
   dev.facebook =  'facebook.com/3453464'
   dev.twitter = 'twitter.com/2534643'
   dev.linkedin = 'linkedin.com/users/23443'
@@ -59,7 +59,9 @@ COMPANY_EMAILS.each do |email|
 
   rand(0..4).times do
     job = Job.new
-    job.job_title = "#{Faker::ProgrammingLanguage.name} developer"
+    {Faker::ProgrammingLanguage.name}
+    job.job_title = "# developer"
+    job.job_description = "#{company.name} is a startup created on the principles of doing some good, encouraging growth, sustainability, and progress in all facets of our business. \nWe are a small startup, and currently need some talent to work on our web presence. Currently our tech stack is focused "
     job.job_description = Faker::Lorem.paragraph(sentence_count: rand(7), supplemental: false, random_sentences_to_add: rand(7))
     job.active = !(rand(1..3) == 1)
     job.company = company
@@ -67,6 +69,16 @@ COMPANY_EMAILS.each do |email|
     job.remote = (rand(1..3) == 1)
     job.start_date = Job::START_DATES.sample
     job.duration = Job::DURATIONS.sample
+    question1 = Question.new(content: "Why do you want to work here?")
+    question2 = Question.new(content: "What skills can you bring to this project?")
+    question3 = Question.new(content: "Can you tell us something about your core values?")
+    question1.job = job
+    question2.job = job
+    question3.job = job
+    question1.save
+    question2.save
+    question3.save
+
     job.save
   end
 end
