@@ -25,22 +25,7 @@
       <h1>Find a startup in your city:</h1>
     </div>
     <div class="carousel">
-      <% @companies.each do |company| %>
-        <%= link_to company_path(company) do %>
-          <div class="landing-page-card d-block">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
-            <div class="card-info">
-              <h1><%= company.name %></h1>
-              <p>
-                Location:
-                <br>
-                <%= company.location %>
-              </p>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <% @companies.each do |company| %>
+      <% @companies.sample(10).each do |company| %>
         <%= link_to company_path(company) do %>
           <div class="landing-page-card d-block">
             <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
@@ -68,24 +53,13 @@
       <h1>Search jobs by programming language:</h1>
     </div>
     <div class="carousel">
-      <% @companies.each do |company| %>
-        <%= link_to job_path(company.jobs.first) do %>
+      <% @jobs.sample(10).each do |job| %>
+        <%= link_to job_path(job) do %>
           <div class="landing-page-card d-block">
             <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
             <div class="card-info">
-              <h1><%= company.name %></h1>
-              <p class="mission"><%= company.jobs.first.job_title.truncate(60) %></p>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <% @companies.each do |company| %>
-        <%= link_to company_path(company) do %>
-          <div class="landing-page-card d-block">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
-            <div class="card-info">
-              <h1><%= company.name %></h1>
-              <p class="mission"><%= company.jobs.first.job_title.truncate(60) %></p>
+              <h1><%= job.company.name %></h1>
+              <p class="mission"><%= job.job_title.truncate(60) %></p>
             </div>
           </div>
         <% end %>
@@ -103,18 +77,7 @@
       <h1>Or by startups whose mission aligns with your values:</h1>
     </div>
     <div class="carousel">
-      <% @companies.each do |company| %>
-        <%= link_to company_path(company) do %>
-          <div class="landing-page-card d-block">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
-            <div class="card-info">
-              <h1><%= company.name %></h1>
-              <p class="mission">Mission: <%= company.mission.truncate(60) %></p>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <% @companies.each do |company| %>
+      <% @companies.sample(10).each do |company| %>
         <%= link_to company_path(company) do %>
           <div class="landing-page-card d-block">
             <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
