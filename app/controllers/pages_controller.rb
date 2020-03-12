@@ -14,4 +14,14 @@ class PagesController < ApplicationController
       @developers.flatten
     end
   end
+
+  def search
+    if params[:query].blank?
+      @results = Company.all
+    else
+      sql_query = "name ILIKE :query OR industry ILIKE :query"
+      @results = Company.where(sql_query, query: "%#{params[:query]}%")
+    end
+    skip_authorization
+  end
 end

@@ -1,0 +1,31 @@
+
+<div class="container">
+
+  <div class="searchbar-wrapper serp-searchbar-container">
+    <%= form_tag search_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "search-bar",
+        style: "width: 300px",
+        placeholder: "Search for a company.."
+      %>
+      <%= button_tag(type: 'submit', class: "btn-search") do %>
+         <i class="fas fa-search"></i>
+      <% end %>
+    <% end %>
+   </div>
+
+  <% if params[:query]==""  %>
+    <h1 style="padding: 20px;">Showing all companies</h1>
+  <% else %>
+    <h1 style="padding: 20px;">Showing <%= pluralize @results.size, 'result' %> for "<%= params[:query] %>"</h1>
+  <% end %>
+
+
+  <% @results.each do |result| %>
+    <p><%= result.name %></p>
+  <% end %>
+
+
+</div>
+
