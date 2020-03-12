@@ -4,18 +4,11 @@
 </div>
 
 
-<div id="searchbar-homepage"  >
-  <%= form_tag search_path, method: :get do %>
-    <%= text_field_tag :query,
-      params[:query],
-      class: "search-bar",
-      placeholder: "Search for an company.."
-    %>
-    <%= button_tag(type: 'submit', class: "btn-search") do %>
-       <i class="fas fa-search"></i>
-    <% end %>
-  <% end %>
-</div>
+<%= render 'pages/searchbar', search_type: 'dev_location', placeholder: "Search for a developer by location..." %>
+<%= render 'pages/searchbar', search_type: 'company_location', placeholder: "Search for a company by location..." %>
+<%= render 'pages/searchbar', search_type: 'company', placeholder: "Search for a company..." %>
+<%= render 'pages/searchbar', search_type: 'developer', placeholder: "Search for a developer..." %>
+
 
 <h1>All companies</h1>
 

@@ -16,12 +16,36 @@ class PagesController < ApplicationController
   end
 
   def search
-    if params[:query].blank?
-      @results = Company.all
-    else
-      sql_query = "name ILIKE :query OR industry ILIKE :query"
-      @results = Company.where(sql_query, query: "%#{params[:query]}%")
+    if params[:search_type] == 'dev_location'
+      @results = query_devs(params[:query], 'location', 'bio' 'last_name')
+    elsif params[:search_type] == 'company_location'
+      @results = query_companies(params[:query], 'location', 'bio', 'industry')
+    elsif params[:search_type] == 'developer'
+      @results = query_devs(params[:query], 'first_name', 'last_name', 'bio')
+    elsif params[:search_type] == 'company'
+      @results = query_companies(params[:query], 'name', 'bio', 'industry')
     end
-    skip_authorization
+  end
+
+  private
+
+  def query_companies(query, field1, field2)
+    if query.blank?
+      results = Company.all
+    else
+      sql_query = "#{field1} ILIKE :query OR #{field2} ILIKE :query"
+      results = Company.where(sql_query, query: "%#{query}%")
+    end
+    return results
+  end
+
+  def query_devs(query, field1, field2, field3)
+    if query.blank?
+      results = Developer.all
+    else
+      sql_query = "#{field1} ILIKE :query OR #{field2} ILIKE :query"
+      results = Developer.where(sql_query, query: "%#{query}%")
+    end
+    return results
   end
 end
