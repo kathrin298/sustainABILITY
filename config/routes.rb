@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {registrations: 'registrations'}
   root to: 'companies#index'
   get 'about', to: 'pages#about', as: :about
   get 'dashboard', to: 'pages#dashboard', as: :dashboard
