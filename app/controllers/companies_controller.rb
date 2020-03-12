@@ -4,6 +4,7 @@ class CompaniesController < ApplicationController
 
   def index
     @companies = policy_scope(Company).order(created_at: :desc)
+    @jobs = policy_scope(Job).order(created_at: :desc)
   end
 
   def show; end
