@@ -27,6 +27,15 @@
   </ul>
 <% end %>
 
+<!-- show copmanies the developers they hired in the past here -->
+<h2>Current & Past hires</h2>
+<ul>
+  <% @developers.each do |developer| %>
+    <li><%= link_to developer.first_name + ' ' + developer.last_name, developer_path(developer) %> </li>
+  <% end %>
+</ul>
+
+
 
 <!-- if user applied to a job, show job applications -->
 <% if current_user.developer && current_user.developer.applications.length >= 1 %>
