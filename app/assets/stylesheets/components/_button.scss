@@ -45,6 +45,24 @@
 }
 
 
+.btn-flat:hover {
+  background-color: #67B353;
+  color: white;
+}
+
+.btn-flat-reverse {
+  color: $green;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: white;
+  transition: background 0.3s ease;
+}
+
+.btn-flat-reverse:hover {
+  background-color: #F4F4F4;
+  color: #67B353;
+}
+
 .btn-gradient {
   color: white;
   padding: 8px 24px;
@@ -63,4 +81,50 @@
 .text-center a {
   font-size: 0.9rem;
   margin-right: 40px;
+
+.customer-segment-selector {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.banner-button {
+  color: white;
+  font-size: 1.4rem;
+  border: 2px solid white;
+  font-weight: 500;
+  &:hover {
+    color: white;
+    background-color: #888888;
+  }
+}
+
+.developer-button {
+  background-color: #676565;
+  padding: 8px 24px;
+  border-radius: 15px 0 0 15px;
+}
+
+.startup-button {
+  background-color: #676565;
+  padding: 8px 36px 8px 24px;
+  border-radius: 0 15px 15px 0;
+}
+
+
+.developer-button-current {
+  background-color: $green;
+  padding: 8px 24px;
+  border-radius: 15px 0 0 15px;
+  &:hover {
+    background-color: $green;
+  }
+}
+
+.startup-button-current {
+  background-color: $green;
+  padding: 8px 36px 8px 24px;
+  border-radius: 0 15px 15px 0;
+  &:hover {
+    background-color: $green;
+  }
 }

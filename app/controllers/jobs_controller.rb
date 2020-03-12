@@ -1,12 +1,12 @@
 class JobsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show]
   before_action :find_job, only: [:show, :edit, :update, :destroy]
 
   def show
     authorize @job
     @questions = @job.questions
     authorize @questions
-    @developer_application = current_user.developer.applications.where(job: @job).first
-    skip_authorization
+    @developer_application = current_user.developer.applications.where(job: @job).first if current_user && current_user.developer
   end
 
   def new

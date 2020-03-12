@@ -5,6 +5,12 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+  }
+  p {
+    font-family: 'Open Sans', sans-serif;
+  }
 }
 .content {
   flex: 1 0 auto;
@@ -12,3 +18,4 @@ body {
 .footer {
   flex-shrink: 0;
 }
+

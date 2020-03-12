@@ -5,7 +5,7 @@
 <p>slogan: <%= @developer.slogan %></p>
 <p>hireable: <%= @developer.hireable %></p>
 <p>bio: <%= @developer.bio %></p>
-<p>websites: <%= @developer.websites %></p>
+<p>website: <%= @developer.website %></p>
 <p>social: <%= @developer.facebook %> :: <%= @developer.github %></p>
 
 
@@ -18,3 +18,20 @@
     method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }  %>
 <% end %>
 
+<h2>Current & past jobs</h2>
+<ul>
+  <% @hired_jobs.each do |job| %>
+    <li><%= job.job_title %>
+    <% if current_user && job.company == current_user.company %>
+      <%= link_to 'Add review', new_application_review_path(job.applications.where(developer: @developer).first) %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h2>Reviews</h2>
+
+  <% @reviews.each do |review| %>
+    <h4><%= review.title %> </h4>
+    <p><%= review.content %> </p>
+    <p><%= review.rating %>/5</p>
+  <% end %>
