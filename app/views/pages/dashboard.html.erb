@@ -17,15 +17,25 @@
 
 <!-- if company has applications, show them here -->
 <% if current_user && current_user.company %>
-  <h2>Applications for your outstanding jobs</h2>
+  <h2>Open applications for your outstanding jobs</h2>
   <ul>
     <% @jobs.each do |job| %>
       <% job.applications.each do |application| %>
-        <li><%= link_to application.developer.first_name + " " + application.developer.last_name, application_path(application) %> </li>
+        <% if application.status == 'pending' %>
+          <li><%= link_to application.developer.first_name + " " + application.developer.last_name, application_path(application) %> </li>
+        <% end %>
       <% end %>
     <% end %>
   </ul>
 <% end %>
+
+<!-- show copmanies the developers they hired in the past here -->
+<h2>Current & Past hires</h2>
+<ul>
+  <% @developers.each do |developer| %>
+    <li><%= link_to developer.first_name + ' ' + developer.last_name, developer_path(developer) %> </li>
+  <% end %>
+</ul>
 
 
 <!-- if user applied to a job, show job applications -->
