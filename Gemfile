@@ -17,8 +17,12 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'faker'
 gem 'pundit'
+<<<<<<< HEAD
 gem 'jquery-slick-rails'
 gem 'jquery-rails'
+=======
+gem 'cloudinary', '~> 1.12.0'
+>>>>>>> master
 
 
 group :development do

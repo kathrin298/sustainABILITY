@@ -1,0 +1,11 @@
+<h1>Application for <%= @application.job.job_title %> </h1>
+
+
+  <% @application.answers.each do |answer| %>
+  <p><%= answer.question.content %></p>
+  <p><%= answer.content %></p>
+  <% end %>
+
+  <p>Status: <%= @application.status %></p>
+
+  <p>Applicant: <%= link_to @application.developer.first_name + ' ' + @application.developer.last_name, developer_path(@application.developer) %></p>

@@ -1,7 +1,7 @@
 class Developer < ApplicationRecord
   HIREABLE_OPTIONS = ['Currently available', 'Open to offers', 'Not available']
   belongs_to :user
-  # has_one_attached :photos
+  has_one_attached :photo
 
   # These will await the application models
   # has_many :applications, dependent: :destroy
@@ -20,6 +20,9 @@ class Developer < ApplicationRecord
 
   has_many :conversations
   has_many :messages, through: :conversations
+
+  has_many :answers
+  has_many :applications
 
   validates :first_name, :last_name, presence: true
   validates :hireable, inclusion: { in: HIREABLE_OPTIONS }, presence: true

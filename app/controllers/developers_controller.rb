@@ -39,7 +39,7 @@ class DevelopersController < ApplicationController
   private
 
   def developer_params
-    params.require(:developer).permit(:first_name, :last_name, :location, :bio, :slogan, :interests,
+    params.require(:developer).permit(:first_name, :last_name,  :photo, :location, :bio, :slogan, :interests,
                                       :hireable, :websites, :social_links, :user, :github_profile_url)
   end
 

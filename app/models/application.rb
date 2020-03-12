@@ -6,5 +6,4 @@ class Application < ApplicationRecord
   has_one :review, dependent: :destroy
   has_many :questions, through: :jobs
 
-  validates :status, inclusion: [ in: STATUS]
 end
