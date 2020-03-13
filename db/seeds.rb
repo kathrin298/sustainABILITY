@@ -1,3 +1,4 @@
+DeveloperSkill.destroy_all
 Skill.destroy_all
 CompanyFavourite.destroy_all
 DeveloperFavourite.destroy_all
@@ -11,64 +12,70 @@ Job.destroy_all
 Company.destroy_all
 Developer.destroy_all
 User.destroy_all
-# .destroy_all
 
-DEV_NAMES = ['ivan', 'brandon', 'john', 'kathrin',]
-COMPANY_EMAILS = ['jimmy@saveworld.com', 'tommy@renewables.com', 'sven@infotech.com', 'bruce@turbines.com']
+
+DEV_BIOS = ["After many years as a successful marketer, I felt I wanted to take a change of direction in my career. I had taken some programming courses before, and really enjoyed it. Then I attended a bootcamp and trained in skills like Ruby on Rails and Javascript. Now, I'm hoping to gain some more experience with an organisation that speaks to my values.",
+            "I'm hoping to start on my programming journey with a company that helps the environment and is conscious of sustainability. I started coding about a year ago, and I'm still learning the trade. Working for an organisation that allows me to develop while aligning with my values is really important to me.",
+            "Need a developer? I'm offering my services to companies that aim to make a difference in the world. I started programming in Java and C++ about 2 years ago, and have recently undertaken training in web development. I really need to get my experience up, and I'd love to work for a company that has altruistic goals – for that, I'd work for the experience alone.",
+            "I undertook a coding bootcamp after a year or so of self-taught programming, and now I feel ready to undertake my first challenges in the real world. I've mostly studied Python and the Django framework, but I'd be willing to learn other stacks to up my experience.",
+            "I joined this platform to find the right companies to work for. I've worked with a software company for the past 4 years, but the work never seemed to mean anything to me. I'd love to support a cause worth my time. Perhaps your company is a good fit? For now, money is not the most important thing to me, I'd love to make a difference in the world!"]
+
+COMPANY_BIOS = ["We are a small startup with big goals. Currently our ethos is about stopping destructive production mechanisms, and helping to affect change in the way businesses conduct their affairs. We are seeking an enthousiastic programmer to help us with our web platform. Experience is not as important as a willingness to learn, and a desire to see change in the world. Please apply if you thing you would be a good fit for our growing company.",
+                "A growing but humble startup, we want to affect change in the world. We're seeking a programming to help with our ongoing development work, and we're hoping that the experience of working for a company with altruistic goals will appeal to candidate. We can't offer much in the way of renumeration, except that you'll be joining a project that will make a difference, and we hope the experience of working for us will spark your career, wherever you may go afterward.",
+                "At our company, we're very into sustainability. Our growing number of clients rely on us each day, and we don't like to disappoint. So far, we've been making do with wordpress websites and basic tech, but our growth is sparking the need to upgrade our online presence. We can offer a little renumeration, but mainly we hope that developer will be interested in us for our altruistic approach to business; that's what our core values are all about."]
+
+COMPANY_MISSONS = ["We seek to change the way people look at the world.",
+                   "Recycling, ocean cleaning, and plastic-awareness",
+                   "Cleaning the air, cleaning the ocean, and working with locals",
+                   "Finding the most sustainable way to live",
+                   "Being the change we want to see in the world"]
+
+COMPANY_NAMES = ['EcoTRANS Ltd', 'Ocean CL', 'Peter–Gordon Lawrence', 'Fitzpatrick & Conlon', 'TransGlobal',
+                'Chavez & Roberts', 'GloboTech', 'Planjis Ltd', 'RightWAY Inc', 'ReCylc', 'Crane Global', 'SkyBlu']
+
+
+DEV_NAMES = ['ivan', 'brandon', 'john', 'kathrin', 'james', 'beth', 'amanda']
 INTERESTS = ['Environmentalism', 'Clean Oceans', 'Plastic reduction', 'Climate Change', 'Eco-tourism',
              'Renewable Energy', 'Health Sciences', 'Waste Managment']
 
-puts "seeding developer users..."
+JOB_DESCRIPTIONS = ["We are seeking a developer to help us maintain our very new technology stack. Experience is great, but just as important is a developer's ability to learn and gel well with the team. Please apply and let's start messaging to see if you're a good fit!",
+                    "Encouragement and fairness are part of our core values, and as such we are seeking to work with someone who shares these values. We are seeking a developer to become an integral part of the team, and hopefully help us create something great. If you're interested please fill out an application and let's get in touch.",
+                    "We are looking for the right candidate to help us implement our new platform. Experience is not essential, we'd rather work with a developer who shares our values and can learn our tech stack quickly. If you think you'd be a good fit, please fill out an application and let's get chatting."]
 
-DEV_NAMES.each do |name|
-  user = User.new
-  user.email = "#{name}@email.com"
-  user.password = 'password'
-  user.save
+DEV_SLOGANS = ["Enthousiastic about development and about the environment",
+               "Looking to gain experience with a company that shares my values",
+               "Ready to learn, ready to save the world!",
+               "Working toward making the world a better place, while learning to code",
+               "Seeking an opportunity to expand my skills, while working for a great startup",
+               "Bringing coding skills to a deserving startup"]
 
-  dev = Developer.new
-  dev.first_name = name
-  dev.last_name = Faker::Name.name.split[1]
-  dev.hireable = Developer::HIREABLE_OPTIONS.sample
-  dev.bio = Faker::Lorem.paragraph(sentence_count: rand(10), supplemental: false, random_sentences_to_add: rand(6))
-  dev.location = Faker::Address.city
-  dev.interests = INTERESTS.sample
-  dev.user = user
-  dev.website = Faker::Internet.domain_name
-  dev.facebook =  'facebook.com/3453464'
-  dev.twitter = 'twitter.com/2534643'
-  dev.linkedin = 'linkedin.com/users/23443'
-  dev.github = 'github.com/45443'
-  dev.save
-end
-puts "Seeded #{Developer.all.size} Developers"
 
 
 
 
 puts "seeding company users..."
 
-COMPANY_EMAILS.each do |email|
+COMPANY_NAMES.each do |name|
   user = User.new
-  user.email = email
+  user.email = "#{name.split[0].downcase}@email.com"
   user.password = 'password'
   user.save
 
   company = Company.new
-  company.name = Faker::Company.name
+  company.name = name
   company.user = user
-  company.bio = Faker::Lorem.paragraph(sentence_count: rand(10), supplemental: false, random_sentences_to_add: rand(6))
+  company.bio = COMPANY_BIOS.sample
   company.location = Faker::Address.city
-  company.mission = Faker::Lorem.paragraph(sentence_count: rand(9), supplemental: false, random_sentences_to_add: rand(6))
+  company.mission = COMPANY_MISSONS.sample
   company.industry = Company::INDUSTRIES.sample
   company.employees = rand(16)
-  company.website = Faker::Internet.domain_name
+  company.website = "#{name.split[0].downcase}.org"
   company.save
 
   rand(0..4).times do
     job = Job.new
-    stack = Faker::ProgrammingLanguage.name
-    job.job_title = "#{stack} developer"
+    stack = Skill::BASIC_SKILLS.sample
+    job.job_title = ["Seeking a #{stack} developer", "#{stack} dev wanted", "Want to code and save the world?", "Looking for junior #{stack} developer", "#{stack} developer wanted in a small startup", "#{stack} developer", "#{stack} developer", "#{stack} dev wanted", "#{stack} developer wanted", "#{stack} developer"].sample
     job.job_description = "#{company.name} is a startup created on the principles of doing some good, encouraging growth, sustainability, and progress in all facets of our business. \nWe are a small startup, and currently need some talent to work on our web presence. Currently our tech stack is focused on #{stack}, but we're open to other technologies."
     job.active = !(rand(1..3) == 1)
     job.company = company
@@ -76,7 +83,7 @@ COMPANY_EMAILS.each do |email|
     job.remote = (rand(1..3) == 1)
     job.start_date = Job::START_DATES.sample
     job.duration = Job::DURATIONS.sample
-    question1 = Question.new(content: "Why do you want to work here?")
+    question1 = Question.new(content: "Why do you want to work at #{company.name}?")
     question2 = Question.new(content: "What skills can you bring to this project?")
     question3 = Question.new(content: "Can you tell us something about your core values?")
     question1.job = job
@@ -91,12 +98,50 @@ COMPANY_EMAILS.each do |email|
 end
 puts "Seeded #{Company.all.size} Companies"
 
-puts 'Seeding skills'
 
-Skill::BASIC_SKILLS.each do |skill|
-  new_skill = Skill.new(name: skill)
-  new_skill.save
+puts "seeding developer users..."
+
+DEV_NAMES.each do |name|
+  user = User.new
+  user.email = "#{name}@email.com"
+  user.password = 'password'
+  user.save
+
+  dev = Developer.new
+  dev.first_name = name.capitalize
+  dev.last_name = Faker::Name.name.split[1]
+  dev.hireable = Developer::HIREABLE_OPTIONS.sample
+  dev.bio = DEV_BIOS.sample
+  dev.location = Faker::Address.city
+  dev.interests = INTERESTS.sample
+  dev.user = user
+  dev.website = Faker::Internet.domain_name
+  dev.facebook =  'facebook.com'
+  dev.twitter = 'twitter.com'
+  dev.linkedin = 'linkedin.com'
+  dev.github = 'github.com'
+  dev.save
+  rand(1..6).times do
+    skill = Skill.new(name: Skill::BASIC_SKILLS.sample)
+    skill.save
+    devskill = DeveloperSkill.new
+    devskill.skill = skill
+    devskill.developer = dev
+    devskill.save
+  end
+  rand(14).times do
+    appl = Application.new
+    appl.developer = dev
+    appl.job = Job.all.sample
+    appl.status = Application::STATUS.sample
+    appl.save
+  end
+
 end
+puts "Seeded #{Developer.all.size} Developers"
+
+
+
 
 
 
