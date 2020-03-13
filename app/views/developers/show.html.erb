@@ -118,7 +118,7 @@
                 <div class="card-product-infos">
                 <%= job.job_title %>
 
-                  <p>Job Description</p>
+                  <p> <%= job.job_description %></p>
                 </div>
               </div>
               <% if current_user && job.company == current_user.company %>

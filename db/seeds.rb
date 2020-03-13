@@ -13,6 +13,7 @@ Company.destroy_all
 Developer.destroy_all
 User.destroy_all
 
+$VERBOSE = nil
 
 DEV_BIOS = ["After many years as a successful marketer, I felt I wanted to take a change of direction in my career. I had taken some programming courses before, and really enjoyed it. Then I attended a bootcamp and trained in skills like Ruby on Rails and Javascript. Now, I'm hoping to gain some more experience with an organisation that speaks to my values.",
             "I'm hoping to start on my programming journey with a company that helps the environment and is conscious of sustainability. I started coding about a year ago, and I'm still learning the trade. Working for an organisation that allows me to develop while aligning with my values is really important to me.",
@@ -34,7 +35,8 @@ COMPANY_NAMES = ['EcoTRANS Ltd', 'Ocean CL', 'Peter–Gordon Lawrence', 'Fitzpat
                 'Chavez & Roberts', 'GloboTech', 'Planjis Ltd', 'RightWAY Inc', 'ReCylc', 'Crane Global', 'SkyBlu']
 
 
-DEV_NAMES = ['ivan', 'brandon', 'john', 'kathrin', 'james', 'beth', 'amanda']
+DEV_NAMES = ['ivan', 'brandon', 'john', 'kathrin', 'james', 'beth', 'amanda', 'jennifer', 'kate', 'alina',
+             'frank', 'savid', 'david', 'korina', 'seamus', 'petra', 'nyian', 'peter', 'michelle']
 INTERESTS = ['Environmentalism', 'Clean Oceans', 'Plastic reduction', 'Climate Change', 'Eco-tourism',
              'Renewable Energy', 'Health Sciences', 'Waste Managment']
 
@@ -42,16 +44,15 @@ JOB_DESCRIPTIONS = ["We are seeking a developer to help us maintain our very new
                     "Encouragement and fairness are part of our core values, and as such we are seeking to work with someone who shares these values. We are seeking a developer to become an integral part of the team, and hopefully help us create something great. If you're interested please fill out an application and let's get in touch.",
                     "We are looking for the right candidate to help us implement our new platform. Experience is not essential, we'd rather work with a developer who shares our values and can learn our tech stack quickly. If you think you'd be a good fit, please fill out an application and let's get chatting."]
 
-DEV_SLOGANS = ["Enthousiastic about development and about the environment",
-               "Looking to gain experience with a company that shares my values",
+DEV_SLOGANS = ["Enthousiastic about development and about the environment.",
+               "Looking to gain experience with a company that shares my values.",
                "Ready to learn, ready to save the world!",
-               "Working toward making the world a better place, while learning to code",
-               "Seeking an opportunity to expand my skills, while working for a great startup",
-               "Bringing coding skills to a deserving startup"]
+               "Working toward making the world a better place, while learning to code!",
+               "Seeking an opportunity to expand my skills, while working for a great startup.",
+               "Bringing coding skills to a deserving startup."]
 
 
-
-
+REVIEW_TITLES = ["Top quality work"]
 
 puts "seeding company users..."
 
@@ -75,8 +76,8 @@ COMPANY_NAMES.each do |name|
   rand(0..4).times do
     job = Job.new
     stack = Skill::BASIC_SKILLS.sample
-    job.job_title = ["Seeking a #{stack} developer", "#{stack} dev wanted", "Want to code and save the world?", "Looking for junior #{stack} developer", "#{stack} developer wanted in a small startup", "#{stack} developer", "#{stack} developer", "#{stack} dev wanted", "#{stack} developer wanted", "#{stack} developer"].sample
-    job.job_description = "#{company.name} is a startup created on the principles of doing some good, encouraging growth, sustainability, and progress in all facets of our business. \nWe are a small startup, and currently need some talent to work on our web presence. Currently our tech stack is focused on #{stack}, but we're open to other technologies."
+    job.job_title = "#{stack.capitalize} developer"
+    job.job_description = JOB_DESCRIPTIONS.sample
     job.active = !(rand(1..3) == 1)
     job.company = company
     job.location = Faker::Address.city
@@ -115,6 +116,7 @@ DEV_NAMES.each do |name|
   dev.location = Faker::Address.city
   dev.interests = INTERESTS.sample
   dev.user = user
+  dev.slogan = DEV_SLOGANS.sample
   dev.website = Faker::Internet.domain_name
   dev.facebook =  'facebook.com'
   dev.twitter = 'twitter.com'
@@ -129,13 +131,29 @@ DEV_NAMES.each do |name|
     devskill.developer = dev
     devskill.save
   end
-  rand(14).times do
+  rand(1..5).times do
     appl = Application.new
     appl.developer = dev
     appl.job = Job.all.sample
     appl.status = Application::STATUS.sample
+
+    REVIEW_CONTENT = ["#{dev.first_name} did a wonderful job for us, and seemed very knowledgeable. Keep up the great work!",
+                    "We loved working with #{dev.first_name}; quick to learn our tricky stack, and professional at all times.",
+                    "#{dev.first_name} worked for us for an extended period, we were only sorry to see the relationship end. Trustworthy and knowledgeable, well done #{dev.first_name}!",
+                    "A great developer and a wonderful new friend, #{dev.first_name} came to us to tackle a very difficult project. Would definitely hire again!",
+                    "#{dev.first_name} was punctual and hard-working right from day one. It was an absolute pleasure. Keep up the good work #{dev.first_name} :)",
+                    "Lovely to meet #{dev.first_name}, and an absolute please to work with. Will definitely hire again, if we can afford it!",
+                    "A good dev and very eager to learn.",
+                    "A great developer and now a good friend, #{dev.first_name} has moved on to better things now but we are still reaping the benefits of the excellent work that was done."]
+    rand(5..10).times do
+      review = Review.new(title: REVIEW_TITLES.sample, content: REVIEW_CONTENT.sample, rating: rand(3..5))
+      # review.developer = appl
+      review.save
+      appl.review = review
+    end
     appl.save
   end
+
 
 end
 puts "Seeded #{Developer.all.size} Developers"
