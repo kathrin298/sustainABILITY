@@ -24,6 +24,14 @@ class PagesController < ApplicationController
       @results = query_devs(params[:query], 'first_name', 'last_name', 'bio')
     elsif params[:search_type] == 'Companies'
       @results = query_companies(params[:query], 'name', 'bio', 'industry')
+    elsif params[:search_type] == 'company_skills'
+      @results = query_companies(params[:query], 'mission', 'bio', 'industry')
+    elsif params[:search_type] == 'dev_interests'
+      @results = query_devs(params[:query], 'interests', 'bio', 'last_name')
+    elsif params[:search_type] == 'company_mission'
+      @results = query_companies(params[:query], 'mission', 'bio', 'name')
+    else
+      @results = query_devs(params[:query], 'location', 'bio', 'last_name')
     end
   end
 
