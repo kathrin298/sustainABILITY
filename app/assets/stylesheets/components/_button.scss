@@ -13,38 +13,21 @@
 }
 
 .btn-flat {
+  display: inline-block;
   color: white;
   padding: 8px 24px;
   border-radius: 8px;
-  margin-top: 40px;
-  background: $yellow;
+  background: $green;
   width: 192px;
   height: 42px;
   transition: background 0.3s ease;
 }
 
-.favorite {
-  background-color: #D64041;
-  &:hover {
-    background-color: #F14849;
-    color: white;
-  }
-}
-
-.message {
-  background-color: #39A0DB;
-  &:hover {
-    background-color: #40B2F4;
-    color: white;
-  }
-}
-
 .icon-wrapper{
-  width: 192px;
+  // width: 192px;
   margin-top: 40px;
-  // margin-left: 10px;
+  margin-left: 10px;
 }
-
 
 .btn-flat:hover {
   background-color: #67B353;
@@ -82,6 +65,27 @@
 .text-center a {
   font-size: 0.9rem;
   margin-right: 40px;
+}
+
+.edit {
+  background-color: #39A0DB;
+  margin-top: 40px;
+
+  &:hover {
+    background-color: #40B2F4;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.delete {
+  background-color: #D64041;
+  margin-top: 40px;
+  &:hover {
+    background-color: #F14849;
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .customer-segment-selector {
@@ -128,5 +132,35 @@
   border-radius: 0 15px 15px 0;
   &:hover {
     background-color: $green;
+  }
+}
+
+.favorite {
+  background-color: #D64041;
+  margin-top: 20px;
+  font-size: 0.95rem;
+  &:hover {
+    background-color: #F04849;
+    color: white;
+  }
+}
+
+.message {
+  background-color: #39A0DB;
+  margin-top: 20px;
+  font-size: 0.95rem;
+  &:hover {
+    background-color: #3FB0F1;
+    color: white;
+  }
+}
+
+.website {
+  background-color: #F9C132;
+  margin-top: 20px;
+  font-size: 0.95rem;
+  &:hover {
+    background-color: #FBD133;
+    color: white;
   }
 }
