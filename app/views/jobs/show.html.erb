@@ -40,7 +40,11 @@
     </div>
     <div class="job-cards">
       <p>Remote:</p>
-      <p><%= @job.remote %> </p>
+      <% if @job.remote%>
+        <p>Yes</p>
+      <% else %>
+        <p>No</p>
+      <% end %>
     </div>
   </div>
 
@@ -64,7 +68,7 @@
 
       <div class="info-text">
         <h3>Company: <%= link_to @job.company.name, company_path(@job.company) %></h3>
-        <p><%= @job.company.industry %></p>
+        <p>Industry: <%= @job.company.industry %></p>
         <p>Mission: <%= @job.company.mission %></p>
       </div>
 
