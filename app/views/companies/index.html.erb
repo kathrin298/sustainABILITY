@@ -7,8 +7,7 @@
     <h1>Do You Want to Gain Experience While Supporting Projects You Love?</h1>
     <p>Find Your Match Now!</p>
     <div class="banner-search-bar">
-      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-      <a class="btn btn-flat" href="#">Search</a>
+      <%= render 'pages/searchbar', search_type: 'Companies', btn_class: "btn btn-flat", placeholder: "Search for a company..." %>
     </div>
   </div>
 </div>
@@ -42,8 +41,7 @@
       <% end %>
     </div>
     <div class="carousel-search-bar">
-      <input class="form-control" type="text" placeholder="New York, London, Berlin..." aria-label="Search">
-      <a class="btn btn-flat-reverse" href="#">Search</a>
+      <%= render 'pages/searchbar', search_type: 'company_location', btn_class: "btn btn-flat-reverse", placeholder: "New York, London, Berlin..." %>
     </div>
   </div>
 </div>
@@ -70,8 +68,7 @@
       <% end %>
     </div>
     <div class="carousel-search-bar">
-      <input class="form-control" type="text" placeholder="Javascript, Python, Ruby..." aria-label="Search">
-      <a class="btn btn-flat" href="#">Search</a>
+      <%= render 'pages/searchbar', search_type: 'Companies', btn_class: "btn btn-flat", placeholder: "Javascript, Python, Ruby..." %>
     </div>
   </div>
 </div>
@@ -94,8 +91,7 @@
       <% end %>
     </div>
     <div class="carousel-search-bar">
-      <input class="form-control" type="text" placeholder="Climate Change, Ocean Pollution..." aria-label="Search">
-      <a class="btn btn-flat-reverse" href="#">Search</a>
+      <%= render 'pages/searchbar', search_type: 'Companies', btn_class: "btn btn-flat-reverse", placeholder: "Climate Change, Ocean Pollution..." %>
     </div>
   </div>
 </div>
@@ -105,23 +101,23 @@
     <a class="btn btn-flat btn-lg" href="#">Find a Job Now!</a>
   </div>
 </div>
-<div class="container">
+<!-- <div class="container">
   <br>
   <hr>
   <br>
   <h1>All companies</h1>
   <ul>
-  <% @companies.each do |company| %>
-    <li><%= link_to company.name, company_path(company) %></li>
-   <% end %>
+  <%# @companies.each do |company| %>
+    <li><%#= link_to company.name, company_path(company) %></li>
+   <%# end %>
   </ul>
 
   <h2>All Jobs</h2>
   <ul>
-    <% @companies.each do |company| %>
-      <% company.jobs.each do |job| %>
-        <li><%= link_to job.job_title, job_path(job) %></li>
-      <% end %>
-   <% end %>
+    <%# @companies.each do |company| %>
+      <%# company.jobs.each do |job| %>
+        <li><%#= link_to job.job_title, job_path(job) %></li>
+      <%# end %>
+   <%# end %>
   </ul>
-</div>
+</div> -->

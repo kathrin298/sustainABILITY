@@ -1,6 +1,6 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag("/logo-nv.svg") %> - <%= current_user.email if current_user.present? %>
+    <%= image_tag("/logo-nv.svg") %>
   <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +19,8 @@
             <%= cl_image_tag current_user.company.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% elsif current_user.developer && current_user.developer.photo.attached? %>
             <%= cl_image_tag current_user.developer.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <% elsif current_user.company && !current_user.company.photo.attached?%>
+            <%= image_tag "blank_company_logo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% else %>
             <%= image_tag "user.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% end %>

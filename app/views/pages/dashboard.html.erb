@@ -1,49 +1,51 @@
-<h1>Your Dashboard</h1>
+<div class="container">
+  <h1>Your Dashboard</h1>
 
-<!-- if user has company, be able to add new job to that company -->
-<% if current_user && current_user.company %>
-  <%= link_to 'Create new job posting', new_company_job_path(@company.id) %>
-<% end %>
+  <!-- if user has company, be able to add new job to that company -->
+  <% if current_user && current_user.company %>
+    <%= link_to 'Create new job posting', new_company_job_path(@company.id) %>
+  <% end %>
 
-<!-- If user has a company, show that company's job postings -->
-<% if current_user && current_user.company %>
-  <h2>My Company's Job Postings</h2>
-  <ul>
-    <% @jobs.each do |job| %>
-      <li><%= link_to job.job_title, job_path(job) %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <!-- If user has a company, show that company's job postings -->
+  <% if current_user && current_user.company %>
+    <h2>My Company's Job Postings</h2>
+    <ul>
+      <% @jobs.each do |job| %>
+        <li><%= link_to job.job_title, job_path(job) %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<!-- if company has applications, show them here -->
-<% if current_user && current_user.company %>
-  <h2>Open applications for your outstanding jobs</h2>
-  <ul>
-    <% @jobs.each do |job| %>
-      <% job.applications.each do |application| %>
-        <% if application.status == 'pending' %>
-          <li><%= link_to application.developer.first_name + " " + application.developer.last_name, application_path(application) %> </li>
+  <!-- if company has applications, show them here -->
+  <% if current_user && current_user.company %>
+    <h2>Open applications for your outstanding jobs</h2>
+    <ul>
+      <% @jobs.each do |job| %>
+        <% job.applications.each do |application| %>
+          <% if application.status == 'pending' %>
+            <li><%= link_to application.developer.first_name + " " + application.developer.last_name, application_path(application) %> </li>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </ul>
-<% end %>
-
-<!-- show copmanies the developers they hired in the past here -->
-<h2>Current & Past hires</h2>
-<ul>
-  <% @developers.each do |developer| %>
-    <li><%= link_to developer.first_name + ' ' + developer.last_name, developer_path(developer) %> </li>
+    </ul>
   <% end %>
-</ul>
 
-
-<!-- if user applied to a job, show job applications -->
-<% if current_user.developer && current_user.developer.applications.length >= 1 %>
-  <h2>My Applications</h2>
+  <!-- show copmanies the developers they hired in the past here -->
+  <h2>Current & Past hires</h2>
   <ul>
-    <% @applications.each do |application| %>
-      <li><%= link_to application.job.job_title, application_path(application) %> </li>
+    <% @developers.each do |developer| %>
+      <li><%= link_to developer.first_name + ' ' + developer.last_name, developer_path(developer) %> </li>
     <% end %>
   </ul>
-<% end %>
+
+
+  <!-- if user applied to a job, show job applications -->
+  <% if current_user.developer && current_user.developer.applications.length >= 1 %>
+    <h2>My Applications</h2>
+    <ul>
+      <% @applications.each do |application| %>
+        <li><%= link_to application.job.job_title, application_path(application) %> </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
