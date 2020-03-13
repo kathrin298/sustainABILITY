@@ -1,21 +1,21 @@
 <div class="container">
   <h1>Your Application for <%= @job.job_title %></h1>
-
-<form action="/answers" method="post">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <%= hidden_field_tag :user_id, current_user.id %>
-  <div class="col-12">
-
-  <% @job.questions.each_with_index do |question, index| %>
-  <br>
-<br>
-<div class="col-12">
-    <%= question.content %>
-    <input type="text" name="question[<%= question.id %>]">
+    <form action="/answers" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= hidden_field_tag :user_id, current_user.id %>
+      <div class="row justify-content-center">
+        <% @job.questions.each_with_index do |question, index| %>
+        <br>
+        <br>
+        <div class="col-12">
+          <%= question.content %>
+          <br>
+          <input type="text" class="form-control form" name="question[<%= question.id %>]">
+        </div>
+        <% end %>
+      </div>
+      <br>
+      <input class="btn-flat" type="submit">
+    </form>
 </div>
-  <% end %>
-  </div>
-  <br>
-  <input class="btn-flat" type="submit">
-</form>
-</div>
+
