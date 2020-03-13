@@ -4,9 +4,9 @@
     <% params[:search_type] = "Companies" %>
   <% end %>
 
-  <div class="banner-search-bar">
+  <div class="serp-searchbar">
     <%= form_tag search_path, method: :get do %>
-      <span>Search for:&nbsp;&nbsp;</span><%= select_tag(:search_type, options_for_select([["Developers","Developers"],
+      <%= select_tag(:search_type, options_for_select([["Developers","Developers"],
                   ["Companies","Companies"]], params[:search_type] ), class:"select") %>&nbsp;&nbsp;&nbsp;
       <%= text_field_tag :query,
         params[:query],
@@ -22,26 +22,26 @@
 
   <% if params[:search_type] == 'Companies' %>
     <% if params[:query] == ""  %>
-      <h1 style="padding: 20px;">All companies</h1>
+      <h2 style="padding: 20px;">All companies</h2>
     <% else %>
-      <h1 style="padding: 20px;">Showing <%= pluralize @results.size, 'company' %> matching your query "<%= params[:query] %>"</h1>
+      <h2 style="padding: 20px;">Showing <%= pluralize @results.size, 'company' %> matching your query "<%= params[:query] %>"</h2>
     <% end %>
   <% else %>
     <% if params[:query] == ""   %>
-      <h1 style="padding: 20px;">All developers</h1>
+      <h2 style="padding: 20px;">All developers</h2>
     <% else %>
-      <h1 style="padding: 20px;">Showing <%= pluralize @results.size, 'developer' %> matching your query "<%= params[:query] %>"</h1>
+      <h2 style="padding: 20px;">Showing <%= pluralize @results.size, 'developer' %> matching your query "<%= params[:query] %>"</h2
     <% end %>
   <% end %>
 
-  <ul>
+
   <% @results.each do |result| %>
     <% if result.respond_to?(:name) %>
-      <li><%= result.name %></li>
+      <%= render 'pages/company_serp', company: result %>
     <% else %>
-      <li><%= "#{result.first_name} #{result.last_name}" %></li>
+      <%= render 'pages/developer_serp', developer: result %>
     <% end %>
   <% end %>
-  </ul>
+
 </div>
 
