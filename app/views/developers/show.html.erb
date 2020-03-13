@@ -3,14 +3,14 @@
     <div class="row my-5">
       <div class="col-3">
           <div style="width:500px; height:300px;">
-                <% if @developer.photo.attached? %>
-                <%= cl_image_tag current_user.developer.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
-                 <% else %>
+            <% if @developer.photo.attached? %>
+              <%= cl_image_tag current_user.developer.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
+            <% else %>
               <%= image_tag "user.jpg", class: "avatar-huge" %>
             <% end %>
           </div>
         </div>
-          <div class="col-6">
+        <div class="col-6">
             <h2><%= @developer.first_name %> <%= @developer.last_name %></h2>
             <p><strong>Location:</strong> <%= @developer.location %></p>
             <p><strong>Interests:</strong> <%= @developer.interests %></p>
@@ -89,66 +89,40 @@
           </div>
     </div>
   </div>
-                <div class="row">
-                  <div class="bio col-8">
-                    <p><strong>Bio:</strong> <%= @developer.bio %></p>
-                  </div>
-                </div>
-                <div class="row mb-4">
-                  <div class="web col-4">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="..." alt="Card image cap">
-                      <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="web col-4">
-                    <div class="card" style="width: 18rem;">
-                       <img class="card-img-top" src=". . ." alt="Card image cap">
-                      <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="web col-4">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="..." alt="Card image cap">
-                      <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <% if @hired_jobs.present? %>
-          <h2>Current & past jobs</h2>
-            <% @hired_jobs.each do |job| %>
-              <div class="card-product">
-                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-                <div class="card-product-infos">
-                <%= job.job_title %>
 
-                  <p> <%= job.job_description %></p>
-                </div>
-              </div>
-              <% if current_user && job.company == current_user.company %>
-                <%= link_to 'Add review', new_application_review_path(job.applications.where(developer: @developer).first) %>
-              <% end %>
-            <% end %>
-            <% end %>
+  <div class="row">
+    <div class="bio col-8">
+      <p><strong>Bio:</strong> <%= @developer.bio %></p>
+    </div>
+  </div>
 
-          <% if @reviews.present? %>
-          <h2>Reviews</h2>
+  <% if @hired_jobs.present? %>
+    <h2>Current & past jobs</h2>
+    <% @hired_jobs.each do |job| %>
+      <div class="card-product">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-product-infos">
+        <%= job.job_title %>
+          <p> <%= job.job_description %></p>
+        </div>
+      </div>
+      <% if current_user && job.company == current_user.company %>
+        <%= link_to 'Add review', new_application_review_path(job.applications.where(developer: @developer).first) %>
+      <% end %>
+    <% end %>
+  <% end %>
 
-            <% @reviews.each do |review| %>
-              <h4><%= review.title %> </h4>
-              <p><%= review.content %> </p>
-              <p><%= review.rating %>/5</p>
-            <% end %>
-            <% end %>
+  <div class="p-5">
+    <% if @reviews.present? %>
+      <h2>Reviews</h2>
+
+      <% @reviews.each do |review| %>
+        <h4><%= review.title %> </h4>
+        <p><%= review.content %> </p>
+        <p><%= review.rating %>/5</p>
+      <% end %>
+    <% end %>
+  </div>
+
 </div>
-
-<br>
-<hr>
-<br>
 
