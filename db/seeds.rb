@@ -52,7 +52,10 @@ DEV_SLOGANS = ["Enthousiastic about development and about the environment.",
                "Bringing coding skills to a deserving startup."]
 
 
-REVIEW_TITLES = ["Top quality work"]
+REVIEW_TITLES = ["Top quality work", "A great developer", "Good developer", "Really nice work", "Great work!",
+                 "A pleasure to work with", "Great personality, great developer", "A real gem", "Excellent work",
+                 "Very knowledgable", "Cordial, punctual, and knowledgable", "Terrific job", "Perfect!",
+                 "Super job, great developer", "Would hire again in a hearbeat"]
 
 puts "seeding company users..."
 
