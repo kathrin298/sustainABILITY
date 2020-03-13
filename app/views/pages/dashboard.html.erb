@@ -83,32 +83,34 @@
         <div class="tab-pane fade" id="posted-jobs" role="tabpanel" aria-labelledby="posted-jobs-tab">
           <ul>
             <% @jobs.each do |job| %>
-              <div class="developer-card">
-                <% if job.company.photo.attached? %>
-                  <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
-                <% else %>
-                  <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
-                <% end %>
-                <div class="developer-card-info">
-                  <div class="developer-card-left">
-                    <h2><%= job.job_title %></h2>
-                    <h3>Status: <%= job.active ? "Active" : "Closed" %></h3>
-                    <p><%= job.job_description.truncate(150) %></p>
-                  </div>
-                  <div class="developer-card-right">
-                    <h3>
-                      <% if (Date.today - job.created_at.to_date).to_i == 0 %>
-                        Posted today
-                      <% else %>
-                        Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
-                      <% end %>
-                    </h3>
-                    <div class="skill-tags">
-                      <!-- Skill tags code goes here -->
+              <%= link_to jobs_path(job) do %>
+                <div class="developer-card">
+                  <% if job.company.photo.attached? %>
+                    <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                  <% else %>
+                    <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                  <% end %>
+                  <div class="developer-card-info">
+                    <div class="developer-card-left">
+                      <h2><%= job.job_title %></h2>
+                      <h3>Status: <%= job.active ? "Active" : "Closed" %></h3>
+                      <p><%= job.job_description.truncate(150) %></p>
+                    </div>
+                    <div class="developer-card-right">
+                      <h3>
+                        <% if (Date.today - job.created_at.to_date).to_i == 0 %>
+                          Posted today
+                        <% else %>
+                          Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
+                        <% end %>
+                      </h3>
+                      <div class="skill-tags">
+                        <!-- Skill tags code goes here -->
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              <% end %>
             <% end %>
           </ul>
         </div>
