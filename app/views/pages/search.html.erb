@@ -34,14 +34,14 @@
     <% end %>
   <% end %>
 
-  <ul>
+
   <% @results.each do |result| %>
     <% if result.respond_to?(:name) %>
-      <li><%= result.name %></li>
+      <%= render 'pages/company_serp_card', company: result %>
     <% else %>
-      <li><%= "#{result.first_name} #{result.last_name}" %></li>
+
     <% end %>
   <% end %>
-  </ul>
+
 </div>
 
