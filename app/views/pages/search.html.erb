@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="banner-search-bar">
+    <%= form_tag search_path, method: :get do %>
+      <span>Search for:&nbsp;&nbsp;</span><%= select_tag :search_type,
+          raw("<option>Developers</option><option>Companies</option>") %>&nbsp;&nbsp;&nbsp;
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control d-flex",
+        placeholder: "search..."
+      %>
+      <%= button_tag(type: 'submit', class: "btn") do %>
+         <i class="fas fa-search"></i>
+      <% end %>
+      <%#= hidden_field_tag :search_type , search_type %>
+    <% end %>
+  </div>
+
+  <% if params[:query]==""  %>
+    <h1 style="padding: 20px;">Showing all companies</h1>
+  <% else %>
+    <h1 style="padding: 20px;">Showing <%= pluralize @results.size, 'result' %> for "<%= params[:query] %>"</h1>
+  <% end %>
+
+  <% @results.each do |result| %>
+
+    <% if result.respond_to?(:name) %>
+      <p><%= result.name %></p>
+    <% else %>
+      <p><%= "#{result.first_name} #{result.last_name}" %></p>
+    <% end %>
+  <% end %>
+</div>
+
