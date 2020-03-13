@@ -1,8 +1,13 @@
 <div class="container">
-  <div class="banner-search-bar">
+
+  <% if params[:search_type] == "company_mission" %>
+    <% params[:search_type] = "Companies" %>
+  <% end %>
+
+  <div class="serp-searchbar">
     <%= form_tag search_path, method: :get do %>
-      <span>Search for:&nbsp;&nbsp;</span><%= select_tag :search_type,
-          raw("<option>Developers</option><option>Companies</option>") %>&nbsp;&nbsp;&nbsp;
+      <%= select_tag(:search_type, options_for_select([["Developers","Developers"],
+                  ["Companies","Companies"]], params[:search_type] ), class:"select") %>&nbsp;&nbsp;&nbsp;
       <%= text_field_tag :query,
         params[:query],
         class: "form-control d-flex",
@@ -11,23 +16,32 @@
       <%= button_tag(type: 'submit', class: "btn") do %>
          <i class="fas fa-search"></i>
       <% end %>
-      <%#= hidden_field_tag :search_type , search_type %>
     <% end %>
   </div>
 
-  <% if params[:query]==""  %>
-    <h1 style="padding: 20px;">Showing all companies</h1>
-  <% else %>
-    <h1 style="padding: 20px;">Showing <%= pluralize @results.size, 'result' %> for "<%= params[:query] %>"</h1>
-  <% end %>
 
-  <% @results.each do |result| %>
-
-    <% if result.respond_to?(:name) %>
-      <p><%= result.name %></p>
+  <% if params[:search_type] == 'Companies' %>
+    <% if params[:query] == ""  %>
+      <h2 style="padding: 20px;">All companies</h2>
     <% else %>
-      <p><%= "#{result.first_name} #{result.last_name}" %></p>
+      <h2 style="padding: 20px;">Showing <%= pluralize @results.size, 'company' %> matching your query "<%= params[:query] %>"</h2>
+    <% end %>
+  <% else %>
+    <% if params[:query] == ""   %>
+      <h2 style="padding: 20px;">All developers</h2>
+    <% else %>
+      <h2 style="padding: 20px;">Showing <%= pluralize @results.size, 'developer' %> matching your query "<%= params[:query] %>"</h2
     <% end %>
   <% end %>
+
+
+  <% @results.each do |result| %>
+    <% if result.respond_to?(:name) %>
+      <%= render 'pages/company_serp', company: result %>
+    <% else %>
+      <%= render 'pages/developer_serp', developer: result %>
+    <% end %>
+  <% end %>
+
 </div>
 

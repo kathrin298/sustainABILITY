@@ -1,0 +1,45 @@
+.serp-card {
+  box-shadow: 2px 2px 7px -2px gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  margin: 20px;
+
+}
+
+.serp-card-wrapper {
+  color:black;
+  text-decoration: none;
+  &:hover {
+    color:black;
+    text-decoration: none;
+  }
+}
+
+.serp-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.serp-text {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.serp-searchbar {
+  padding: 20px;
+  form {
+     padding: 10px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+  }
+
+  select {
+    padding: 7px;
+  }
+}
