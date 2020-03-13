@@ -126,7 +126,7 @@
                     <div class="developer-card-info">
                       <div class="developer-card-left">
                         <h2><%= application.developer.first_name.capitalize %> <%= application.developer.last_name.capitalize %></h2>
-                        <h3><%= application.developer.slogan.present? ? developer.slogan : "No title provided" %></h3>
+                        <h3><%= application.developer.slogan.present? ? application.developer.slogan : "No title provided" %></h3>
                         <p><%= application.developer.bio.truncate(150) %></p>
                       </div>
                       <div class="developer-card-right">
