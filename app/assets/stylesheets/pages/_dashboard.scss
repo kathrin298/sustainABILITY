@@ -1,0 +1,58 @@
+.dashboard-table {
+  margin-top: 30px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+    margin-bottom: 0;
+  }
+  .message {
+    font-size: 1.15rem;
+    margin-top: 0;
+  }
+}
+
+.dashboard-body {
+  margin: 30px 0;
+}
+
+.tab-content {
+  border: 1px solid #DEE2E7;
+  padding: 30px;
+}
+
+.developer-card {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+}
+
+.developer-card img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.developer-card h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.developer-card p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.developer-card .developer-card-infos {
+  padding: 16px;
+}
