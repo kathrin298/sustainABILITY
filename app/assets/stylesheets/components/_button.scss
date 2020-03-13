@@ -164,3 +164,18 @@
     color: white;
   }
 }
+
+.btn-reject {
+  display: inline-block;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 8px;
+  background: #DC3645;
+  width: 192px;
+  height: 42px;
+  transition: background 0.3s ease;
+  &:hover {
+    color: white;
+    background-color: #EF3B4B;
+  }
+}
