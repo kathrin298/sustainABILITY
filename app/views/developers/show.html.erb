@@ -19,27 +19,35 @@
             <p><strong>Intersts:</strong></p>
 
               <div class="d-flex justify-content-start icon-wrapper ml-0 mt-0 mb-4">
-                <% if !@developer.github.nil?  %>
-                <i class="fab fa-github fa-2x mr-3"></i>
+                <% if @developer.github.present?  %>
+                  <%= link_to("#{"https://" if !@developer.github.include?('http')}#{@developer.github}") do %>
+                    <i class="fab fa-github fa-2x mr-3"></i>
+                  <% end %>
                 <% end %>
-                <% if !@developer.facebook.nil?  %>
-                <i class="fab fa-facebook fa-2x mr-3"></i>
+                <% if @developer.facebook.present?  %>
+                  <%= link_to("#{"https://" if !@developer.facebook.include?('http')}#{@developer.facebook}") do %>
+                    <i class="fab fa-facebook fa-2x mr-3"></i>
+                  <% end %>
                 <% end %>
-                <% if !@developer.twitter.nil?  %>
-                <i class="fab fa-twitter fa-2x mr-3"></i>
+                <% if @developer.twitter.present?  %>
+                  <%= link_to("#{"https://" if !@developer.twitter.include?('http')}#{@developer.twitter}") do %>
+                    <i class="fab fa-twitter fa-2x mr-3"></i>
+                  <% end %>
                 <% end %>
-                <% if !@developer.linkedin.nil?  %>
-                <i class="fab fa-linkedin fa-2x mr-3"></i>
+                <% if @developer.linkedin.present?  %>
+                  <%= link_to("#{"https://" if !@developer.linkedin.include?('http')}#{@developer.linkedin}") do %>
+                    <i class="fab fa-linkedin fa-2x mr-3"></i>
+                  <% end %>
                 <% end %>
               </div>
           </div>
           <div class="col-3">
                 <div class="d-row text-center">
-                        <% if current_user.developer == @developer %>
+                        <% if current_user.present? && current_user.developer == @developer %>
                   <div class="d-row my-2">
                     <div class="mb-0">
                         <% if policy(@developer).edit? %>
-                         <%= link_to 'Edit', edit_developer_path(@developer), class: "btn-flat edit" %>
+                         <%= link_to 'Edit profile', edit_developer_path(@developer), class: "btn-flat edit" %>
 
                         <% end %>
                     </div>
