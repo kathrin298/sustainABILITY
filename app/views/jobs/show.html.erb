@@ -54,10 +54,16 @@
   <div class="company-container">
     <div class="company-info">
 
-      <img src="" alt="">
+      <div style="width:500px; height:300px;">
+        <% if @job.company.photo.attached? %>
+          <%= cl_image_tag @job.company.photo.key, height: 200, width: 200, crop: :thumb %>
+        <% else %>
+          <%= image_tag "blank_company_logo.jpg", class: "avatar-huge" %>
+        <% end %>
+      </div>
 
       <div class="info-text">
-        <h3>Company: <%= @job.company.name %></h3>
+        <h3>Company: <%= link_to @job.company.name, company_path(@job.company) %></h3>
         <p><%= @job.company.industry %></p>
         <p>Mission: <%= @job.company.mission %></p>
       </div>
