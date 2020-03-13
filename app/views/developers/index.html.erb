@@ -94,17 +94,6 @@
 <div class="container">
   <div class="closing-cta">
     <h1>Ready to Get Started?</h1>
-    <a class="btn btn-flat btn-lg" href="/search?search_type=Developers&query=">Find a Developer Now!</a>
+    <a class="btn btn-flat btn-lg" href="/search?search_type=Developers&query=">Search Devs</a>
   </div>
-</div>
-<div class="container">
-  <br>
-  <hr>
-  <br>
-  <h1>All developers</h1>
-    <ul>
-    <% @developers.each do |developer| %>
-      <li><%= link_to developer.first_name, developer_path(developer) %></li>
-     <% end %>
-    </ul>
 </div>
