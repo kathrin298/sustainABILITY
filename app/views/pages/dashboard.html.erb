@@ -83,7 +83,7 @@
         <div class="tab-pane fade" id="posted-jobs" role="tabpanel" aria-labelledby="posted-jobs-tab">
           <ul>
             <% @jobs.each do |job| %>
-              <%= link_to jobs_path(job) do %>
+              <%= link_to job_path(job) do %>
                 <div class="developer-card">
                   <% if job.company.photo.attached? %>
                     <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
