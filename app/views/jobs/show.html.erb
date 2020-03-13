@@ -1,4 +1,25 @@
-<h1> <%= @job.job_title %>  (job owned by <%= @job.company.user.email%> )</h1>
+<div class="container my-3">
+  <div class="title-container">
+    <h1>Position: <%= @job.job_title %></h1>
+    <!-- Apply now button -->
+    <% if @developer_application %>
+      <p>You have already applied to this job. View your <%= link_to 'application', application_path(@developer_application) %></p>
+    <% else %>
+      <% if current_user && current_user.developer %>
+        <%= link_to 'Apply now', new_job_application_path(@job) %>
+      <% elsif !current_user %>
+        <p>Please <%= link_to "login", new_user_session_path %> or create an account to apply for this job</p>
+      <% end %>
+    <% end %>
+  </div>
+
+
+</div>
+
+<!-- old code -->
+<br>
+
+<h1> <%= @job.job_title %></h1>
 
 <p><%= @job.job_description %> </p>
 
@@ -17,7 +38,6 @@
 
 <br>
 
-<!-- pundit needs to be set up here -->
 <% if policy(@job).edit? %>
   <%= link_to 'edit job posting', edit_job_path(@job) %>
 <% end %>
@@ -25,8 +45,7 @@
 <% if policy(@job).destroy? %>
   <%= link_to 'delete job posting', job_path(@job), method: :delete %>
 <% end %>
-<!-- only showing application questions and edit/delete if the company owns the jobs posting -->
-<%# if current_user && current_user == @job.company.user %>
+
 <% if policy(@job).edit? %>
   <h3>Application questions</h3>
   <%= link_to 'Add new question', new_job_question_path(@job) %>
