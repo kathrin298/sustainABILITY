@@ -6,7 +6,7 @@
           <% if @company.photo.attached? %>
             <%= cl_image_tag current_user.company.photo.key, height: 200, width: 200, crop: :thumb %>
           <% else %>
-            <%= image_tag "user.jpg", class: "avatar-huge" %>
+            <%= image_tag "blank_company_logo.jpg", class: "avatar-huge" %>
           <% end %>
         </div>
       </div>
