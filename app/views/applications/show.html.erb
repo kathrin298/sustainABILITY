@@ -1,23 +1,37 @@
-<h1>Application for <%= @application.job.job_title %> </h1>
+<div class="container my-4">
+  <div class="application-info">
+    <div>
+      <h1>Application for <%= @application.job.job_title %> </h1>
+      <p>By <%= link_to "#{@application.developer.first_name.capitalize} #{@application.developer.last_name.capitalize}", developer_path(@application.developer) %></p>
+    </div>
+    <!-- application status -->
+    <% if @application.status == 'accepted' %>
+      <p class="tag green">Status: <%= @application.status %></p>
+    <% elsif @application.status == 'rejected'%>
+      <p class="tag orange">Status: <%= @application.status %></p>
+    <% else %>
+      <p class="tag grey">Status: <%= @application.status %></p>
+    <% end %>
+  </div>
 
-<% @application.answers.each do |answer| %>
-  <p><%= answer.question.content %></p>
-  <p><%= answer.content %></p>
-<% end %>
+  <ol>
+  <% @application.answers.each do |answer| %>
+    <li><strong><%= answer.question.content %></strong></li>
+    <p><%= answer.content %></p>
+  <% end %>
+  </ol>
 
-<p>Status: <%= @application.status %></p>
-
-<p>Applicant: <%= link_to "#{@application.developer.first_name} #{@application.developer.last_name}", developer_path(@application.developer) %></p>
-
-<!-- Buttons to accept/reject offers if your company recieved application -->
-<% if @application.job.company == current_user.company %>
-  <%= link_to 'Accept application',
-               application_path(@application,
-                                :application => {status: 'accepted'}),
-               method: :patch %>
-  <br>
-  <%= link_to 'Reject application',
-               application_path(@application,
-                                :application => {status: 'rejected'}),
-               method: :patch %>
-<% end %>
+  <!-- buttons for hiring manager -->
+  <div class="buttons">
+    <% if @application.job.company == current_user.company %>
+      <%= link_to 'Accept',
+                   application_path(@application,
+                                    :application => {status: 'accepted'}),
+                   method: :patch, class: "btn btn-flat" %>
+      <%= link_to 'Reject',
+                   application_path(@application,
+                                    :application => {status: 'rejected'}),
+                   method: :patch, class: "btn btn-reject ml-4" %>
+    <% end %>
+  </div>
+</div>
