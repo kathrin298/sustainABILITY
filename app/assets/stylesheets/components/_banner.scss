@@ -27,8 +27,11 @@
 }
 
 .banner-search-bar {
+  form {
+
   display: flex;
   align-items: center;
+  }
   .form-control {
     width: 250px;
   }

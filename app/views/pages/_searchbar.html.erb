@@ -1,0 +1,13 @@
+<div class="banner-search-bar">
+  <%= form_tag search_path, method: :get do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control d-flex",
+      placeholder: placeholder
+    %>
+    <%= button_tag(type: 'submit', class: btn_class) do %>
+       <i class="fas fa-search"></i>
+    <% end %>
+    <%= hidden_field_tag :search_type , search_type %>
+  <% end %>
+</div>
