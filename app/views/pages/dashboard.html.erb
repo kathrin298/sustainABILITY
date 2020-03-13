@@ -85,7 +85,7 @@
             <% @jobs.each do |job| %>
               <div class="developer-card">
                 <% if job.company.photo.attached? %>
-                  <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                  <%= cl_image_tag company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
                 <% else %>
                   <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
                 <% end %>
