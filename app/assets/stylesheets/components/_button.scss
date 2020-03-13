@@ -26,7 +26,7 @@
 .icon-wrapper{
   // width: 192px;
   margin-top: 40px;
-  margin-left: 10px;
+
 }
 
 .btn-flat:hover {
@@ -64,7 +64,7 @@
 
 .text-center a {
   font-size: 0.9rem;
-  margin-right: 40px;
+  // margin-right: 40px;
 }
 
 .edit {
@@ -80,12 +80,31 @@
 
 .delete {
   background-color: #D64041;
-  margin-top: 40px;
+  margin-top: 16px;
   &:hover {
     background-color: #F14849;
     color: white;
     text-decoration: none;
   }
+}
+
+.skill{
+  background-color: #39A0DB;
+  margin-top: 5px;
+  margin-bottom: 3px;
+   &:hover {
+    background-color: #40B2F4;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.delete-skill-btn {
+  color: white;
+}
+
+.bg-dark {
+  border-radius: 6px;
 }
 
 .customer-segment-selector {
