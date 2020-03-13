@@ -1,0 +1,19 @@
+<%= link_to company_path(developer), class: "serp-card-wrapper" do %>
+  <div class="serp-card">
+      <div class="serp-text">
+      <% if developer.photo.attached? %>
+        <%= cl_image_tag current_user.developer.photo.key, height: 200, width: 200, crop: :thumb %>
+      <% else %>
+        <%= image_tag "blank_company_logo.jpg", class: "serp-avatar" %>
+      <% end %>
+
+      <h4><%=  developer.first_name.capitalize %> <%=  developer.last_name.capitalize %></h4>
+      <span><%=  developer.slogan %></span>
+
+      </div>
+      <div class="serp-extras">
+        <h6><%= developer.location%></h6>
+        <span><%=developer.hireable %></span>
+      </div>
+  </div>
+<% end %>

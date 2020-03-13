@@ -37,9 +37,9 @@
 
   <% @results.each do |result| %>
     <% if result.respond_to?(:name) %>
-      <%= render 'pages/company_serp_card', company: result %>
+      <%= render 'pages/company_serp', company: result %>
     <% else %>
-
+      <%= render 'pages/developer_serp', developer: result %>
     <% end %>
   <% end %>
 

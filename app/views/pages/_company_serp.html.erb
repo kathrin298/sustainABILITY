@@ -1,18 +1,20 @@
 <%= link_to company_path(company), class: "serp-card-wrapper" do %>
-  <div class="serp-company-card">
+  <div class="serp-card">
+    <div class="serp-text">
       <% if company.photo.attached? %>
         <%= cl_image_tag current_user.company.photo.key, height: 200, width: 200, crop: :thumb %>
       <% else %>
         <%= image_tag "blank_company_logo.jpg", class: "serp-avatar" %>
       <% end %>
-
-      <div class="serp-company-text">
+      <div class="px-5">
         <h4><%=  company.name %></h4>
         <span><%=  company.mission %></span>
       </div>
-      <div class="serp-company-extras">
-        <h6><%= company.location%></h6>
-        <span> Current openings: <%=company.jobs.size %></span>
-      </div>
+    </div>
+
+    <div class="serp-extras">
+      <h6><%= company.location%></h6>
+      <span> Current openings: <%=company.jobs.size %></span>
+    </div>
   </div>
 <% end %>

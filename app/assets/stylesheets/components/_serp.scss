@@ -1,9 +1,9 @@
-.serp-company-card {
+.serp-card {
   box-shadow: 2px 2px 7px -2px gray;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 100px;
+  padding: 10px 10px;
   margin: 20px;
 
 }
@@ -23,12 +23,13 @@
   border-radius: 50%;
 }
 
-.serp-company-text {
+.serp-text {
   padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.serp-company-extras {
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid gray;
+.serp-extras {
+
 }
