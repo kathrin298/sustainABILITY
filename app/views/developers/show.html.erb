@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="card-trip">
+  <div class="card-trip mb-4">
     <div class="row my-5">
       <div class="col-3">
           <div style="width:500px; height:300px;">
                 <% if @developer.photo.attached? %>
-                <%= cl_image_tag current_user.company.photo.key, height: 200, width: 200, crop: :thumb %>
+                <%= cl_image_tag current_user.developer.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
                  <% else %>
               <%= image_tag "user.jpg", class: "avatar-huge" %>
             <% end %>
@@ -16,7 +16,6 @@
             <p><strong>Interests:</strong> <%= @developer.interests %></p>
             <p><strong>Slogan:</strong> <%= @developer.slogan %></p>
             <p><strong>Hireable:</strong> <%= @developer.hireable %></p>
-            <p><strong>Intersts:</strong></p>
 
               <div class="d-flex justify-content-start icon-wrapper ml-0 mt-0 mb-4">
                 <% if @developer.github.present?  %>
@@ -42,43 +41,54 @@
               </div>
           </div>
           <div class="col-3">
-                <div class="d-row text-center">
-                        <% if current_user.present? && current_user.developer == @developer %>
-                  <div class="d-row my-2">
-                    <div class="mb-0">
-                        <% if policy(@developer).edit? %>
-                         <%= link_to 'Edit profile', edit_developer_path(@developer), class: "btn-flat edit" %>
-
-                        <% end %>
-                    </div>
-                        <div class="mt-0">
-                          <% if policy(@developer).destroy? %>
-                            <%= link_to "Delete Account", registration_path(:user),
-                              method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }, class: "btn-flat delete"  %>
-                          <% end %>
-                        </div>
+            <div class="d-flex flex-column justify-content-start align-items-start text-center">
+              <% if current_user.present? && current_user.developer == @developer %>
+                <div class="d-row my-2">
+                  <div class="mb-0">
+                    <% if policy(@developer).edit? %>
+                      <%= link_to 'Edit profile', edit_developer_path(@developer), class: "btn-flat edit" %>
+                    <% end %>
                   </div>
-                         <% else %>
-                        <a class="btn btn-flat favorite" href="#"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                        <a class="btn btn-flat message" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
-                      <% if @developer.website.present?  %>
-                        <%= link_to "#{"https://" if !@developer.linkedin.include?('http')}#{@developer.website}", class: "btn btn-flat website" do %>
-                          View my website
-                        <% end %>
-                        <% end %>
-                        <% end %>
-                        <p class="mt-3 mr-5"><strong>SKILLS</strong></p>
-                        <hr>
+                  <div class="mt-0">
+                    <% if policy(@developer).destroy? %>
+                      <%= link_to "Delete Account", registration_path(:user),
+                        method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }, class: "btn-flat delete"  %>
+                    <% end %>
+                  </div>
                 </div>
-          </div>
-    </div>
-  </div>
-                <div>
-                  <% @developer.skills.each do |skill| %>
-                    <div class="bg-dark p-2 text-white d-inline mr-2"><%= skill.name %>
+              <% else %>
+              <div class="d-flex flex-column align-items-start my-2">
+                  <a class="btn btn-flat favorite" href="#"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
+                  <a class="btn btn-flat message" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+                  <% if @developer.website.present?  %>
+                    <%= link_to "#{"https://" if !@developer.linkedin.include?('http')}#{@developer.website}", class: "btn btn-flat website" do %>
+                      View my website
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+              <div class="d-flex flex-column align-items-start">
+                <% if @developer.user == current_user %>
+                  <%= link_to 'Add skill', new_developer_developer_skill_path(@developer), class: "btn-flat skill" %>
+                <% end %>
+
+                <div class="d-flex justify-content-start flex-wrap mb-3" style="background-color: transparent;">
+                  <% @developer.developer_skills.each do |developer_skill| %>
+                    <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                      <%= developer_skill.skill.name %>
+                      <% if @developer.user == current_user %>
+                        <%= link_to developer_developer_skill_path(@developer, developer_skill), method: :delete, class: "delete-skill-btn" do %>
+                           <i class="fas fa-times-circle"></i>
+                        <% end %>
+                      <% end %>
                     </div>
                   <% end %>
                 </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
                 <div class="row">
                   <div class="bio col-8">
                     <p><strong>Bio:</strong> <%= @developer.bio %></p>
@@ -118,7 +128,7 @@
                 <div class="card-product-infos">
                 <%= job.job_title %>
 
-                  <p>Job Description</p>
+                  <p> <%= job.job_description %></p>
                 </div>
               </div>
               <% if current_user && job.company == current_user.company %>
@@ -142,14 +152,3 @@
 <hr>
 <br>
 
-<!-- Section to add skills -->
-<h2>Skills</h2>
-<%= link_to 'Add skill', new_developer_developer_skill_path(@developer) %>
-<ul>
-<% @developer.developer_skills.each do |developer_skill| %>
-  <li>
-    <%= developer_skill.skill.name %>
-    <%= link_to 'delete', developer_developer_skill_path(@developer, developer_skill), method: :delete %>
-  </li>
-<% end %>
-</ul>

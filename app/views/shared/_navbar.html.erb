@@ -10,10 +10,13 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to "Developers", "/search?search_type=Developers&query=", class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Companies", "/search?search_type=Companies&query=", class: "nav-link" %>
+      </li>
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to "Messages", "#", class: "nav-link" %>
-        </li>
         <li class="nav-item dropdown">
           <% if current_user.company && current_user.company.photo.attached? %>
             <%= cl_image_tag current_user.company.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -44,3 +47,6 @@
     </ul>
   </div>
 </div>
+
+
+<!-- # Add all companies and all developers in navbar -->

@@ -68,7 +68,7 @@
       <% end %>
     </div>
     <div class="carousel-search-bar">
-      <%= render 'pages/searchbar', search_type: 'Companies', btn_class: "btn btn-flat", placeholder: "Javascript, Python, Ruby..." %>
+      <%= render 'pages/searchbar', search_type: 'companies_jobs', btn_class: "btn btn-flat", placeholder: "Javascript, Python, Ruby..." %>
     </div>
   </div>
 </div>
@@ -91,14 +91,14 @@
       <% end %>
     </div>
     <div class="carousel-search-bar">
-      <%= render 'pages/searchbar', search_type: 'Companies', btn_class: "btn btn-flat-reverse", placeholder: "Climate Change, Ocean Pollution..." %>
+      <%= render 'pages/searchbar', search_type: 'company_mission', btn_class: "btn btn-flat-reverse", placeholder: "Climate Change, Ocean Pollution..." %>
     </div>
   </div>
 </div>
 <div class="container">
   <div class="closing-cta">
     <h1>Ready to Get Started?</h1>
-    <a class="btn btn-flat btn-lg" href="#">Find a Job Now!</a>
+    <a class="btn btn-flat btn-lg" href="/search?search_type=Companies&query=">Find a Job Now!</a>
   </div>
 </div>
 <!-- <div class="container">
