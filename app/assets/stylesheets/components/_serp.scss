@@ -41,5 +41,22 @@
 
   select {
     padding: 7px;
+    background-color: $green;
+    color: white;
+    option {
+      color: black;
+      background-color: white;
+      padding: 5px;
+    }
+  }
+}
+
+.serp-extras {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: space-between;
+  #duration {
+    text-align: right;
   }
 }

@@ -9,4 +9,16 @@ class Job < ApplicationRecord
   has_many :applications, dependent: :destroy
 
   validates :job_title, :job_description, presence: true
+
+
+  def posted_how_long_ago
+    minutes_ago = (Time.zone.now - self.updated_at)/60
+    if minutes_ago > 60
+      return "Posted #{(minutes_ago/60).to_i} hours ago"
+    elsif minutes_ago > 24*60
+      return "Posted #{(minutes_ago/(24*60)).to_i} days ago"
+    else
+      return "Posted #{minutes_ago.to_i} minutes ago"
+    end
+  end
 end

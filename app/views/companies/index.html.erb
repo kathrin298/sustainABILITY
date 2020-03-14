@@ -7,7 +7,7 @@
     <h1>Do You Want to Gain Experience While Supporting Projects You Love?</h1>
     <p>Find Your Match Now!</p>
     <div class="banner-search-bar">
-      <%= render 'pages/searchbar', search_type: 'Companies', btn_class: "btn btn-flat", placeholder: "Search for a company..." %>
+      <%= render 'pages/searchbar', search_type: 'Jobs', btn_class: "btn btn-flat", placeholder: "Search for a job..." %>
     </div>
   </div>
 </div>
@@ -60,7 +60,7 @@
               <p class="mission">
                 Company:
                 <br>
-
+                <%= job.company.name %>
               </p>
             </div>
           </div>
@@ -68,7 +68,7 @@
       <% end %>
     </div>
     <div class="carousel-search-bar">
-      <%= render 'pages/searchbar', search_type: 'companies_jobs', btn_class: "btn btn-flat", placeholder: "Javascript, Python, Ruby..." %>
+      <%= render 'pages/searchbar', search_type: 'jobs', btn_class: "btn btn-flat", placeholder: "Javascript, Python, Ruby..." %>
     </div>
   </div>
 </div>
