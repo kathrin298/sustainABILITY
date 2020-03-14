@@ -7,6 +7,14 @@
         <% else %>
           <%= image_tag "blank_company_logo.jpg", class: "avatar-huge" %>
         <% end %>
+      <div class="col-3">
+        <div style="width:500px; height:300px;">
+          <% if @company.photo.attached? %>
+            <%= cl_image_tag @company.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
+          <% else %>
+            <%= image_tag "blank_company_logo.png", class: "avatar-huge" %>
+          <% end %>
+        </div>
       </div>
         <div class="col-6" id="company-information-holder">
           <h2><%= @company.name %></h2>
