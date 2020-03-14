@@ -1,11 +1,11 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80);">
   <div class="customer-segment-selector">
     <%= link_to "I'm a Developer", companies_path, class: "btn banner-button developer-button-current" %>
     <%= link_to "I'm a Startup", developers_path, class: "btn banner-button startup-button" %>
   </div>
   <div class="banner-text">
-    <h1>Do You Want to Gain Experience While Supporting Projects You Love?</h1>
-    <p>Find Your Match Now!</p>
+    <h1>Gain Experience While Supporting <strong>Projects You Care About</strong></h1>
+    <p>How do you want to save the world?</p>
     <div class="banner-search-bar">
       <%= render 'pages/searchbar', search_type: 'Companies', btn_class: "btn btn-flat", placeholder: "Search for a company..." %>
     </div>
@@ -13,15 +13,21 @@
 </div>
 <div class="container">
   <div class="unique-value-proposition">
-    <h1>Improve Your Coding and Support Mission-Driven Companies!</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem reiciendis corporis officia aut, fuga cumque odio cupiditate minus voluptatem consectetur, quam mollitia eum suscipit, sunt quas magni vel ab commodi!</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat incidunt nemo in quasi praesentium est ratione officiis sed unde, excepturi sit, rerum id aperiam consequatur commodi reiciendis aliquam quis veritatis.</p>
+    <h1>Improve Your Coding and Support <strong>Mission-Driven Companies</strong></h1>
+    <div class="uvp-container">
+      <%= image_tag("leaves.png") %>
+      <div class="text">
+        <p> We all know that actions speak louder than our words. If you really care about something, there is finally a way to support it apart from donating money you never even know reaches the right cause. And the best part? You'll learn tons while doing it!</p>
+        <p>On sustainABLE, every company is saving the world in one way or another. All you need to do is find a company that matches your beliefs and start connecting! </p>
+      </div>
+
+    </div>
   </div>
 </div>
 <div class="green-carousel">
   <div class="container">
     <div class="carousel-title">
-      <h1>Find a startup in your city:</h1>
+      <h1>Find a startup in<strong> your city </strong>:</h1>
     </div>
     <div class="carousel">
       <% @companies.sample(10).each do |company| %>
@@ -48,7 +54,7 @@
 <div class="grey-carousel">
   <div class="container">
     <div class="carousel-title">
-      <h1>Search jobs by programming language:</h1>
+      <h1>Search jobs by<strong style="color: white"> programming language </strong>:</h1>
     </div>
     <div class="carousel">
       <% @jobs.sample(10).each do |job| %>
@@ -75,7 +81,7 @@
 <div class="green-carousel">
   <div class="container">
     <div class="carousel-title">
-      <h1>Or by startups whose mission aligns with your values:</h1>
+      <h1>Or by startups whose<strong> mission </strong>aligns with your values:</h1>
     </div>
     <div class="carousel">
       <% @companies.sample(10).each do |company| %>

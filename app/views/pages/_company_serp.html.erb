@@ -4,7 +4,7 @@
       <% if company.photo.attached? %>
         <%= cl_image_tag company.photo.key, height: 200, width: 200, crop: :thumb, class: "serp-avatar" %>
       <% else %>
-        <%= image_tag "blank_company_logo.jpg", class: "serp-avatar" %>
+        <%= image_tag "blank_company_logo.png", class: "serp-avatar" %>
       <% end %>
       <div class="px-5">
         <h4><%=  company.name %></h4>
