@@ -13,21 +13,20 @@
 </div>
 <div class="container">
   <div class="unique-value-proposition">
-    <h1>Support Your Mission With <strong>Like-Minded</strong> Developers</h1>
     <div class="uvp-container">
-      <%= image_tag("leaves.png") %>
       <div class="text">
+        <h1>Support Your Mission With <strong>Like-Minded</strong> Developers</h1>
         <p>Tired of working with people who don't stand behind your mission 100% like you do? Are you just getting started and need to find the right talent to bring your idea forward? You found the right place!</p>
         <p>On sustainABLE, we'll help you connect with developers who care about the same causes you do. They believe in the same mission so you can be sure they'll give you their best work yet.</p>
       </div>
-
+      <%= image_tag("leaves.png") %>
     </div>
   </div>
 </div>
 <div class="green-carousel">
   <div class="container">
     <div class="carousel-title">
-      <h1>Find a developer in<strong> your city </strong>:</h1>
+      <h1>Find a developer in <strong>your city</strong>:</h1>
     </div>
     <div class="carousel">
       <% @developers.sample(10).each do |developer| %>
@@ -54,7 +53,7 @@
 <div class="grey-carousel">
   <div class="container">
     <div class="carousel-title">
-      <h1>Search developers by<strong style="color: white"> programming language </strong>:</h1>
+      <h1>Search developers by <strong style="color: white">programming language</strong>:</h1>
     </div>
     <div class="carousel">
       <% @developers.sample(10).each do |developer| %>
@@ -77,7 +76,7 @@
 <div class="green-carousel">
   <div class="container">
     <div class="carousel-title">
-      <h1>Or by developers whose<strong> interests </strong>align with your startups values:</h1>
+      <h1>Or by developers whose <strong>values</strong> align with your startup's mission:</h1>
     </div>
     <div class="carousel">
       <% @developers.sample(10).each do |developer| %>
