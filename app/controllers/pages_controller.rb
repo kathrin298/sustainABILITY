@@ -32,6 +32,15 @@ class PagesController < ApplicationController
       @results = query(Company, params[:query], 'mission', 'bio', 'name')
     elsif params[:search_type] == 'Jobs'
       @results = query(Job, params[:query], 'job_title', 'job_description', 'location')
+    elsif params[:search_type] == 'Skills'
+      @results = []
+      skills = query(Skill, params[:query], 'name', 'name', 'name')
+      skills.each do |skill|
+        skill.developer_skills.each do |dev_skill|
+          @results << dev_skill.developer
+        end
+      end
+      @results = @results.uniq
     else
       @results = query(Developer, params[:query], 'location', 'bio', 'last_name')
     end
@@ -40,23 +49,24 @@ class PagesController < ApplicationController
 
   def serp_headline
     if params[:search_type] == 'Companies'
-      if params[:query] == ""
-        @serp_headline = "All companies"
-      else
-        @serp_headline = "#{ActionController::Base.helpers.pluralize(@results.size, 'company')} matching #{params[:query]}"
-      end
+      @serp_headline = serp_headline_helper('company')
     elsif params[:search_type] == 'Jobs'
-      if params[:query] == ""
-        @serp_headline = "All jobs"
-      else
-        @serp_headline = "#{ActionController::Base.helpers.pluralize(@results.size, 'job')} matching #{params[:query]}"
-      end
+      @serp_headline = serp_headline_helper('jobs')
+    elsif params[:search_type] == 'company_location'
+      @serp_headline = serp_headline_helper('company')
+    elsif params[:search_type] == 'company_mission'
+      @serp_headline = serp_headline_helper('company')
     else
-      if params[:query] == ""
-        @serp_headline = "All developers"
-      else
-        @serp_headline = "#{ActionController::Base.helpers.pluralize(@results.size, 'developer')} matching #{params[:query]}"
-      end
+      @serp_headline = serp_headline_helper('developer')
+    end
+  end
+
+  def serp_headline_helper(term)
+    term = ActionController::Base.helpers.pluralize(@results.size, term)
+    if params[:query] == ""
+      return "All #{term}"
+    else
+      return "#{term} matching '#{params[:query]}'"
     end
   end
 
