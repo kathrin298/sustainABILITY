@@ -23,12 +23,6 @@
   transition: background 0.3s ease;
 }
 
-.icon-wrapper{
-  // width: 192px;
-  margin-top: 40px;
-
-}
-
 .btn-flat:hover {
   background-color: #67B353;
   color: white;
@@ -156,8 +150,7 @@
 
 .favorite {
   background-color: #D64041;
-  margin-top: 20px;
-  font-size: 0.95rem;
+  font-size: 0.90rem;
   &:hover {
     background-color: #F04849;
     color: white;
@@ -166,7 +159,6 @@
 
 .message {
   background-color: #39A0DB;
-  margin-top: 20px;
   font-size: 0.95rem;
   &:hover {
     background-color: #3FB0F1;
@@ -175,8 +167,8 @@
 }
 
 .website {
-  background-color: #F9C132;
-  margin-top: 20px;
+  background-color: $green;
+  // margin-top: 20px;
   font-size: 0.95rem;
   &:hover {
     background-color: #FBD133;
@@ -196,5 +188,35 @@
   &:hover {
     color: white;
     background-color: #EF3B4B;
+  }
+}
+
+#bio {
+  margin: 0 20px;
+}
+
+.btn-delete {
+  display: inline-block;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 8px;
+  background: gray;
+  width: 192px;
+  height: 42px;
+  transition: background 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-delete:hover {
+  background-color: #A9A9A9;
+  color: white;
+}
+
+.btn-message {
+  background-color: #39A0DB;
+  font-size: 0.95rem;
+  &:hover {
+    background-color: #3FB0F1;
+    color: white;
   }
 }
