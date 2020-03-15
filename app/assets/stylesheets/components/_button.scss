@@ -16,28 +16,22 @@
   display: inline-block;
   color: white;
   padding: 8px 24px;
-  border-radius: 8px;
+  border-radius: 20px;
   background: $green;
-  width: 192px;
-  height: 42px;
+  // width: 192px;
+  // height: 42px;
   transition: background 0.3s ease;
 }
 
-.icon-wrapper{
-  // width: 192px;
-  margin-top: 40px;
-
-}
-
 .btn-flat:hover {
-  background-color: #67B353;
+  background-color: #559C5E;
   color: white;
 }
 
 .btn-flat-reverse {
   color: $green;
   padding: 8px 24px;
-  border-radius: 4px;
+  border-radius: 20px;
   background: white;
   transition: background 0.3s ease;
 }
@@ -114,23 +108,24 @@
 
 .banner-button {
   color: white;
+  font-weight: 100;
   font-size: 1.4rem;
-  border: 2px solid white;
-  font-weight: 500;
+  border: 1px solid #979797;
+  transition: 0.3s ease;
   &:hover {
     color: white;
-    background-color: #888888;
+    background-color: rgba(100,100,100,0.5);
   }
 }
 
 .developer-button {
-  background-color: #676565;
+  background-color: rgba(0,0,0,0.5);
   padding: 8px 24px;
-  border-radius: 15px 0 0 15px;
+  border-radius: 20px 0 0 20px;
 }
 
 .startup-button {
-  background-color: #676565;
+  background-color: rgba(0,0,0,0.5);
   padding: 8px 36px 8px 24px;
   border-radius: 0 15px 15px 0;
 }
@@ -156,8 +151,7 @@
 
 .favorite {
   background-color: #D64041;
-  margin-top: 20px;
-  font-size: 0.95rem;
+  font-size: 0.90rem;
   &:hover {
     background-color: #F04849;
     color: white;
@@ -166,7 +160,6 @@
 
 .message {
   background-color: #39A0DB;
-  margin-top: 20px;
   font-size: 0.95rem;
   &:hover {
     background-color: #3FB0F1;
@@ -175,8 +168,8 @@
 }
 
 .website {
-  background-color: #F9C132;
-  margin-top: 20px;
+  background-color: $green;
+  // margin-top: 20px;
   font-size: 0.95rem;
   &:hover {
     background-color: #FBD133;
@@ -196,5 +189,35 @@
   &:hover {
     color: white;
     background-color: #EF3B4B;
+  }
+}
+
+#bio {
+  margin: 0 20px;
+}
+
+.btn-delete {
+  display: inline-block;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 8px;
+  background: gray;
+  width: 192px;
+  height: 42px;
+  transition: background 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-delete:hover {
+  background-color: #A9A9A9;
+  color: white;
+}
+
+.btn-message {
+  background-color: #39A0DB;
+  font-size: 0.95rem;
+  &:hover {
+    background-color: #3FB0F1;
+    color: white;
   }
 }

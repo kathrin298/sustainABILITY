@@ -4,7 +4,7 @@
       <div class="col-3">
           <div style="width:500px; height:300px;">
             <% if @developer.photo.attached? %>
-              <%= cl_image_tag current_user.developer.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
+              <%= cl_image_tag @developer.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
             <% else %>
               <%= image_tag "user.jpg", class: "avatar-huge" %>
             <% end %>

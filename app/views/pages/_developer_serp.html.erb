@@ -2,7 +2,7 @@
   <div class="serp-card">
     <div class="serp-text">
       <% if developer.photo.attached? %>
-        <%= cl_image_tag current_user.developer.photo.key, height: 200, width: 200, crop: :thumb, class: "serp-avatar" %>
+        <%= cl_image_tag developer.photo.key, height: 200, width: 200, crop: :thumb, class: "serp-avatar" %>
       <% else %>
         <%= image_tag "user.jpg", class: "serp-avatar" %>
       <% end %>
