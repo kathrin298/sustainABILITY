@@ -62,7 +62,9 @@
             <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
             <div class="card-info">
               <h1><%= developer.first_name %> <%= developer.last_name %></h1>
-              <p>Proficiency: </p>
+              <% if developer.skills.first && developer.skills.second  %>
+                <p>Proficiencies: <%= developer.skills.first.name %>, <%= developer.skills.second.name %></p>
+              <% end %>
             </div>
           </div>
         <% end %>
