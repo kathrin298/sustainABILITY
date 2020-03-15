@@ -1,0 +1,33 @@
+
+
+.radio-btns {
+  display: flex;
+  justify-content: space-around;
+}
+
+input[type="radio"] {
+  display:none;
+  width: 100%;
+
+  &:checked + label {
+    background-color: blue;
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  &:not(:checked) + label {
+    background-color: red;
+    padding: 15px;
+    border-radius: 8px;
+  }
+}
+
+
+#github-login {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin: 20px 60px;
+  border-radius: 12px;
+}

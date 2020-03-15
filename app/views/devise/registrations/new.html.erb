@@ -1,4 +1,5 @@
 <div class="container p-5 w-50">
+
   <h2>Sign up</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -16,7 +17,9 @@
       <%= f.input :password_confirmation,
                   required: true,
                   input_html: { autocomplete: "new-password" } %>
-      <%= f.collection_radio_buttons :type, [['Developer', 'Developer'], ['Company', 'Company']], :first, :last %>
+      <div class="radio-btns">
+        <%= f.collection_radio_buttons :type, [['Developer', 'Sign up as a developer'], ['Company', 'Sign up as a company']], :first, :last %>
+      </div>
     </div>
 
     <div class="form-actions">
@@ -25,4 +28,20 @@
   <% end %>
 
   <%= render "devise/shared/links" %>
+
+
+  <%= link_to "Sign up with Github", user_github_omniauth_authorize_path, id: "github-login", class: "d-none"  %>
+
 </div>
+
+
+
+<script>
+  let labels = document.getElementsByTagName('LABEL');
+  labels[3].addEventListener('click', (e) => {
+    document.getElementById("github-login").classList.add('d-block');
+  });
+  labels[4].addEventListener('click', (e) => {
+    document.getElementById("github-login").classList.add('d-none');
+  });
+</script>
