@@ -1,77 +1,104 @@
 <div class="container">
   <div class="card-trip">
     <div class="row my-5">
+      <div class="col-3" id="company-avatar-holder">
+        <% if @company.photo.attached? %>
+          <%= cl_image_tag @company.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
+        <% else %>
+          <%= image_tag "blank_company_logo.jpg", class: "avatar-huge" %>
+        <% end %>
       <div class="col-3">
         <div style="width:500px; height:300px;">
           <% if @company.photo.attached? %>
-            <%= cl_image_tag current_user.company.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
+            <%= cl_image_tag @company.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
           <% else %>
-            <%= image_tag "blank_company_logo.jpg", class: "avatar-huge" %>
+            <%= image_tag "blank_company_logo.png", class: "avatar-huge" %>
           <% end %>
         </div>
       </div>
-        <div class="col-6">
+        <div class="col-6" id="company-information-holder">
           <h2><%= @company.name %></h2>
           <p><strong>Location:</strong> <%= @company.location %></p>
           <p><strong>Mission:</strong> <%= @company.mission %></p>
           <p><strong>Industry:</strong> <%= @company.industry %></p>
           <p><strong>Employees:</strong> <%= @company.employees %></p>
         </div>
-           <!-- button for send message and add favrite, and social media icon -->
-          <div class="col-3">
-            <% unless @company.user == current_user %>
-              <div class="text-center">
-                <a class="btn btn-flat favorite" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                <a class="btn btn-flat message" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
-              </div>
-            <% end %>
-            <div class="row">
-              <div class="col-12">
-              <% if policy(@company).edit? %>
-                <%= link_to "Edit", edit_company_path(@company), class: "d-block btn-flat text-center" %>
+         <!-- button for send message and add favrite, and social media icon -->
+        <div class="col-3">
+          <div id="company-links-holder">
+              <% if @company.website.present?  %>
+                <div id="company-button-holder">
+                  <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center" %>
+                </div>
               <% end %>
-              </div>
-
-              <div class="col-12">
-                <% if policy(@company).destroy? %>
-                  <%= link_to "Delete Account", registration_path(:user), class: "d-block btn-flat text-center",
+            <% unless @company.user == current_user %>
+                <a class="btn btn-flat btn-delete" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
+                <a class="btn btn-flat btn-delete" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+            <% end %>
+              <% if policy(@company).edit? %>
+                <div id="company-button-holder">
+                  <%= link_to "Edit Account", edit_company_path(@company), class: "d-block btn-flat btn-delete text-center" %>
+                </div>
+              <% end %>
+              <% if policy(@company).destroy? %>
+                <div id="company-button-holder">
+                  <%= link_to "Delete Account", registration_path(:user), class: "d-block btn-delete text-center",
                     method: :delete, data: { confirm: "Are you sure you want to delete your company account?" }  %>
-                <% end %>
-              </div>
-            </div>
-            <div class="d-flex justify-content-between icon-wrapper">
-              <i class="fab fa-github fa-2x"></i>
-              <i class="fab fa-facebook fa-2x"></i>
-              <i class="fab fa-twitter fa-2x"></i>
-              <i class="fab fa-linkedin fa-2x"></i>
-            </div>
+                </div>
+              <% end %>
           </div>
-    </div>
-  </div>
-    <div class="col-14">
-                <!-- video -->
-      <div class="video-section">
-         <img class="video" src="https://cloud.addictivetips.com/wp-content/uploads/2018/12/screenshot-youtube.jpg" alt="">
-      </div>
+        </div>
     </div>
        <!-- bio about company -->
-      <div>
-        <h5><strong>Bio:</strong></h5> <%= @company.bio %> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eum maiores sequi, laboriosam expedita quisquam recusandae placeat veniam vero, ratione optio nisi hic voluptas dignissimos, assumenda nemo ab quidem cupiditate.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam praesentium fugit perspiciatis, quasi quae magni amet minus iure et quia obcaecati labore voluptatum porro a, error aliquid ullam adipisci pariatur.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam delectus aliquam molestias quo eveniet iure, dolorem, quis magni non dolore aut distinctio odit consequatur fugit ipsa laboriosam quia labore. Temporibus.</p>
+    <div id="bio">
+      <h5><strong>Bio:</strong></h5> <%= @company.bio %> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eum maiores sequi, laboriosam expedita quisquam recusandae placeat veniam vero, ratione optio nisi hic voluptas dignissimos, assumenda nemo ab quidem cupiditate.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam praesentium fugit perspiciatis, quasi quae magni amet minus iure et quia obcaecati labore voluptatum porro a, error aliquid ullam adipisci pariatur.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam delectus aliquam molestias quo eveniet iure, dolorem, quis magni non dolore aut distinctio odit consequatur fugit ipsa laboriosam quia labore. Temporibus.</p>
+    </div>
+    <% if @company.video_url.present? %>
+      <div class="video-section">
+        <iframe width="100%" src="<%= @company.video_url.gsub!("watch?v=", "embed/") %>" allowfullscreen></iframe>
       </div>
-          <!-- startup project card -->
-         <% @company.jobs.each do |job| %>
+    <% end %>
+  </div>
+                <!-- video -->
+    <div id="company-jobs-holder">
+      <h1>Jobs at this company:</h1>
+      <% @company.jobs.each do |job| %>
+        <div id="company-job-card-holder">
           <%= link_to job_path(job) do  %>
-        <div class="card-product">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
-            <div class="card-product-infos">
-              <h7><%= job.job_title %></h7>
-              <p>Description</p>
-            </div>
+              <div class="developer-card">
+                <% if @company.photo.attached? %>
+                  <%= cl_image_tag @company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                <% else %>
+                  <%= image_tag "blank_company_logo.jpg", id: "dashboard-card-avatar" %>
+                <% end %>
+                <div class="developer-card-info">
+                  <div class="developer-card-left">
+                    <h2><%= job.job_title %></h2>
+                    <h3>Status: <%= job.active? ? "Accepting applications" : "Position closed" %></h3>
+                    <p><%= job.job_description.truncate(150) %></p>
+                  </div>
+                  <div class="developer-card-right">
+                    <h3>
+                      <% if (Date.today - job.created_at.to_date).to_i == 0 %>
+                        Posted today
+                      <% elsif (Date.today - job.created_at.to_date).to_i == 1 %>
+                        Posted 1 day ago
+                      <% else %>
+                        Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
+                      <% end %>
+                    </h3>
+                    <div class="skill-tags">
+                      <!-- Skill tags code goes here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <% end %>
         </div>
-        <% end %>
       <% end %>
+    </div>
 </div>
 
 

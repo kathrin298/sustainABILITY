@@ -1,51 +1,187 @@
 <div class="container">
-  <h1>Your Dashboard</h1>
-
-  <!-- if user has company, be able to add new job to that company -->
-  <% if current_user && current_user.company %>
-    <%= link_to 'Create new job posting', new_company_job_path(@company.id) %>
-  <% end %>
-
-  <!-- If user has a company, show that company's job postings -->
-  <% if current_user && current_user.company %>
-    <h2>My Company's Job Postings</h2>
-    <ul>
-      <% @jobs.each do |job| %>
-        <li><%= link_to job.job_title, job_path(job) %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
-  <!-- if company has applications, show them here -->
-  <% if current_user && current_user.company %>
-    <h2>Open applications for your outstanding jobs</h2>
-    <ul>
-      <% @jobs.each do |job| %>
-        <% job.applications.each do |application| %>
-          <% if application.status == 'pending' %>
-            <li><%= link_to application.developer.first_name + " " + application.developer.last_name, application_path(application) %> </li>
+  <div class="dashboard-table">
+    <div class="dashboard-header">
+      <h1>My Dashboard</h1>
+      <%= link_to 'Post a Job', new_company_job_path(@company.id), class: "btn btn-flat message" if current_user.company.present? %>
+    </div>
+    <div class="dashboard-body">
+      <% if current_user.developer.present? %>
+      <ul class="nav nav-tabs nav-fill" id="nav-developer" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="favorite-jobs-list" data-toggle="tab" href="#favorite-jobs" role="tab" aria-controls="favorite-jobs" aria-selected="true">Favorite Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="submitted-applications-tab" data-toggle="tab" href="#submitted-applications" role="tab" aria-controls="submitted-applications" aria-selected="false">Submitted Appications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="previous-jobs-tab" data-toggle="tab" href="#previous-jobs" role="tab" aria-controls="previous-jobs" aria-selected="false">Previous Jobs</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="favorite-jobs" role="tabpanel" aria-labelledby="favorite-jobs-list">
+          <h2>You don't have any jobs saved to favorites</h2>
+          <%= link_to "View all jobs", search_path %>
+        </div>
+        <div class="tab-pane fade" id="submitted-applications" role="tabpanel" aria-labelledby="submitted-applications-tab">
+        <% @applications.each do |application| %>
+          <%= link_to application_path(application) do %>
+            <div class="developer-card">
+              <% if application.developer.photo.attached? %>
+                <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+              <% else %>
+                <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+              <% end %>
+              <div class="developer-card-info">
+                <div class="developer-card-left">
+                  <h2><%= application.job.job_title %></h2>
+                  <h3>Status: <%= application.status.capitalize %></h3>
+                  <p><%= application.job.job_description.truncate(150) %></p>
+                </div>
+                <div class="developer-card-right">
+                  <h3>
+                    <% if (Date.today - application.created_at.to_date).to_i == 0 %>
+                      Submit today
+                    <% else %>
+                      Submit <%= (Date.today - job.created_at.to_date).to_i %> days ago
+                    <% end %>
+                  </h3>
+                  <div class="skill-tags">
+                    <!-- Skill tags code goes here -->
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
         <% end %>
+        </div>
+        <div class="tab-pane fade" id="previous-jobs" role="tabpanel" aria-labelledby="previous-jobs-tab">
+          <h2>You don't have any current or previous jobs.</h2>
+          <p>When a company accepts your application, the job will appear here.</p>
+          <%= link_to "View all jobs", search_path %>
+        </div>
+      </div>
+      <% elsif current_user.company.present? %>
+      <ul class="nav nav-tabs nav-fill" id="nav-developer" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="favorite-developers-list" data-toggle="tab" href="#favorite-developers" role="tab" aria-controls="favorite-developers" aria-selected="true">Favorite Developers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="posted-jobs-tab" data-toggle="tab" href="#posted-jobs" role="tab" aria-controls="posted-jobs" aria-selected="false">Posted Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="received-applications-tab" data-toggle="tab" href="#received-applications" role="tab" aria-controls="received-applications" aria-selected="false">Received Applications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="previous-hires-tab" data-toggle="tab" href="#previous-hires" role="tab" aria-controls="previous-hires" aria-selected="false">Hired Developers</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="favorite-developers" role="tabpanel" aria-labelledby="favorite-developers-list">
+          <h2>You don't have any developers saved to favorites</h2>
+          <%= link_to "View all developers", search_path %>
+        </div>
+        <div class="tab-pane fade" id="posted-jobs" role="tabpanel" aria-labelledby="posted-jobs-tab">
+          <ul>
+            <% @jobs.each do |job| %>
+              <%= link_to job_path(job) do %>
+                <div class="developer-card">
+                  <% if job.company.photo.attached? %>
+                    <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                  <% else %>
+                    <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                  <% end %>
+                  <div class="developer-card-info">
+                    <div class="developer-card-left">
+                      <h2><%= job.job_title %></h2>
+                      <h3>Status: <%= job.active ? "Active" : "Closed" %></h3>
+                      <p><%= job.job_description.truncate(150) %></p>
+                    </div>
+                    <div class="developer-card-right">
+                      <h3>
+                        <% if (Date.today - job.created_at.to_date).to_i == 0 %>
+                          Posted today
+                        <% else %>
+                          Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
+                        <% end %>
+                      </h3>
+                      <div class="skill-tags">
+                        <!-- Skill tags code goes here -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <div class="tab-pane fade" id="received-applications" role="tabpanel" aria-labelledby="received-applications-tab">
+          <% @jobs.each do |job| %>
+            <% job.applications.each do |application| %>
+              <% if application.status == 'pending' %>
+                <%= link_to application_path(application) do %>
+                  <div class="developer-card">
+                    <% if application.developer.photo.attached? %>
+                      <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                    <% else %>
+                      <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                    <% end %>
+                    <div class="developer-card-info">
+                      <div class="developer-card-left">
+                        <h2><%= application.developer.first_name.capitalize %> <%= application.developer.last_name.capitalize %></h2>
+                        <h3><%= application.developer.slogan.present? ? application.developer.slogan : "No title provided" %></h3>
+                        <p><%= application.developer.bio.truncate(150) %></p>
+                      </div>
+                      <div class="developer-card-right">
+                        <h3><%= application.job.job_title %></h3>
+                        <div class="skill-tags">
+                          <% application.developer.developer_skills.each do |developer_skill| %>
+                            <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                              <%= developer_skill.skill.name %>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="tab-pane fade" id="previous-hires" role="tabpanel" aria-labelledby="previous-hires-tab">
+          <ul>
+            <% @developers.each do |developer| %>
+              <%= link_to developer_path(developer) do %>
+                  <div class="developer-card">
+                  <% if developer.photo.attached? %>
+                    <%= cl_image_tag developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                  <% else %>
+                    <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                  <% end %>
+                  <div class="developer-card-info">
+                    <div class="developer-card-left">
+                      <h2><%= developer.first_name.capitalize %> <%= developer.last_name.capitalize %></h2>
+                      <h3><%= developer.slogan.present? ? developer.slogan : "No title provided" %></h3>
+                      <p><%= developer.bio.truncate(150) %></p>
+                    </div>
+                    <div class="developer-card-right">
+                      <h3><%= developer.location %></h3>
+                      <div class="skill-tags">
+                        <% developer.developer_skills.each do |developer_skill| %>
+                          <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                            <%= developer_skill.skill.name %>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
       <% end %>
-    </ul>
-  <% end %>
-
-  <!-- show copmanies the developers they hired in the past here -->
-  <h2>Current & Past hires</h2>
-  <ul>
-    <% @developers.each do |developer| %>
-      <li><%= link_to developer.first_name + ' ' + developer.last_name, developer_path(developer) %> </li>
-    <% end %>
-  </ul>
-
-
-  <!-- if user applied to a job, show job applications -->
-  <% if current_user.developer && current_user.developer.applications.length >= 1 %>
-    <h2>My Applications</h2>
-    <ul>
-      <% @applications.each do |application| %>
-        <li><%= link_to application.job.job_title, application_path(application) %> </li>
-      <% end %>
-    </ul>
-  <% end %>
+    </div>
+  </div>
 </div>

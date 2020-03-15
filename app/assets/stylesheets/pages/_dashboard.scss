@@ -1,0 +1,121 @@
+.dashboard-table {
+  margin-top: 30px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+    margin-bottom: 0;
+  }
+  .message {
+    font-size: 1.15rem;
+    margin-top: 0;
+  }
+}
+
+.dashboard-body {
+  margin: 30px 0;
+}
+
+.tab-content {
+  border: 1px solid #DEE2E7;
+  padding: 30px;
+}
+
+.developer-card {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  margin-bottom: 30px;
+  &:hover {
+    background-color: #F4F4F4;
+  }
+}
+
+#received-applications a, #previous-hires a, #submitted-applications a, #posted-jobs a {
+  text-decoration: none;
+}
+
+.nav-link {
+  color: #a5a5a5;
+  &:hover {
+    color: #777676;
+  }
+}
+
+#dashboard-card-avatar {
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 30px;
+}
+
+.developer-card h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.developer-card p, h1, h2, h3, h4, h5, h6 {
+  color: #141823;
+}
+
+.developer-card p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.developer-card-info {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.developer-card-left {
+  width: 60%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 15px;
+    margin: 0;
+    opacity: 0.5;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+
+.developer-card-right {
+  width: 40%;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  h3 {
+    font-size: 18px;
+    margin: 0;
+    opacity: 0.5;
+    height: 45px;
+  }
+  p {
+    font-size: 15px;
+    margin: 0;
+    height: 45px;
+  }
+}
