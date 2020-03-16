@@ -46,7 +46,11 @@
                     <% end %>
                   </h3>
                   <div class="skill-tags">
-                    <!-- Skill tags code goes here -->
+                    <% application.job.job_skills.first(6).each do |job_skill| %>
+                      <div class="bg-dark p-1 text-white d-inline mr-2 mt-2" style="font-size: 12px">
+                        <%= job_skill.skill.name %>
+                      </div>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -105,7 +109,11 @@
                         <% end %>
                       </h3>
                       <div class="skill-tags">
-                        <!-- Skill tags code goes here -->
+                        <% job.job_skills.first(6).each do |job_skill| %>
+                          <div class="bg-dark p-1 text-white d-inline mr-2 mt-2" style="font-size: 12px">
+                            <%= job_skill.skill.name %>
+                          </div>
+                        <% end %>
                       </div>
                     </div>
                   </div>
@@ -134,8 +142,8 @@
                       <div class="developer-card-right">
                         <h3><%= application.job.job_title %></h3>
                         <div class="skill-tags">
-                          <% application.developer.developer_skills.each do |developer_skill| %>
-                            <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                          <% application.developer.developer_skills.first(6).each do |developer_skill| %>
+                            <div class="bg-dark p-1 text-white d-inline mr-2 mt-2" style="font-size: 12px">
                               <%= developer_skill.skill.name %>
                             </div>
                           <% end %>
@@ -168,7 +176,7 @@
                       <h3><%= developer.location %></h3>
                       <div class="skill-tags">
                         <% developer.developer_skills.each do |developer_skill| %>
-                          <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                          <div class="bg-dark p-1 text-white d-inline mr-2 mt-2" style="font-size: 12px">
                             <%= developer_skill.skill.name %>
                           </div>
                         <% end %>
