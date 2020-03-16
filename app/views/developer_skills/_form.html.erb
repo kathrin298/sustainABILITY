@@ -3,3 +3,9 @@
 
   <%= f.submit "Add", class: "btn btn-primary" %>
 <% end %>
+
+<select class="js-example-basic-multiple" name="skills[]" multiple="multiple">
+  <% Skill.all.each do |skill| %>
+    <option value="<%= skill.name %>"><%= skill.name %></option>
+  <% end %>
+</select>
