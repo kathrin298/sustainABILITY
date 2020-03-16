@@ -39,7 +39,7 @@ class JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-      redirect_to job_path(@job)
+      redirect_to dashboard_path(@job)
     else
       render 'edit'
     end
