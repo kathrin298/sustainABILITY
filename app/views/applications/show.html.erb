@@ -35,7 +35,7 @@
     <% end %>
   </div>
   <br>
-  <% if @application.status == 'accepted' %>
+  <% if @application.status == 'accepted' && @application.job.company.user == current_user %>
     <%= link_to 'Close job posting',
                    job_path(@application.job,
                                     :job => {active: false}),
