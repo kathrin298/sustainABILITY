@@ -30,7 +30,7 @@
     <% if params[:query] == ""   %>
       <h2 style="padding: 20px;">All developers</h2>
     <% else %>
-      <h2 style="padding: 20px;">Showing <%= pluralize @results.size, 'developer' %> matching your query "<%= params[:query] %>"</h2
+      <h2 style="padding: 20px;">Showing <%= pluralize @results.size, 'developer' %> matching your query "<%= params[:query] %>"</h2>
     <% end %>
   <% end %>
 
