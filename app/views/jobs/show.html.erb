@@ -13,15 +13,18 @@
 
     </div>
     <!-- Apply now button -->
-    <% if @developer_application %>
-      <p>You have already applied to this job. View your <%= link_to 'application', application_path(@developer_application) %></p>
-    <% else %>
-      <% if current_user && current_user.developer %>
-        <%= link_to 'Apply now', new_job_application_path(@job), class: "btn btn-flat apply mt-0" %>
-      <% elsif !current_user %>
-        <p>Please <%= link_to "login", new_user_session_path %> or create an account to apply for this job</p>
+
+    <div class="title-container-right">
+      <% if @developer_application %>
+        <p>You have already applied to this job. View your <%= link_to 'application', application_path(@developer_application) %></p>
+      <% else %>
+        <% if current_user && current_user.developer %>
+          <%= link_to 'Apply now', new_job_application_path(@job), class: "btn btn-flat message mt-0" %>
+        <% elsif !current_user %>
+          <p>Please <%= link_to "login", new_user_session_path %> or create an account to apply for this job</p>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 
   <!-- container for quick facts -->
@@ -52,13 +55,32 @@
   <div class="description">
     <strong>Job Description</strong>
     <p><%= @job.job_description %> </p>
+
+  <!-- skills section -->
+    <% if @job.company.user == current_user %>
+      <%= link_to 'Add skill', new_job_job_skill_path(@job), class: "btn-flat skill" %>
+    <% end %>
+
+    <div class="d-flex justify-content-start flex-wrap mb-3" style="background-color: transparent;">
+      <% @job.job_skills.each do |job_skill| %>
+        <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+          <%= job_skill.skill.name %>
+          <% if @job.company.user == current_user %>
+            <%= link_to job_job_skill_path(@job, job_skill), method: :delete, class: "delete-skill-btn" do %>
+               <i class="fas fa-times-circle"></i>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
+
 
 <!-- company info -->
   <div class="company-container">
     <div class="company-info">
 
-      <div style="width:500px; height:300px;">
+      <div>
         <% if @job.company.photo.attached? %>
           <%= cl_image_tag @job.company.photo.key, height: 200, width: 200, crop: :thumb %>
         <% else %>
