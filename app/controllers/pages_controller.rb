@@ -8,6 +8,11 @@ class PagesController < ApplicationController
     @company = current_user.company
     @jobs = Job.where(company: @company)
     @applications = Application.where(developer: current_user.developer)
+    @developer = current_user.developer
+    @developer_jobs = []
+    Application.where(status:'accepted', developer: @developer).each do |application|
+      @developer_jobs << application.job
+    end
     @developers = []
     Application.where(status:'accepted', job: @jobs).each do |application|
       @developers << application.developer

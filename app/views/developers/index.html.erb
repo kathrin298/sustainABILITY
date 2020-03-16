@@ -32,7 +32,11 @@
       <% @developers.sample(10).each do |developer| %>
         <%= link_to developer_path(developer) do %>
           <div class="landing-page-card d-block">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
+            <% if developer.photo.attached? %>
+              <%= cl_image_tag developer.photo.key,  id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;", height: 90, width: 90 %>
+            <% else %>
+              <%= image_tag "user.jpg", id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;", height: 90, width: 90 %>
+            <% end %>
             <div class="card-info">
               <h1><%= developer.first_name %> <%= developer.last_name %></h1>
               <p>
@@ -59,7 +63,11 @@
       <% @developers.sample(10).each do |developer| %>
         <%= link_to developer_path(developer) do %>
           <div class="landing-page-card d-block">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
+            <% if developer.photo.attached? %>
+              <%= cl_image_tag developer.photo.key,  id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;", height: 90, width: 90 %>
+            <% else %>
+              <%= image_tag "user.jpg", id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;", height: 90, width: 90 %>
+            <% end %>
             <div class="card-info">
               <h1><%= developer.first_name %> <%= developer.last_name %></h1>
               <% if developer.skills.first && developer.skills.second  %>
@@ -84,7 +92,11 @@
       <% @developers.sample(10).each do |developer| %>
         <%= link_to developer_path(developer) do %>
           <div class="landing-page-card d-block">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
+            <% if developer.photo.attached? %>
+              <%= cl_image_tag developer.photo.key,  id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;", height: 90, width: 90 %>
+            <% else %>
+              <%= image_tag "user.jpg", id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;", height: 90, width: 90 %>
+            <% end %>
             <div class="card-info">
               <h1><%= developer.first_name %> <%= developer.last_name %></h1>
               <p>Interest: <%= developer.interests.truncate(60) %></p>
