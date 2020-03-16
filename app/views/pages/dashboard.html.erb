@@ -45,8 +45,12 @@
                         Submit <%= (Date.today - application.created_at.to_date).to_i %> days ago
                       <% end %>
                     </h3>
-                    <div class="skill-tags">
-                      <!-- Skill tags code goes here -->
+                    <div class="skill-tags-holder">
+                        <% application.job.job_skills.first(6).each do |job_skill| %>
+                          <div class="skill-tag">
+                            <%= job_skill.skill.name %>
+                          </div>
+                        <% end %>
                     </div>
                   </div>
                 </div>
