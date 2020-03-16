@@ -1,11 +1,5 @@
 <%= simple_form_for([developer, developer_skill]) do |f| %>
-  <%= f.association :skill %>
+  <%= f.association :skill, class: "select2", input_html: {multiple: true, class: "select2"} %>
 
-  <%= f.submit "Add", class: "btn btn-primary" %>
+  <%= f.submit "Add", class: "btn btn-flat" %>
 <% end %>
-
-<select class="js-example-basic-multiple" name="skills[]" multiple="multiple">
-  <% Skill.all.each do |skill| %>
-    <option value="<%= skill.name %>"><%= skill.name %></option>
-  <% end %>
-</select>
