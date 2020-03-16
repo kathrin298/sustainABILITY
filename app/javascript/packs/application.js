@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import 'select2';
 import "bootstrap";
 import "slick";
