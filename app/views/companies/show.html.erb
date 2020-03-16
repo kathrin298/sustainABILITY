@@ -43,9 +43,8 @@
     </div>
        <!-- bio about company -->
     <div id="bio">
-      <h5><strong>Bio:</strong></h5> <%= @company.bio %> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eum maiores sequi, laboriosam expedita quisquam recusandae placeat veniam vero, ratione optio nisi hic voluptas dignissimos, assumenda nemo ab quidem cupiditate.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam praesentium fugit perspiciatis, quasi quae magni amet minus iure et quia obcaecati labore voluptatum porro a, error aliquid ullam adipisci pariatur.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam delectus aliquam molestias quo eveniet iure, dolorem, quis magni non dolore aut distinctio odit consequatur fugit ipsa laboriosam quia labore. Temporibus.</p>
+      <h5><strong>Bio:</strong></h5>
+      <p><%= @company.bio %></p>
     </div>
     <% if @company.video_url.present? %>
       <div class="video-section">
