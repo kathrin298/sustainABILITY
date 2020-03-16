@@ -38,7 +38,7 @@
   }
 }
 
-#received-applications a, #previous-hires a, #submitted-applications a, #posted-jobs a {
+#received-applications a, #previous-hires a, #submitted-applications a, #posted-jobs a, #previous-jobs a {
   text-decoration: none;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .developer-card p {
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1.4;
   opacity: .7;
   margin-bottom: 0;
