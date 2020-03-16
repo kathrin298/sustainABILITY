@@ -42,7 +42,7 @@
                     <% if (Date.today - application.created_at.to_date).to_i == 0 %>
                       Submit today
                     <% else %>
-                      Submit <%= (Date.today - job.created_at.to_date).to_i %> days ago
+                      Submit <%= (Date.today - application.created_at.to_date).to_i %> days ago
                     <% end %>
                   </h3>
                   <div class="skill-tags">
