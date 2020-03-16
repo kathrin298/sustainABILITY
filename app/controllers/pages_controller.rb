@@ -64,20 +64,19 @@ class PagesController < ApplicationController
       else
         @results = Job.search_all_jobs(params[:query])
       end
-    elsif params[:search_type] == 'Skills'
-      if params[:query].blank?
-        Developer.all
-      else
-        @results = []
-        skills = Skill.search_jobs_by_skill(params[:query])
-        # skills = query(Skill, params[:query], 'name', 'name', 'name')
-        skills.each do |skill|
-          skill.developer_skills.each do |dev_skill|
-            @results << dev_skill.developer
-          end
-        end
-        @results = @results.uniq
-      end
+    # elsif params[:search_type] == 'Skills'
+    #   if params[:query].blank?
+    #     Developer.all
+    #   else
+    #     @results = []
+    #     skills = Skill.search_jobs_by_skill(params[:query])
+    #     skills.each do |skill|
+    #       skill.developer_skills.each do |dev_skill|
+    #         @results << dev_skill.developer
+    #       end
+    #     end
+    #     @results = @results.uniq
+    #   end
     else
       @results = Developer.all
     end

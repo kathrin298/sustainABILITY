@@ -12,7 +12,7 @@
   <div class="serp-searchbar">
     <%= form_tag search_path, method: :get do %>
       <%= select_tag(:search_type, options_for_select([["Developers","Developers"],
-                  ["Companies","Companies"], ["Jobs","Jobs"], ["Skills","Skills"]], params[:search_type] ), class:"select") %>&nbsp;&nbsp;&nbsp;
+                  ["Companies","Companies"], ["Jobs","Jobs"]], params[:search_type] ), class:"select") %>&nbsp;&nbsp;&nbsp;
       <%= text_field_tag :query,
         params[:query],
         class: "form-control d-flex",

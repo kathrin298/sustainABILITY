@@ -15,6 +15,9 @@ class Job < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_all_jobs,
     against: [ :job_title,  :job_description ],
+    associated_against: {
+      skills: [ :name ]
+    },
     using: {
       tsearch: { prefix: true }
     }

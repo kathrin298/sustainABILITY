@@ -6,6 +6,9 @@ class Developer < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_all_developers,
     against: [ :last_name,  :first_name,  :interests,  :bio, :slogan ],
+    associated_against: {
+      skills: [ :name ]
+    },
     using: {
       tsearch: { prefix: true }
     }
