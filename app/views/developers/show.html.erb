@@ -96,7 +96,7 @@
       <% if @hired_jobs.present? %>
 
        <% if current_user && @hired_jobs.find { |job| job.company == current_user.company } %>
-        <%= link_to 'Add review', new_application_review_path(job.applications.where(developer: @developer).first) %>
+        <%= link_to 'Add review', new_application_review_path(@hired_jobs.first), class: "btn btn-flat message" %>
       <% end %>
         <div class="p-5 mx-auto p-5 ">
 
