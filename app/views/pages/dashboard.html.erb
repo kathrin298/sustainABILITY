@@ -38,16 +38,14 @@
                     <p><%= application.job.job_description.truncate(150) %></p>
                   </div>
                   <div class="developer-card-right">
-                    <h3>
+                    <h3>Company: <%= application.job.company.name %></h3>
+                    <h2>
                       <% if (Date.today - application.created_at.to_date).to_i == 0 %>
                         Submit today
                       <% else %>
                         Submit <%= (Date.today - application.created_at.to_date).to_i %> days ago
                       <% end %>
-                    </h3>
-                    <div class="skill-tags">
-                      <!-- Skill tags code goes here -->
-                    </div>
+                    </h2>
                   </div>
                 </div>
               </div>
