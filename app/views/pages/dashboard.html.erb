@@ -60,9 +60,33 @@
         <% end %>
         </div>
         <div class="tab-pane fade" id="previous-jobs" role="tabpanel" aria-labelledby="previous-jobs-tab">
-          <h2>You don't have any current or previous jobs.</h2>
-          <p>When a company accepts your application, the job will appear here.</p>
-          <%= link_to "View all jobs", search_path %>
+          <% if @developer_jobs.present? %>
+            <% @developer_jobs.each do |job| %>
+              <%= link_to job_path(job) do %>
+                <div class="developer-card">
+                  <% if job.company.photo.attached? %>
+                    <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                  <% else %>
+                    <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
+                  <% end %>
+                  <div class="developer-card-info">
+                    <div class="developer-card-left">
+                      <h2><%= job.job_title %></h2>
+                      <p><%= job.job_description.truncate(150) %></p>
+                    </div>
+                    <div class="developer-card-right">
+                      <h3>Company: <%= job.company.name %></h3>
+                      <h2>Industry: <%= job.company.industry %></h2>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <h2>You don't have any current or previous jobs.</h2>
+            <p>When a company accepts your application, the job will appear here.</p>
+            <%= link_to "View all jobs", search_path %>
+          <% end %>
         </div>
       </div>
       <% elsif current_user.company.present? %>
@@ -93,7 +117,7 @@
                   <% if job.company.photo.attached? %>
                     <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
                   <% else %>
-                    <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                    <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
                   <% end %>
                   <div class="developer-card-info">
                     <div class="developer-card-left">

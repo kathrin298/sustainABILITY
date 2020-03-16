@@ -33,7 +33,11 @@
       <% @companies.sample(10).each do |company| %>
         <%= link_to company_path(company) do %>
           <div class="landing-page-card d-block">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
+            <% if company.photo.attached? %>
+              <%= cl_image_tag company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;" %>
+            <% else %>
+              <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;", height: 90, width: 90 %>
+            <% end %>
             <div class="card-info">
               <h1><%= company.name %></h1>
               <p>
@@ -60,13 +64,17 @@
       <% @jobs.sample(10).each do |job| %>
         <%= link_to job_path(job) do %>
           <div class="landing-page-card d-block">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
+            <% if job.company.photo.attached? %>
+              <%= cl_image_tag job.company.photo.key, height: 90, width: 90, id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;" %>
+            <% else %>
+              <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;", height: 90, width: 90 %>
+            <% end %>
             <div class="card-info">
               <h1><%= job.job_title.truncate(25) %></h1>
               <p class="mission">
                 Company:
                 <br>
-
+                <%= job.company.name %>
               </p>
             </div>
           </div>
@@ -87,7 +95,11 @@
       <% @companies.sample(10).each do |company| %>
         <%= link_to company_path(company) do %>
           <div class="landing-page-card d-block">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" id="avatar" height="75" width="75" style="margin: 0 auto 15px auto;">
+            <% if company.photo.attached? %>
+              <%= cl_image_tag company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;" %>
+            <% else %>
+              <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar", style: "margin: 0 auto 15px auto; border-radius: 50%;", height: 90, width: 90 %>
+            <% end %>
             <div class="card-info">
               <h1><%= company.name %></h1>
               <p class="mission">Mission: <%= company.mission.truncate(60) %></p>
