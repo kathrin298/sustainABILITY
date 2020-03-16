@@ -39,16 +39,14 @@
                     <p><%= application.job.job_description.truncate(150) %></p>
                   </div>
                   <div class="developer-card-right">
-                    <h3>
+                    <h3>Company: <%= application.job.company.name %></h3>
+                    <h2>
                       <% if (Date.today - application.created_at.to_date).to_i == 0 %>
                         Submit today
                       <% else %>
                         Submit <%= (Date.today - application.created_at.to_date).to_i %> days ago
                       <% end %>
-                    </h3>
-                    <div class="skill-tags">
-                      <!-- Skill tags code goes here -->
-                    </div>
+                    </h2>
                   </div>
                 </div>
               </div>
@@ -133,8 +131,12 @@
                           Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
                         <% end %>
                       </h3>
-                      <div class="skill-tags">
-                        <!-- Skill tags code goes here -->
+                      <div class="skill-tags-holder">
+                        <% job.job_skills.first(6).each do |job_skill| %>
+                          <div class="skill-tag">
+                            <%= job_skill.skill.name %>
+                          </div>
+                        <% end %>
                       </div>
                     </div>
                   </div>
@@ -165,9 +167,9 @@
                       </div>
                       <div class="developer-card-right">
                         <h3><%= application.job.job_title %></h3>
-                        <div class="skill-tags">
-                          <% application.developer.developer_skills.each do |developer_skill| %>
-                            <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                        <div class="skill-tags-holder">
+                          <% application.developer.developer_skills.first(6).each do |developer_skill| %>
+                            <div class="skill-tag" style="font-size: 12px">
                               <%= developer_skill.skill.name %>
                             </div>
                           <% end %>
@@ -198,9 +200,9 @@
                     </div>
                     <div class="developer-card-right">
                       <h3><%= developer.location %></h3>
-                      <div class="skill-tags">
+                      <div class="skill-tags-holder">
                         <% developer.developer_skills.each do |developer_skill| %>
-                          <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                          <div class="skill-tag" style="font-size: 12px">
                             <%= developer_skill.skill.name %>
                           </div>
                         <% end %>
