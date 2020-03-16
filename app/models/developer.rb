@@ -3,14 +3,24 @@ class Developer < ApplicationRecord
   belongs_to :user
   has_one_attached :photo
 
-  # These will await the application models
-  # has_many :applications, dependent: :destroy
-  # has_many :reviews, through: :applications, dependent: :destroy
-  # has_many :jobs, through: :applications, dependent: :destroy
-  # has_many :answers, through: :applications, dependent: :destroy
+  include PgSearch::Model
+  pg_search_scope :search_all_developers,
+    against: [ :last_name,  :first_name,  :interests,  :bio, :slogan ],
+    using: {
+      tsearch: { prefix: true }
+    }
 
-  # has_many :conversations, dependent: :destroy
-  # has_many :messages, through: :conversations, dependent: :destroy
+  pg_search_scope :search_dev_by_location,
+    against: [ :location ],
+    using: {
+      tsearch: { prefix: true }
+    }
+
+  pg_search_scope :search_dev_by_interests,
+    against: [ :interests, :bio, :slogan ],
+    using: {
+      tsearch: { prefix: true }
+    }
 
   has_many :company_favourites, dependent: :destroy
   has_many :developer_favourites, dependent: :destroy

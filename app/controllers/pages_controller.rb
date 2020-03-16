@@ -15,34 +15,66 @@ class PagesController < ApplicationController
     end
   end
 
+
   def search
     if params[:search_type] == 'dev_location'
-      @results = query(Developer, params[:query], 'location', 'bio', 'last_name')
-    elsif params[:search_type] == 'company_location'
-      @results = query(Company, params[:query], 'location', 'bio', 'industry')
-    elsif params[:search_type] == 'Developers'
-      @results = query(Developer, params[:query], 'first_name', 'last_name', 'bio')
-    elsif params[:search_type] == 'Companies'
-      @results = query(Company, params[:query], 'name', 'bio', 'industry')
-    elsif params[:search_type] == 'company_skills'
-      @results = query(Company, params[:query], 'mission', 'bio', 'industry')
-    elsif params[:search_type] == 'dev_interests'
-      @results = query(Developer, params[:query], 'interests', 'bio', 'last_name')
-    elsif params[:search_type] == 'company_mission'
-      @results = query(Company, params[:query], 'mission', 'bio', 'name')
-    elsif params[:search_type] == 'Jobs'
-      @results = query(Job, params[:query], 'job_title', 'job_description', 'location')
-    elsif params[:search_type] == 'Skills'
-      @results = []
-      skills = query(Skill, params[:query], 'name', 'name', 'name')
-      skills.each do |skill|
-        skill.developer_skills.each do |dev_skill|
-          @results << dev_skill.developer
-        end
+      if params[:query].blank?
+        @results = Developer.all
+      else
+        @results = Developer.search_dev_by_location(params[:query])
       end
-      @results = @results.uniq
+    elsif params[:search_type] == 'company_location'
+      if params[:query].blank?
+        @results = Company.all
+      else
+        @results = Company.search_companies_by_location(params[:query])
+      end
+    elsif params[:search_type] == 'Developers'
+      if params[:query].blank?
+        @results = Developer.all
+      else
+        @results = Developer.search_all_developers(params[:query])
+      end
+    elsif params[:search_type] == 'Companies'
+      if params[:query].blank?
+        @results = Company.all
+      else
+        @results = Company.search_all_companies(params[:query])
+      end
+    elsif params[:search_type] == 'dev_interests'
+      if params[:query].blank?
+        @results = Developer.all
+      else
+        @results = Developer.search_dev_by_interests(params[:query])
+      end
+    elsif params[:search_type] == 'company_mission'
+      if params[:query].blank?
+        @results = Company.all
+      else
+        @results = Company.search_companies_by_mission(params[:query])
+      end
+    elsif params[:search_type] == 'Jobs'
+      if params[:query].blank?
+        @results = Job.all
+      else
+        @results = Job.search_all_jobs(params[:query])
+      end
+    elsif params[:search_type] == 'Skills'
+      if params[:query].blank?
+        Developer.all
+      else
+        @results = []
+        skills = Skill.search_jobs_by_skill(params[:query])
+        # skills = query(Skill, params[:query], 'name', 'name', 'name')
+        skills.each do |skill|
+          skill.developer_skills.each do |dev_skill|
+            @results << dev_skill.developer
+          end
+        end
+        @results = @results.uniq
+      end
     else
-      @results = query(Developer, params[:query], 'location', 'bio', 'last_name')
+      @results = Developer.all
     end
     serp_headline
   end
@@ -61,6 +93,8 @@ class PagesController < ApplicationController
     end
   end
 
+  private
+
   def serp_headline_helper(term)
     term = ActionController::Base.helpers.pluralize(@results.size, term)
     if params[:query] == ""
@@ -70,15 +104,14 @@ class PagesController < ApplicationController
     end
   end
 
-  private
 
-  def query(model, query, field1, field2, field3)
-    if query.blank?
-      results = model.all
-    else
-      sql_query = "#{field1} ILIKE :query OR #{field2} ILIKE :query OR #{field3} ILIKE :query"
-      results = model.where(sql_query, query: "%#{query}%")
-    end
-    return results
-  end
+  # def query(model, query, field1, field2, field3)
+  #   if query.blank?
+  #     results = model.all
+  #   else
+  #     sql_query = "#{field1} ILIKE :query OR #{field2} ILIKE :query OR #{field3} ILIKE :query"
+  #     results = model.where(sql_query, query: "%#{query}%")
+  #   end
+  #   return results
+  # end
 end
