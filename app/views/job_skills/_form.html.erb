@@ -1,0 +1,5 @@
+<%= simple_form_for([job, job_skill]) do |f| %>
+  <%= f.association :skill %>
+
+  <%= f.submit "Add", class: "btn btn-primary" %>
+<% end %>

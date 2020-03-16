@@ -7,6 +7,8 @@ class Job < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :answers, through: :questions, dependent: :destroy
   has_many :applications, dependent: :destroy
+  has_many :job_skills, dependent: :destroy
+  has_many :skills, through: :job_skills, dependent: :destroy
 
   validates :job_title, :job_description, presence: true
 end

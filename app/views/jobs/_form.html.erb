@@ -6,6 +6,8 @@
   <%= f.input :remote, collection: Job::REMOTE %>
   <%= f.input :start_date, collection: Job::START_DATES %>
   <%= f.input :duration, collection: Job::DURATIONS %>
+  <%= f.input :active, label: 'Open for applications'%>
+
 
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
