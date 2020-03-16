@@ -17,7 +17,7 @@
       <p>You have already applied to this job. View your <%= link_to 'application', application_path(@developer_application) %></p>
     <% else %>
       <% if current_user && current_user.developer %>
-        <%= link_to 'Apply now', new_job_application_path(@job), class: "btn btn-flat message mt-0" %>
+        <%= link_to 'Apply now', new_job_application_path(@job), class: "btn btn-flat apply mt-0" %>
       <% elsif !current_user %>
         <p>Please <%= link_to "login", new_user_session_path %> or create an account to apply for this job</p>
       <% end %>

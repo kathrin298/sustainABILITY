@@ -23,6 +23,7 @@ class Developer < ApplicationRecord
 
   has_many :answers
   has_many :applications
+  has_many :reviews, through: :applications
 
   validates :first_name, :last_name, presence: true
   validates :hireable, inclusion: { in: HIREABLE_OPTIONS }, presence: true
@@ -31,6 +32,15 @@ class Developer < ApplicationRecord
      # should return some html code(?) based on the return of a regex
      # that finds which social site the list object belongs to
   end
+
+   def average_rating
+    if !reviews.empty?
+      (reviews.sum(:rating) / reviews.size.to_f).round(1)
+    else
+      "no reviews yet"
+    end
+  end
+
 
 end
 
