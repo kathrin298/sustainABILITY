@@ -119,3 +119,20 @@
     height: 45px;
   }
 }
+
+.skill-tags-holder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.skill-tag {
+  background-color: #343A41;
+  padding: 0.25rem;
+  color: white;
+  margin: 0 0.25rem;
+  font-size: 12px;
+  border-radius: 6px;
+  margin-top: 5px;
+}
+

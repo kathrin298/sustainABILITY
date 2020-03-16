@@ -45,9 +45,9 @@
                       Submit <%= (Date.today - application.created_at.to_date).to_i %> days ago
                     <% end %>
                   </h3>
-                  <div class="skill-tags">
+                  <div class="skill-tags-holder">
                     <% application.job.job_skills.first(6).each do |job_skill| %>
-                      <div class="bg-dark p-1 text-white d-inline mr-2 mt-2" style="font-size: 12px">
+                      <div class="skill-tag" style="font-size: 12px">
                         <%= job_skill.skill.name %>
                       </div>
                     <% end %>
@@ -108,9 +108,9 @@
                           Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
                         <% end %>
                       </h3>
-                      <div class="skill-tags">
+                      <div class="skill-tags-holder">
                         <% job.job_skills.first(6).each do |job_skill| %>
-                          <div class="bg-dark p-1 text-white d-inline mr-2 mt-2" style="font-size: 12px">
+                          <div class="skill-tag">
                             <%= job_skill.skill.name %>
                           </div>
                         <% end %>
@@ -141,9 +141,9 @@
                       </div>
                       <div class="developer-card-right">
                         <h3><%= application.job.job_title %></h3>
-                        <div class="skill-tags">
+                        <div class="skill-tags-holder">
                           <% application.developer.developer_skills.first(6).each do |developer_skill| %>
-                            <div class="bg-dark p-1 text-white d-inline mr-2 mt-2" style="font-size: 12px">
+                            <div class="skill-tag" style="font-size: 12px">
                               <%= developer_skill.skill.name %>
                             </div>
                           <% end %>
@@ -174,9 +174,9 @@
                     </div>
                     <div class="developer-card-right">
                       <h3><%= developer.location %></h3>
-                      <div class="skill-tags">
+                      <div class="skill-tags-holder">
                         <% developer.developer_skills.each do |developer_skill| %>
-                          <div class="bg-dark p-1 text-white d-inline mr-2 mt-2" style="font-size: 12px">
+                          <div class="skill-tag" style="font-size: 12px">
                             <%= developer_skill.skill.name %>
                           </div>
                         <% end %>
