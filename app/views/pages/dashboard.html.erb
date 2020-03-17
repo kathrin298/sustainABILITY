@@ -11,7 +11,7 @@
           <a class="nav-link active" id="favorite-jobs-list" data-toggle="tab" href="#favorite-jobs" role="tab" aria-controls="favorite-jobs" aria-selected="true">Favorite Jobs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="submitted-applications-tab" data-toggle="tab" href="#submitted-applications" role="tab" aria-controls="submitted-applications" aria-selected="false">Submitted Appications</a>
+          <a class="nav-link" id="submitted-applications-tab" data-toggle="tab" href="#submitted-applications" role="tab" aria-controls="submitted-applications" aria-selected="false">Submitted Applications</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="previous-jobs-tab" data-toggle="tab" href="#previous-jobs" role="tab" aria-controls="previous-jobs" aria-selected="false">Previous Jobs</a>
@@ -27,10 +27,10 @@
           <% @applications.each do |application| %>
             <%= link_to application_path(application) do %>
               <div class="developer-card">
-                <% if application.developer.photo.attached? %>
-                  <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                <% if application.job.company.photo.attached? %>
+                  <%= cl_image_tag application.job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
                 <% else %>
-                  <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                  <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
                 <% end %>
                 <div class="developer-card-info">
                   <div class="developer-card-left">

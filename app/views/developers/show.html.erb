@@ -2,22 +2,13 @@
   <div class="card-trip mb-4">
     <div class="row my-5">
       <div class="col-3">
-          <div style="width:500px; height:300px;">
+          <div class="d-flex flex-column align-items-center justify-content-center">
             <% if @developer.photo.attached? %>
               <%= cl_image_tag @developer.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
             <% else %>
               <%= image_tag "user.jpg", class: "avatar-huge" %>
             <% end %>
-          </div>
-        </div>
-        <div class="col-6">
-            <h2><%= @developer.first_name %> <%= @developer.last_name %></h2>
-            <p><strong>Location:</strong> <%= @developer.location %></p>
-            <p><strong>Interests:</strong> <%= @developer.interests %></p>
-            <p><strong>Slogan:</strong> <%= @developer.slogan %></p>
-            <p><strong>Hireable:</strong> <%= @developer.hireable %></p>
-
-              <div class="d-flex justify-content-start icon-wrapper ml-0 mt-0 mb-4">
+              <div class="d-flex justify-content-center icon-wrapper mt-2">
                 <% if @developer.github.present?  %>
                   <%= link_to("#{"https://" if !@developer.github.include?('http')}#{@developer.github}") do %>
                     <i class="fab fa-github fa-2x mr-3"></i>
@@ -35,10 +26,19 @@
                 <% end %>
                 <% if @developer.linkedin.present?  %>
                   <%= link_to("#{"https://" if !@developer.linkedin.include?('http')}#{@developer.linkedin}") do %>
-                    <i class="fab fa-linkedin fa-2x mr-3"></i>
+                    <i class="fab fa-linkedin fa-2x"></i>
                   <% end %>
                 <% end %>
               </div>
+          </div>
+        </div>
+        <div class="col-6">
+            <h2><%= @developer.first_name %> <%= @developer.last_name %></h2>
+            <p><strong>Location:</strong> <%= @developer.location %></p>
+            <p><strong>Interests:</strong> <%= @developer.interests %></p>
+            <p><strong>Slogan:</strong> <%= @developer.slogan %></p>
+            <p><strong>Hireable:</strong> <%= @developer.hireable %></p>
+
           </div>
           <div class="col-3">
             <div class="d-flex flex-column justify-content-start align-items-start text-center">
@@ -57,32 +57,36 @@
                   </div>
                 </div>
               <% else %>
-              <div class="d-flex flex-column align-items-start my-2">
-                  <a class="btn btn-flat favorite w-100" href="#"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                  <a class="btn btn-flat message w-100" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+              <div class="d-flex flex-column align-items-start my-2 w-100">
                   <% if @developer.website.present?  %>
                     <%= link_to "#{"https://" if !@developer.linkedin.include?('http')}#{@developer.website}", class: "btn btn-flat website w-100" do %>
                       View my website
                     <% end %>
                   <% end %>
+                  <a class="btn btn-flat message w-100" href="#"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
+                  <a class="btn btn-flat message w-100" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
                 </div>
               <% end %>
-              <div class="d-flex flex-column align-items-start">
+              <div class="d-flex flex-column align-items-center w-100">
                 <% if @developer.user == current_user %>
                   <%= link_to 'Add skill', new_developer_developer_skill_path(@developer), class: "btn-flat skill" %>
                 <% end %>
 
-                <div class="d-flex justify-content-start flex-wrap mb-3" style="background-color: transparent;">
-                  <% @developer.developer_skills.each do |developer_skill| %>
-                    <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
-                      <%= developer_skill.skill.name %>
-                      <% if @developer.user == current_user %>
-                        <%= link_to developer_developer_skill_path(@developer, developer_skill), method: :delete, class: "delete-skill-btn" do %>
-                           <i class="fas fa-times-circle"></i>
+                <div class="d-flex flex-column w-100">
+                  <span class="text-center font-weight-bold">My Skill</span>
+                  <hr class="w-100">
+                  <div class="d-flex justify-content-start flex-wrap mb-3" style="background-color: transparent;">
+                    <% @developer.developer_skills.each do |developer_skill| %>
+                      <div class="rounded bg-dark p-2 text-white d-inline mr-2 mt-2">
+                        <%= developer_skill.skill.name %>
+                        <% if @developer.user == current_user %>
+                          <%= link_to developer_developer_skill_path(@developer, developer_skill), method: :delete, class: "delete-skill-btn" do %>
+                             <i class="fas fa-times-circle"></i>
+                          <% end %>
                         <% end %>
-                      <% end %>
-                    </div>
-                  <% end %>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,7 +107,7 @@
           <% if @reviews.present? %>
           <div class="d-flex justify-content-between align-items-center">
             <h2><strong>Reviews</strong></h2>
-           <h4><span><%= @developer.average_rating %></span>
+           <h4><span><%= @developer.average_rating %>/5</span>
            <span><i class="fas fa-star"></i></span>
            </div></h4>
             <% @reviews.each do |review| %>
