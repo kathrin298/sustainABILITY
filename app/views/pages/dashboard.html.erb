@@ -42,9 +42,9 @@
                     <h3>Company: <%= application.job.company.name %></h3>
                     <h2>
                       <% if (Date.today - application.created_at.to_date).to_i == 0 %>
-                        Submit today
+                        Submitted today
                       <% else %>
-                        Submit <%= (Date.today - application.created_at.to_date).to_i %> days ago
+                        Submitted <%= (Date.today - application.created_at.to_date).to_i %> days ago
                       <% end %>
                     </h2>
                   </div>
