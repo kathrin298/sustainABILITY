@@ -58,8 +58,16 @@
                 </div>
               <% else %>
               <div class="d-flex flex-column align-items-start my-2">
-                  <a class="btn btn-flat favorite" href="#"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                  <a class="btn btn-flat message" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+                  <% if current_user.company && current_user.company.favourites.include?(@developer) %>
+                    <%= link_to developer_favourite_path(current_user.company.developer_favourites.find_by(developer: @developer)), method: :delete, class: 'btn btn-flat', style: 'font-size:0.88rem' do %>
+                      <i class="fas fa-ban fa-lg"></i> Remove from favourites
+                    <% end %>
+                    <% else %>
+                    <%= link_to developer_developer_favourites_path(@developer), method: :post, class: "btn btn-flat favourite" do %>
+                    <i class="far fa-heart fa-lg"></i> Add to favourites</a>
+                    <% end %>
+                  <% end %>
+                  <a class="btn btn-flat message w-100" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
                   <% if @developer.website.present?  %>
                     <%= link_to "#{"https://" if !@developer.linkedin.include?('http')}#{@developer.website}", class: "btn btn-flat website" do %>
                       View my website
