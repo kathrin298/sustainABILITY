@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   def index
     # @users = User.all
-    @conversations = Conversation.all
+    @conversations = Conversation.all.sort_by { |conversation| conversation.messages.last.created_at}.reverse!
   end
 
   def create
