@@ -47,22 +47,20 @@
 
         <% end %>
       </div>
-      <div class="messages-container">
-        <div class="tab-content" id="conversation-tabContent">
-          <% @conversations.each do |conversation| %>
-            <div class="tab-pane fade <%= 'show active' if @conversations.first == conversation %>" id="conversation-<%= conversation.id %>" role="tabpanel" aria-labelledby="conversation-<%= conversation.id %>-tab">
-              <% conversation.messages.each do |message| %>
-                <% if message.user == current_user %>
-                  <p class="send-messages"><%= message.content %></p>
-                  <br>
-                <% else %>
-                  <p class="received-messages"><%= message.content %></p>
-                  <br>
-                <% end %>
+      <div class="messages-container tab-content" id="conversation-tabContent">
+        <% @conversations.each do |conversation| %>
+          <div class="tab-pane fade <%= 'show active' if @conversations.first == conversation %>" id="conversation-<%= conversation.id %>" role="tabpanel" aria-labelledby="conversation-<%= conversation.id %>-tab">
+            <% conversation.messages.each do |message| %>
+              <% if message.user == current_user %>
+                <p class="send-messages text-right"><%= message.content %></p>
+                <br>
+              <% else %>
+                <p class="received-messages text-left"><%= message.content %></p>
+                <br>
               <% end %>
-            </div>
-          <% end %>
-        </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
