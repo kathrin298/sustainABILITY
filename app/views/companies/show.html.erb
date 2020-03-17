@@ -20,12 +20,12 @@
           <div id="company-links-holder">
               <% if @company.website.present?  %>
                 <div id="company-button-holder">
-                  <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center" %>
+                  <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center", style: 'width:201px' %>
                 </div>
               <% end %>
             <% unless @company.user == current_user %>
-                <a class="btn btn-flat btn-delete" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                <a class="btn btn-flat btn-delete" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+                <a class="btn btn-flat message px-0" href="#" style="width: 201px;"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
+                <a class="btn btn-flat message px-0" href="#" style="width: 201px;"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
             <% end %>
               <% if policy(@company).edit? %>
                 <div id="company-button-holder">
