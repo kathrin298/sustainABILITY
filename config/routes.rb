@@ -28,7 +28,10 @@ Rails.application.routes.draw do
     resources :answers, only: [:update]
   end
 
-  resources :conversations, only: [:index, :create, :destroy]
+  resources :conversations, only: [:index, :create, :destroy] do
+    resources :messages, only: [:index, :new, :create]
+  end
+
   resources :developer_favorites, only: [:index]
   resources :company_favorites, only: [:index]
   resources :skills, only: [:new, :create, :destroy]

@@ -58,8 +58,10 @@
                 </div>
               <% else %>
               <div class="d-flex flex-column align-items-start my-2">
+                <% unless current_user.developer %>
                   <a class="btn btn-flat favorite" href="#"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                  <a class="btn btn-flat message" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+                  <%= link_to 'Send message', conversations_path(developer_id: params[:id], company_id: current_user.company), method: :post, class: "btn btn-flat message" %>
+                <% end %>
                   <% if @developer.website.present?  %>
                     <%= link_to "#{"https://" if !@developer.linkedin.include?('http')}#{@developer.website}", class: "btn btn-flat website" do %>
                       View my website
