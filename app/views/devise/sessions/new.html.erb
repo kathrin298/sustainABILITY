@@ -20,9 +20,15 @@
           <%= f.button :submit, "Log in", class: "btn btn-success w-100" %>
         </div>
 
+
         <%- if devise_mapping.omniauthable? %>
           <%- resource_class.omniauth_providers.each do |provider| %>
-            <%= link_to "Log in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider),  class: "btn btn-dark my-2 w-100"  %><br />
+            <%= link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-dark my-2 w-100" do %>
+              <div class="d-flex">
+                <i style="font-size: 22px; align-text: left;" class="fab fa-github"></i>
+                <span class="mx-auto">Log in up with <%= OmniAuth::Utils.camelize(provider) %></span>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
 
@@ -38,7 +44,7 @@
 
       <% end %>
 
-      <%= render "devise/shared/links" %>
+      <%#= render "devise/shared/links" %>
 
     </div>
   </div>

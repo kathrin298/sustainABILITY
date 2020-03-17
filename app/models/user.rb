@@ -14,8 +14,14 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      #user.name = auth.info.name   # assuming the user model has a name
-      #user.image = auth.info.image # assuming the user model has an image
+      dev = Developer.new(first_name: auth.info.name.split[0],
+                          last_name: auth.info.name.split[-1],
+                          location: auth.extra.raw_info.location,
+                          hireable: "Currently available",
+                          github:  auth.info.urls.GitHub,
+                          website: auth.info.urls.Blog)
+      dev.user = user
+      dev.save
     end
   end
 
