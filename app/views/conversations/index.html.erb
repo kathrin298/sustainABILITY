@@ -1,1 +1,51 @@
-<h1>Conversations</h1>
+<div class="container">
+  <div class="card-trip">
+    <h1>Conversations</h1>
+      <div class="inbox-container">
+        <div class="conversations-container">
+          <% @conversations.each do |conversation| %>
+
+            <div class="conversation">
+              <% if conversation.developer == current_user.developer %>
+                <% if conversation.company.photo.attached? %>
+                  <%= cl_image_tag conversation.company.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar mx-3" %>
+                <% else %>
+                  <%= image_tag "blank_company_logo.png", class: "avatar mx-3" %>
+                <% end %>
+
+                <div>
+                  <div class="conversation-header">
+                    <p class="sender"><%= conversation.company.name %></p>
+                    <p class="date"> <%= conversation.messages.last.message_time %> </p>
+                  </div>
+                  <p class="message-preview"><%= conversation.messages.last.content.truncate(50) %></p>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="conversation">
+              <% if conversation.company == current_user.company %>
+                <% if conversation.developer.photo.attached? %>
+                  <%= cl_image_tag conversation.developer.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar mx-3" %>
+                <% else %>
+                  <%= image_tag "user.jpg", class: "avatar mx-3" %>
+                <% end %>
+
+                <div>
+                  <div class="conversation-header">
+                    <p class="sender"><%= conversation.developer.first_name.capitalize %> <%= conversation.developer.last_name.capitalize %></p>
+                    <p class="date"> <%= conversation.messages.last.message_time %> </p>
+                  </div>
+                  <p class="message-preview"><%= conversation.messages.last.content.truncate(50) %></p>
+                </div>
+              <% end %>
+            </div>
+
+          <% end %>
+        </div>
+        <div class="messages-container">
+          <p>kjkjh</p>
+        </div>
+      </div>
+  </div>
+</div>

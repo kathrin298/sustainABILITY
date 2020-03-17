@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   end
 
   resources :conversations, only: [:index, :create, :destroy] do
-    resources :messages, only: [:index, :new, :create]
+    resources :messages, only: [:new, :create]
   end
 
   resources :developer_favorites, only: [:index]
