@@ -25,9 +25,8 @@ class Developer < ApplicationRecord
       tsearch: { prefix: true }
     }
 
-  # has_many :company_favourites, dependent: :destroy
   has_many :company_favourites, dependent: :destroy
-  has_many :favourites, through: :company_favourites, source: :company
+  has_many :developer_favourites, dependent: :destroy
 
   has_many :developer_skills, dependent: :destroy
   has_many :skills, through: :developer_skills, dependent: :destroy
