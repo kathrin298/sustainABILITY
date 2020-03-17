@@ -2,15 +2,21 @@
 
   <% if params[:search_type] == "company_mission" %>
     <% params[:search_type] = "Companies" %>
+  <% elsif params[:search_type] == "jobs" %>
+    <% params[:search_type] = "Jobs" %>
+  <% elsif params[:search_type] == "company_location" %>
+    <% params[:search_type] = "Companies" %>
   <% end %>
 
+  <!-- search bar -->
   <div class="serp-searchbar">
     <%= form_tag search_path, method: :get do %>
       <%= select_tag(:search_type, options_for_select([["Developers","Developers"],
-                  ["Companies","Companies"]], params[:search_type] ), class:"select") %>&nbsp;&nbsp;&nbsp;
+                  ["Companies","Companies"], ["Jobs","Jobs"]], params[:search_type] ), class:"select") %>&nbsp;&nbsp;&nbsp;
       <%= text_field_tag :query,
         params[:query],
         class: "form-control d-flex",
+        onfocus: "this.value=''",
         placeholder: "search..."
       %>
       <%= button_tag(type: 'submit', class: "btn") do %>
@@ -19,6 +25,7 @@
     <% end %>
   </div>
 
+  <h4 style="padding: 20px;"> <%= @serp_headline %> </h4>
 
   <% if params[:search_type] == 'Companies' %>
     <% if params[:query] == ""  %>
@@ -34,14 +41,15 @@
     <% end %>
   <% end %>
 
-
+  <!-- Actual search results listing -->
   <% @results.each do |result| %>
-    <% if result.respond_to?(:name) %>
+    <% if result.class == Company %>
       <%= render 'pages/company_serp', company: result %>
-    <% else %>
+    <% elsif result.class == Developer %>
       <%= render 'pages/developer_serp', developer: result %>
+    <% else %>
+      <%= render 'pages/jobs_serp', job: result %>
     <% end %>
   <% end %>
 
 </div>
-
