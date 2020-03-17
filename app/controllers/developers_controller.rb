@@ -11,7 +11,7 @@ class DevelopersController < ApplicationController
     @developer.applications.where(status: 'accepted').each do |application|
       @hired_jobs << application.job
     end
-    @reviews = Review.where(application: @developer.applications)
+    @reviews = @developer.reviews
   end
 
   def new
