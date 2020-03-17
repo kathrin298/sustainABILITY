@@ -15,7 +15,7 @@
         <div class="developer-card-right" style="width: 25%;">
           <h3><%= developer.location %></h3>
           <div class="skill-tags-holder">
-            <% developer.developer_skills.each do |developer_skill| %>
+            <% developer.developer_skills.first(5).each do |developer_skill| %>
               <div class="skill-tag" style="font-size: 12px">
                 <%= developer_skill.skill.name %>
               </div>
