@@ -1,4 +1,67 @@
 <div class="container my-5">
+<<<<<<< HEAD
+  <div class="title-container">
+    <div class="title-container-left">
+      <h1>Position: <%= @job.job_title %></h1>
+
+      <% if policy(@job).edit? %>
+        <%= link_to 'edit job', edit_job_path(@job) %>
+      <% end %>
+      <br>
+      <% if policy(@job).destroy? %>
+        <%= link_to 'delete job', job_path(@job), method: :delete %>
+      <% end %>
+
+    </div>
+    <!-- Apply now button -->
+
+    <div class="title-container-right">
+      <% if @developer_application %>
+        <p>You have already applied to this job. View your <%= link_to 'application', application_path(@developer_application) %></p>
+      <% else %>
+        <% if current_user && current_user.developer %>
+          <%= link_to 'Apply now', new_job_application_path(@job), class: "btn btn-flat message mt-0" %>
+        <% elsif !current_user %>
+          <p>Please <%= link_to "login", new_user_session_path %> or create an account to apply for this job</p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- container for quick facts -->
+  <div class="job-cards-container">
+    <div class="job-cards">
+      <p>Start date:</p>
+      <p><%= @job.start_date %> </p>
+    </div>
+    <div class="job-cards">
+      <p>Duration:</p>
+      <p><%= @job.duration %> </p>
+    </div>
+    <div class="job-cards">
+      <p>Location:</p>
+      <p><%= @job.location %> </p>
+    </div>
+    <div class="job-cards">
+      <p>Remote:</p>
+      <% if @job.remote%>
+        <p>Yes</p>
+      <% else %>
+        <p>No</p>
+      <% end %>
+    </div>
+  </div>
+
+<!-- job description -->
+  <div class="description">
+    <strong>Job Description</strong>
+    <p><%= @job.job_description %> </p>
+
+  <!-- skills section -->
+    <% if @job.company.user == current_user %>
+      <%= link_to 'Add skill', new_job_job_skill_path(@job), class: "btn-flat skill" %>
+    <% end %>
+=======
   <div class="card-trip">
     <div class="title-container">
       <div class="title-container-left">
@@ -11,6 +74,7 @@
             Posted <%= (Date.today - @job.created_at.to_date).to_i %> days ago
           <% end %>
         </p>
+>>>>>>> master
 
       </div>
       <!-- Buttons -->
