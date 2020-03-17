@@ -18,6 +18,12 @@ class PagesController < ApplicationController
       @developers << application.developer
       @developers.flatten
     end
+    @received_applications = []
+    @jobs.each do |job|
+      job.applications.each do |application|
+        @received_applications << application if application.status == 'pending'
+      end
+    end
   end
 
 
