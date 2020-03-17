@@ -26,7 +26,6 @@ class PagesController < ApplicationController
     end
   end
 
-
   def search
     if params[:search_type] == 'dev_location'
       if params[:query].blank?

@@ -1,5 +1,5 @@
 <%= link_to developer_path(developer), class: "serp-card-wrapper" do %>
-  <div class="serp-card">
+  <div data-hireable="<%= developer.hireable %>" class="serp-card">
     <div class="serp-text">
       <% if developer.photo.attached? %>
         <%= cl_image_tag developer.photo.key, height: 200, width: 200, crop: :thumb, class: "serp-avatar" %>
@@ -7,14 +7,14 @@
         <%= image_tag "user.jpg", class: "serp-avatar" %>
       <% end %>
       <div class="px-5">
-        <h4><%=  developer.first_name.capitalize %> <%=  developer.last_name.capitalize %></h4>
-        <span><%=  developer.slogan %></span>
+        <h4><%= developer.first_name.capitalize %> <%= developer.last_name.capitalize %></h4>
+        <span><%= developer.slogan %></span>
       </div>
     </div>
 
     <div class="serp-extras">
       <h6><%= developer.location%></h6>
-      <span><%=developer.hireable %></span>
+      <span><%= developer.hireable %></span>
     </div>
   </div>
 <% end %>

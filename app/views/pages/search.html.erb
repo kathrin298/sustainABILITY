@@ -27,6 +27,11 @@
 
   <h4 style="padding: 20px;"> <%= @serp_headline %> </h4>
 
+
+   <%= check_box_tag :serpcheckbox %>
+
+
+
   <!-- Actual search results listing -->
   <% @results.each do |result| %>
     <% if result.class == Company %>
@@ -39,3 +44,20 @@
   <% end %>
 
 </div>
+
+
+
+<script>
+  let checkbox = document.getElementById("serpcheckbox");
+  let active = document.querySelectorAll('[data-hireable]');
+  active.forEach(dev => {
+    console.log(dev)
+  })
+
+  checkbox.addEventListener('change', () => {
+      if(this.checked) {
+      } else {
+          console.log(" Checkbox is not checked..")
+      }
+  });
+</script>
