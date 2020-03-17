@@ -24,8 +24,16 @@
                 </div>
               <% end %>
             <% unless @company.user == current_user %>
-                <a class="btn btn-flat btn-delete" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                <a class="btn btn-flat btn-delete" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+              <% if current_user.developer && current_user.developer.favourites.include?(@company) %>
+                <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat favorite' do %>
+                  <i class="fas fa-ban fa-lg"></i> Remove from favourite
+                <% end %>
+                <% else %>
+                    <%= link_to company_company_favourites_path(@company), method: :post, class: "btn btn-flat btn-delete w-100" do %>
+                    <i class="far fa-heart fa-lg"></i> Add to favourites</a>
+                  <% end %>
+                <% end %>
+                  <a class="btn btn-flat btn-delete w-100" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
             <% end %>
               <% if policy(@company).edit? %>
                 <div id="company-button-holder">

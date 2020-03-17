@@ -17,11 +17,31 @@
           <a class="nav-link" id="previous-jobs-tab" data-toggle="tab" href="#previous-jobs" role="tab" aria-controls="previous-jobs" aria-selected="false">Previous Jobs</a>
         </li>
       </ul>
+
+
+
+
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="favorite-jobs" role="tabpanel" aria-labelledby="favorite-jobs-list">
-          <h2>You don't have any jobs saved to favorites</h2>
+         <% if current_user.developer.favourites.empty? %>
+
+         <h2>You don't have any jobs saved to favorites</h2>
           <%= link_to "View all jobs", search_path %>
         </div>
+
+        <% else %>
+
+          <% current_user.developer.favourites.each do |favourite_comp| %>
+            <p><%= link_to favourite_comp.name, company_path(favourite_comp) %></p>
+          <% end %>
+
+        <% end %>
+
+
+
+
+
+
         <div class="tab-pane fade" id="submitted-applications" role="tabpanel" aria-labelledby="submitted-applications-tab">
           <% @applications.each do |application| %>
             <%= link_to application_path(application) do %>
@@ -97,11 +117,24 @@
           <a class="nav-link" id="previous-hires-tab" data-toggle="tab" href="#previous-hires" role="tab" aria-controls="previous-hires" aria-selected="false">Hired Developers</a>
         </li>
       </ul>
+
+
+
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="favorite-developers" role="tabpanel" aria-labelledby="favorite-developers-list">
-          <h2>You don't have any developers saved to favorites</h2>
+          <% if current_user.company.favourites.empty? %>
+            <h2>You don't have any developers saved to favorites</h2>
+          <% else %>
+            <% current_user.company.favourites.each do |favourite_dev|%>
+              <p><%= link_to "#{favourite_dev.first_name} #{favourite_dev.last_name}", developer_path(favourite_dev) %></p>
+            <% end %>
+          <% end %>
           <%= link_to "View all developers", search_path %>
         </div>
+
+
+
+
         <div class="tab-pane fade" id="posted-jobs" role="tabpanel" aria-labelledby="posted-jobs-tab">
           <ul>
             <% @jobs.each do |job| %>
