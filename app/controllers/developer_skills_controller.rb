@@ -6,13 +6,17 @@ class DeveloperSkillsController < ApplicationController
   end
 
   def create
-    @developer_skill = DeveloperSkill.new(developer_skill_params)
-    @developer_skill.developer = @developer
-    if @developer_skill.save
-      redirect_to developer_path(@developer)
-    else
-      render 'new'
+    params[:developer_skill][:skill_id].each do |item|
+      if item =~ /\d/
+        @developer_skill = DeveloperSkill.new(skill_id: item.to_i, developer: @developer)
+        @developer_skill.save
+      elsif item =~ /\w/
+        @skill = Skill.new(name: item)
+        @developer_skill = DeveloperSkill.new(skill: @skill, developer: @developer)
+        @developer_skill.save
+      end
     end
+    redirect_to developer_path(@developer)
   end
 
   def destroy

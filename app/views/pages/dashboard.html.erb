@@ -23,36 +23,34 @@
           <%= link_to "View all jobs", search_path %>
         </div>
         <div class="tab-pane fade" id="submitted-applications" role="tabpanel" aria-labelledby="submitted-applications-tab">
-        <% @applications.each do |application| %>
-          <%= link_to application_path(application) do %>
-            <div class="developer-card">
-              <% if application.developer.photo.attached? %>
-                <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
-              <% else %>
-                <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
-              <% end %>
-              <div class="developer-card-info">
-                <div class="developer-card-left">
-                  <h2><%= application.job.job_title %></h2>
-                  <h3>Status: <%= application.status.capitalize %></h3>
-                  <p><%= application.job.job_description.truncate(150) %></p>
-                </div>
-                <div class="developer-card-right">
-                  <h3>
-                    <% if (Date.today - application.created_at.to_date).to_i == 0 %>
-                      Submit today
-                    <% else %>
-                      Submit <%= (Date.today - application.created_at.to_date).to_i %> days ago
-                    <% end %>
-                  </h3>
-                  <div class="d-flex align-items-start skill-tags">
-                    <!-- Skill tags code goes here -->
+          <% @applications.each do |application| %>
+            <%= link_to application_path(application) do %>
+              <div class="developer-card">
+                <% if application.job.company.photo.attached? %>
+                  <%= cl_image_tag application.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                <% else %>
+                  <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
+                <% end %>
+                <div class="developer-card-info">
+                  <div class="developer-card-left">
+                    <h2><%= application.job.job_title %></h2>
+                    <h3>Status: <%= application.status.capitalize %></h3>
+                    <p><%= application.job.job_description.truncate(150) %></p>
+                  </div>
+                  <div class="developer-card-right">
+                    <h3>Company: <%= application.job.company.name %></h3>
+                    <h2>
+                      <% if (Date.today - application.created_at.to_date).to_i == 0 %>
+                        Submitted today
+                      <% else %>
+                        Submitted <%= (Date.today - application.created_at.to_date).to_i %> days ago
+                      <% end %>
+                    </h2>
                   </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
         </div>
         <div class="tab-pane fade" id="previous-jobs" role="tabpanel" aria-labelledby="previous-jobs-tab">
           <% if @developer_jobs.present? %>
@@ -112,7 +110,7 @@
                   <% if job.company.photo.attached? %>
                     <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
                   <% else %>
-                    <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                    <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
                   <% end %>
                   <div class="developer-card-info">
                     <div class="developer-card-left">
@@ -128,8 +126,12 @@
                           Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
                         <% end %>
                       </h3>
-                      <div class="skill-tags">
-                        <!-- Skill tags code goes here -->
+                      <div class="skill-tags-holder">
+                        <% job.job_skills.first(6).each do |job_skill| %>
+                          <div class="skill-tag">
+                            <%= job_skill.skill.name %>
+                          </div>
+                        <% end %>
                       </div>
                     </div>
                   </div>
@@ -157,9 +159,9 @@
                       </div>
                       <div class="developer-card-right">
                         <h3><%= application.job.job_title %></h3>
-                        <div class="d-flex flex-wrap skill-tags">
-                          <% application.developer.developer_skills.each do |developer_skill| %>
-                            <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                        <div class="skill-tags-holder">
+                          <% application.developer.developer_skills.first(6).each do |developer_skill| %>
+                            <div class="skill-tag" style="font-size: 12px">
                               <%= developer_skill.skill.name %>
                             </div>
                           <% end %>
@@ -190,9 +192,9 @@
                     </div>
                     <div class="developer-card-right">
                       <h3><%= developer.location %></h3>
-                      <div class="d-flex skill-tags">
+                      <div class="skill-tags-holder">
                         <% developer.developer_skills.each do |developer_skill| %>
-                          <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                          <div class="skill-tag" style="font-size: 12px">
                             <%= developer_skill.skill.name %>
                           </div>
                         <% end %>
