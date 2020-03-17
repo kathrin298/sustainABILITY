@@ -1,26 +1,22 @@
 .title-container {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #C5BFBF;
+  border-bottom: 1px solid #c0c0c070;
 }
 
-.job-cards-container {
+.title-container-left a:hover {
+  text-decoration: none;
+}
+
+.job-info-container {
   display: flex;
   justify-content: space-between;
-
-}
-
-.job-cards {
-  border: 1px solid #C5BFBF;
-  width: 180px;
-  padding: 10px;
-  margin: 30px 0;
-  border-radius: 3px;
+  padding-top: 30px;
 }
 
 .description {
-  border-bottom: 1px solid #C5BFBF;
   margin-bottom: 20px;
+  padding-right: 30px;
 }
 
 .company-info {
@@ -29,6 +25,30 @@
 }
 
 .company-container {
-  border-bottom: 1px solid #C5BFBF;
   margin-bottom: 20px;
+}
+
+.date {
+  color: #C0C0C0;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+.quick-info {
+  width: 60%;
+  border-left: 1px solid #c0c0c070;
+  padding-left: 30px;
+}
+
+.title {
+  display: flex;
+}
+
+li {
+  font-family: Yantramanav;
+  a:hover {
+    text-decoration: none;
+  }
 }
