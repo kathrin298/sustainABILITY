@@ -8,7 +8,7 @@
     <% if @application.status == 'accepted' %>
       <p class="tag green">Status: <%= @application.status %></p>
     <% elsif @application.status == 'rejected'%>
-      <p class="tag orange">Status: <%= @application.status %></p>
+      <p class="tag red">Status: <%= @application.status %></p>
     <% else %>
       <p class="tag grey">Status: <%= @application.status %></p>
     <% end %>
@@ -34,4 +34,11 @@
                    method: :patch, class: "btn btn-reject ml-4" %>
     <% end %>
   </div>
+  <br>
+  <% if @application.status == 'accepted' && @application.job.company.user == current_user %>
+    <%= link_to 'Close job posting',
+                   job_path(@application.job,
+                                    :job => {active: false}),
+                   method: :patch, class: "btn btn-flat btn-delete" %>
+  <% end %>
 </div>

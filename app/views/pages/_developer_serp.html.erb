@@ -1,20 +1,29 @@
-<%= link_to developer_path(developer), class: "serp-card-wrapper" do %>
-  <div class="serp-card">
-    <div class="serp-text">
+<div class="serp-card-holder" data-hireable="<%= developer.hireable %>">
+  <%= link_to developer_path(developer) do %>
+      <div class="developer-card">
       <% if developer.photo.attached? %>
-        <%= cl_image_tag developer.photo.key, height: 200, width: 200, crop: :thumb, class: "serp-avatar" %>
+        <%= cl_image_tag developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
       <% else %>
-        <%= image_tag "user.jpg", class: "serp-avatar" %>
+        <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
       <% end %>
-      <div class="px-5">
-        <h4><%=  developer.first_name.capitalize %> <%=  developer.last_name.capitalize %></h4>
-        <span><%=  developer.slogan %></span>
+      <div class="developer-card-info">
+        <div class="developer-card-left">
+          <h2><%= developer.first_name.capitalize %> <%= developer.last_name.capitalize %></h2>
+          <h3><%= developer.slogan.present? ? developer.slogan : "No title provided" %></h3>
+          <p><%= developer.bio.truncate(150) %></p>
+        </div>
+        <div class="developer-card-right" style="width: 25%;">
+          <h3><%= developer.location %></h3>
+          <div class="skill-tags-holder">
+            <% developer.developer_skills.first(5).each do |developer_skill| %>
+              <div class="skill-tag" style="font-size: 12px">
+                <%= developer_skill.skill.name %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
+  <% end %>
+</div>
 
-    <div class="serp-extras">
-      <h6><%= developer.location%></h6>
-      <span><%=developer.hireable %></span>
-    </div>
-  </div>
-<% end %>

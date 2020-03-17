@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # devise_for :users, controllers: {registrations: 'registrations'}
   devise_for :users, controllers: {registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
   root to: 'companies#index'
@@ -18,6 +17,7 @@ Rails.application.routes.draw do
   resources :jobs, only: [:show, :index, :edit, :update, :destroy] do
     resources :applications, only: [:new, :create]
     resources :questions, only: [:new, :create]
+    resources :job_skills, only: [:new, :create, :destroy]
   end
 
   resources :applications, only: [:show, :update] do

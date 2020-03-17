@@ -3,9 +3,11 @@
   <%= f.input :job_title %>
   <%= f.input :job_description %>
   <%= f.input :location %>
-  <%= f.input :remote, collection: Job::REMOTE %>
   <%= f.input :start_date, collection: Job::START_DATES %>
   <%= f.input :duration, collection: Job::DURATIONS %>
+  <%= f.input_field :remote, as: :boolean, boolean_style: :inline %>
+  <%= f.label "Remote ", style: "text-align:center;" %>
+  <%= f.input :active, label: 'Open for applications'%>
 
-  <%= f.submit "Submit", class: "btn btn-primary" %>
+  <%= f.submit "Submit", class: "btn btn-primary", style: "display: block; margin-left: auto;" %>
 <% end %>

@@ -1,47 +1,65 @@
-<div class="container p-5 w-50">
+<div class="container">
+  <div class="row">
+    <div class="col-4 mx-auto">
 
-  <h2>Sign up</h2>
+      <h2>Sign up</h2>
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= f.error_notification %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }%>
+          <%= f.input :password,
+                      required: true,
+                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: { autocomplete: "new-password" } %>
+          <div class="radio-btns">
+            <%= f.collection_radio_buttons :type, [['Developer', 'Developer Sign up'], ['Company', 'Company Sign up']],  :first, :last%>
+          </div>
+        </div>
 
-    <div class="form-inputs">
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "email" }%>
-      <%= f.input :password,
-                  required: true,
-                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                  input_html: { autocomplete: "new-password" } %>
-      <%= f.input :password_confirmation,
-                  required: true,
-                  input_html: { autocomplete: "new-password" } %>
-      <div class="radio-btns">
-        <%= f.collection_radio_buttons :type, [['Developer', 'Sign up as a developer'], ['Company', 'Sign up as a company']], :first, :last %>
-      </div>
+        <div class="form-actions">
+          <%= f.button :submit, "Sign up", class: "btn btn-success w-100", id: "sign-up-btn" %>
+        </div>
+      <% end %>
+
+      <%#= render "devise/shared/links" %>
+
+      <%- if devise_mapping.omniauthable? %>
+        <%- resource_class.omniauth_providers.each do |provider| %>
+          <%= link_to omniauth_authorize_path(resource_name, provider), id: "github-login",  class: "btn btn-dark my-2 w-100 d-none" do %>
+            <div class="d-flex">
+              <i class="fab fa-github align-self-start"></i>
+              <span class="align-self-center">Sign up with <%= OmniAuth::Utils.camelize(provider) %></span>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+
     </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Sign up", class: "btn btn-success" %>
-    </div>
-  <% end %>
-
-  <%= render "devise/shared/links" %>
-
-
-  <%= link_to "Sign up with Github", user_github_omniauth_authorize_path, id: "github-login", class: "d-none"  %>
-
+  </div>
 </div>
 
-
-
 <script>
-  let labels = document.getElementsByTagName('LABEL');
-  labels[3].addEventListener('click', (e) => {
-    document.getElementById("github-login").classList.add('d-block');
+  const devLabel = document.getElementsByTagName('LABEL')[3];
+  const compLabel = document.getElementsByTagName('LABEL')[4];
+  const signUpBtn = document.getElementById("sign-up-btn");
+  console.log(devLabel, compLabel)
+  compLabel.checked = true;
+
+  devLabel.addEventListener('click', (e) => {
+    document.getElementById("github-login").classList.remove('d-none');
+    signUpBtn.style.opacity = 1
   });
-  labels[4].addEventListener('click', (e) => {
+  compLabel.addEventListener('click', (e) => {
     document.getElementById("github-login").classList.add('d-none');
+    signUpBtn.style.opacity = 1
   });
+
+
 </script>

@@ -1,4 +1,4 @@
-<%= simple_form_for([developer, developer_skill]) do |f| %>
+<%= simple_form_for([job, job_skill]) do |f| %>
   <%= f.association :skill, class: "select2", input_html: {multiple: true, class: "select2"} %>
 
   <%= f.submit "Add", class: "btn btn-flat" %>
