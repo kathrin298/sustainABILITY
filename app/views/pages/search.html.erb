@@ -25,11 +25,12 @@
     <% end %>
   </div>
 
-  <h4 style="padding: 20px;"> <%= @serp_headline %> </h4>
-
-
-   <%= check_box_tag :serpcheckbox %>
-
+  <div style="padding: 20px;" class="d-flex justify-content-between">
+    <h2 id="serp_headline"> <%= @serp_headline %></h2>
+    <% if params[:search_type] == "Developers" %>
+      <h5> <%= check_box_tag :serpcheckbox %> Only show available developers </h5>
+    <% end %>
+  </div>
 
 
   <!-- Actual search results listing -->
@@ -38,27 +39,31 @@
       <%= render 'pages/company_serp', company: result %>
     <% elsif result.class == Developer %>
       <%= render 'pages/developer_serp', developer: result %>
-    <% else %>
-      <%= render 'pages/jobs_serp', job: result %>
+    <% elsif result.class == Job %>
+        <%= render 'pages/jobs_serp', job: result %>
     <% end %>
   <% end %>
-
 </div>
 
 
-
 <script>
+  const hideDevs = () => {
+    let unavailable = document.querySelectorAll('[data-hireable="Not available"]');
+    unavailable.forEach(dev => {
+      dev.classList.toggle('d-none');
+    });
+    let numberOfResults = document.querySelectorAll(".serp-card-holder").length;
+    let numberOfHiddens = document.querySelectorAll(".d-none").length;
+
+    document.getElementById("serp_headline").innerText = `Showing ${numberOfResults - numberOfHiddens} developers`
+  };
+
   let checkbox = document.getElementById("serpcheckbox");
-  let active = document.querySelectorAll('[data-hireable="Currently available"]');
-  active.forEach(dev => {
+  checkbox.checked = true;
+  hideDevs();
 
-    console.log(dev)
-  })
-
-  checkbox.addEventListener('change', () => {
-      if(this.checked) {
-      } else {
-          console.log(" Checkbox is not checked..")
-      }
+  checkbox.addEventListener('change', function() {
+      hideDevs();
   });
+
 </script>

@@ -60,3 +60,106 @@
     text-align: right;
   }
 }
+
+.serp-card-holder a {
+  text-decoration: none;
+}
+
+#search-page-job-card-holder a {
+  text-decoration: none;
+}
+
+.search-page-job-card {
+  overflow: hidden;
+  height: 150px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  margin-bottom: 30px;
+  &:hover {
+    background-color: #F4F4F4;
+  }
+}
+
+.search-page-job-card h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.search-page-job-card p, h1, h2, h3, h4, h5, h6 {
+  color: #141823;
+}
+
+.search-page-job-card p {
+  font-size: 15px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.search-page-job-card-info {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-page-job-card-left {
+  width: 60%;
+  text-align: left;
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 0;
+    opacity: 0.5;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+
+.search-page-job-card-right {
+  width: 40%;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: flex-end;
+  h2 {
+    font-weight: 300;
+    opacity: 0.5;
+  }
+  h3 {
+    font-size: 22px;
+    margin: 0;
+    opacity: 0.5;
+  }
+  p {
+    font-size: 15px;
+    margin: 0;
+  }
+}
+
+#skill-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.search-page-skill-tags-holder {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+#search-page-job-card-headers {
+  height: 32px;
+}

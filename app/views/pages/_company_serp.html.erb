@@ -1,20 +1,21 @@
-<%= link_to company_path(company), class: "serp-card-wrapper" do %>
-  <div class="serp-card">
-    <div class="serp-text">
+<div class="serp-card-holder">
+  <%= link_to company_path(company) do %>
+    <div class="developer-card">
       <% if company.photo.attached? %>
-        <%= cl_image_tag company.photo.key, height: 200, width: 200, crop: :thumb, class: "serp-avatar" %>
+        <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
       <% else %>
-        <%= image_tag "blank_company_logo.png", class: "serp-avatar" %>
+        <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
       <% end %>
-      <div class="px-5">
-        <h4><%= company.name %></h4>
-        <span><%= company.mission %></span>
+      <div class="developer-card-info">
+        <div class="developer-card-left">
+          <h2><%= company.name %></h2>
+          <p><%= company.bio.truncate(150) %></p>
+        </div>
+        <div class="developer-card-right">
+          <h3><%= company.location %></h3>
+          <h2>Industry: <%= company.industry %></h2>
+        </div>
       </div>
     </div>
-
-    <div class="serp-extras">
-      <h6><%= company.location%></h6>
-      <span> Current openings: <%=company.jobs.size %></span>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

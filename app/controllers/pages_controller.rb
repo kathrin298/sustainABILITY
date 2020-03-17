@@ -65,23 +65,11 @@ class PagesController < ApplicationController
       end
     elsif params[:search_type] == 'Jobs'
       if params[:query].blank?
-        @results = Job.all
+        @results = filter_active_jobs(Job.all)
       else
-        @results = Job.search_all_jobs(params[:query])
+        @results = filter_active_jobs(Job.search_all_jobs(params[:query]))
       end
-    # elsif params[:search_type] == 'Skills'
-    #   if params[:query].blank?
-    #     Developer.all
-    #   else
-    #     @results = []
-    #     skills = Skill.search_jobs_by_skill(params[:query])
-    #     skills.each do |skill|
-    #       skill.developer_skills.each do |dev_skill|
-    #         @results << dev_skill.developer
-    #       end
-    #     end
-    #     @results = @results.uniq
-    #   end
+
     else
       @results = Developer.all
     end
@@ -102,6 +90,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def filter_active_jobs(results)
+    results.select { |result| result.applications.where(status: "accepted").length==0}
+  end
+
   private
 
   def serp_headline_helper(term)
@@ -112,15 +104,4 @@ class PagesController < ApplicationController
       return "#{term} matching '#{params[:query]}'"
     end
   end
-
-
-  # def query(model, query, field1, field2, field3)
-  #   if query.blank?
-  #     results = model.all
-  #   else
-  #     sql_query = "#{field1} ILIKE :query OR #{field2} ILIKE :query OR #{field3} ILIKE :query"
-  #     results = model.where(sql_query, query: "%#{query}%")
-  #   end
-  #   return results
-  # end
 end
