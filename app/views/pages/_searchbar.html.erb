@@ -3,7 +3,8 @@
     <%= text_field_tag :query,
       params[:query],
       class: "form-control d-flex",
-      placeholder: placeholder
+      placeholder: placeholder,
+      onfocus: "this.value=''"
     %>
     <%= button_tag(type: 'submit', class: btn_class) do %>
        <i class="fas fa-search"></i>

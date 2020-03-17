@@ -20,12 +20,12 @@
           <div id="company-links-holder">
               <% if @company.website.present?  %>
                 <div id="company-button-holder">
-                  <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center" %>
+                  <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center", style: 'width:201px' %>
                 </div>
               <% end %>
             <% unless @company.user == current_user %>
-                <a class="btn btn-flat btn-delete" href="#"> <i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                <a class="btn btn-flat btn-delete" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+                <a class="btn btn-flat message px-0" href="#" style="width: 201px;"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
+                <a class="btn btn-flat message px-0" href="#" style="width: 201px;"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
             <% end %>
               <% if policy(@company).edit? %>
                 <div id="company-button-holder">
@@ -43,9 +43,8 @@
     </div>
        <!-- bio about company -->
     <div id="bio">
-      <h5><strong>Bio:</strong></h5> <%= @company.bio %> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eum maiores sequi, laboriosam expedita quisquam recusandae placeat veniam vero, ratione optio nisi hic voluptas dignissimos, assumenda nemo ab quidem cupiditate.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam praesentium fugit perspiciatis, quasi quae magni amet minus iure et quia obcaecati labore voluptatum porro a, error aliquid ullam adipisci pariatur.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam delectus aliquam molestias quo eveniet iure, dolorem, quis magni non dolore aut distinctio odit consequatur fugit ipsa laboriosam quia labore. Temporibus.</p>
+      <h5><strong>Bio:</strong></h5>
+      <p><%= @company.bio %></p>
     </div>
     <% if @company.video_url.present? %>
       <div class="video-section">

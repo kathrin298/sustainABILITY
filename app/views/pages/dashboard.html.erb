@@ -18,43 +18,46 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="favorite-jobs" role="tabpanel" aria-labelledby="favorite-jobs-list">
+        <div class="tab-pane fade show active" id="favorite-jobs" role="tabpanel" aria-labelledby="favorite-jobs-list" style="text-align: center;">
           <h2>You don't have any jobs saved to favorites</h2>
-          <%= link_to "View all jobs", search_path %>
+          <%= link_to "View All Jobs", "/search?search_type=Jobs&query=", class: "btn btn-flat" %>
         </div>
-        <div class="tab-pane fade" id="submitted-applications" role="tabpanel" aria-labelledby="submitted-applications-tab">
-        <% @applications.each do |application| %>
-          <%= link_to application_path(application) do %>
-            <div class="developer-card">
-              <% if application.developer.photo.attached? %>
-                <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
-              <% else %>
-                <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
-              <% end %>
-              <div class="developer-card-info">
-                <div class="developer-card-left">
-                  <h2><%= application.job.job_title %></h2>
-                  <h3>Status: <%= application.status.capitalize %></h3>
-                  <p><%= application.job.job_description.truncate(150) %></p>
-                </div>
-                <div class="developer-card-right">
-                  <h3>
-                    <% if (Date.today - application.created_at.to_date).to_i == 0 %>
-                      Submit today
-                    <% else %>
-                      Submit <%= (Date.today - application.created_at.to_date).to_i %> days ago
-                    <% end %>
-                  </h3>
-                  <div class="d-flex align-items-start skill-tags">
-                    <!-- Skill tags code goes here -->
+        <div class="tab-pane fade" id="submitted-applications" role="tabpanel" aria-labelledby="submitted-applications-tab" style="text-align: center;">
+        <% if @applications.present? %>
+          <% @applications.each do |application| %>
+            <%= link_to application_path(application) do %>
+              <div class="developer-card">
+                <% if application.developer.photo.attached? %>
+                  <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                <% else %>
+                  <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                <% end %>
+                <div class="developer-card-info">
+                  <div class="developer-card-left">
+                    <h2><%= application.job.job_title %></h2>
+                    <h3>Status: <%= application.status.capitalize %></h3>
+                    <p><%= application.job.job_description.truncate(150) %></p>
+                  </div>
+                  <div class="developer-card-right">
+                    <h3>Company: <%= application.job.company.name %></h3>
+                    <h2>
+                      <% if (Date.today - application.created_at.to_date).to_i == 0 %>
+                        Submit today
+                      <% else %>
+                        Submit <%= (Date.today - application.created_at.to_date).to_i %> days ago
+                      <% end %>
+                    </h2>
                   </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
+        <% else %>
+          <h2>You haven't applied for any jobs yet.</h2>
+          <%= link_to "View All Jobs", "/search?search_type=Jobs&query=", class: "btn btn-flat" %>
         <% end %>
         </div>
-        <div class="tab-pane fade" id="previous-jobs" role="tabpanel" aria-labelledby="previous-jobs-tab">
+        <div class="tab-pane fade" id="previous-jobs" role="tabpanel" aria-labelledby="previous-jobs-tab" style="text-align: center;">
           <% if @developer_jobs.present? %>
             <% @developer_jobs.each do |job| %>
               <%= link_to job_path(job) do %>
@@ -80,7 +83,7 @@
           <% else %>
             <h2>You don't have any current or previous jobs.</h2>
             <p>When a company accepts your application, the job will appear here.</p>
-            <%= link_to "View all jobs", search_path %>
+            <%= link_to "View All Jobs", "/search?search_type=Jobs&query=", class: "btn btn-flat" %>
           <% end %>
         </div>
       </div>
@@ -100,19 +103,19 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="favorite-developers" role="tabpanel" aria-labelledby="favorite-developers-list">
+        <div class="tab-pane fade show active" id="favorite-developers" role="tabpanel" aria-labelledby="favorite-developers-list" style="text-align: center;">
           <h2>You don't have any developers saved to favorites</h2>
-          <%= link_to "View all developers", search_path %>
+          <%= link_to "View All Developers", "/search?search_type=Developers&query=", class: "btn btn-flat" %>
         </div>
-        <div class="tab-pane fade" id="posted-jobs" role="tabpanel" aria-labelledby="posted-jobs-tab">
-          <ul>
+        <div class="tab-pane fade" id="posted-jobs" role="tabpanel" aria-labelledby="posted-jobs-tab" style="text-align: center;">
+          <% if @jobs.present? %>
             <% @jobs.each do |job| %>
               <%= link_to job_path(job) do %>
                 <div class="developer-card">
                   <% if job.company.photo.attached? %>
                     <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
                   <% else %>
-                    <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                    <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
                   <% end %>
                   <div class="developer-card-info">
                     <div class="developer-card-left">
@@ -128,52 +131,61 @@
                           Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
                         <% end %>
                       </h3>
-                      <div class="skill-tags">
-                        <!-- Skill tags code goes here -->
+                      <div class="skill-tags-holder">
+                        <% job.job_skills.first(6).each do |job_skill| %>
+                          <div class="skill-tag">
+                            <%= job_skill.skill.name %>
+                          </div>
+                        <% end %>
                       </div>
                     </div>
                   </div>
                 </div>
               <% end %>
             <% end %>
-          </ul>
+          <% else %>
+            <h2>You haven't posted any jobs yet!</h2>
+            <%= link_to 'Post a Job', new_company_job_path(@company.id), class: "btn btn-flat" if current_user.company.present? %>
+          <% end %>
         </div>
-        <div class="tab-pane fade" id="received-applications" role="tabpanel" aria-labelledby="received-applications-tab">
-          <% @jobs.each do |job| %>
-            <% job.applications.each do |application| %>
-              <% if application.status == 'pending' %>
-                <%= link_to application_path(application) do %>
-                  <div class="developer-card">
-                    <% if application.developer.photo.attached? %>
-                      <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
-                    <% else %>
-                      <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
-                    <% end %>
-                    <div class="developer-card-info">
-                      <div class="developer-card-left">
-                        <h2><%= application.developer.first_name.capitalize %> <%= application.developer.last_name.capitalize %></h2>
-                        <h3><%= application.developer.slogan.present? ? application.developer.slogan : "No title provided" %></h3>
-                        <p><%= application.developer.bio.truncate(150) %></p>
-                      </div>
-                      <div class="developer-card-right">
-                        <h3><%= application.job.job_title %></h3>
-                        <div class="d-flex flex-wrap skill-tags">
-                          <% application.developer.developer_skills.each do |developer_skill| %>
-                            <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
-                              <%= developer_skill.skill.name %>
-                            </div>
-                          <% end %>
-                        </div>
+        <div class="tab-pane fade" id="received-applications" role="tabpanel" aria-labelledby="received-applications-tab" style="text-align: center;">
+          <% if @received_applications.present? %>
+            <% @received_applications.each do |application| %>
+              <%= link_to application_path(application) do %>
+                <div class="developer-card">
+                  <% if application.developer.photo.attached? %>
+                    <%= cl_image_tag application.developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                  <% else %>
+                    <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                  <% end %>
+                  <div class="developer-card-info">
+                    <div class="developer-card-left">
+                      <h2><%= application.developer.first_name.capitalize %> <%= application.developer.last_name.capitalize %></h2>
+                      <h3><%= application.developer.slogan.present? ? application.developer.slogan : "No title provided" %></h3>
+                      <p><%= application.developer.bio.truncate(150) %></p>
+                    </div>
+                    <div class="developer-card-right">
+                      <h3><%= application.job.job_title %></h3>
+                      <div class="skill-tags-holder">
+                        <% application.developer.developer_skills.first(6).each do |developer_skill| %>
+                          <div class="skill-tag" style="font-size: 12px">
+                            <%= developer_skill.skill.name %>
+                          </div>
+                        <% end %>
                       </div>
                     </div>
                   </div>
-                <% end %>
+                </div>
               <% end %>
             <% end %>
+          <% else %>
+            <h2>You haven't received any applications yet.</h2>
+            <p>Click "Post a Job" above, or click below to search through the available developers!</p>
+            <%= link_to "View Available Developers", "/search?search_type=Developers&query=", class: "btn btn-flat" %>
           <% end %>
         </div>
-        <div class="tab-pane fade" id="previous-hires" role="tabpanel" aria-labelledby="previous-hires-tab">
-          <ul>
+        <div class="tab-pane fade" id="previous-hires" role="tabpanel" aria-labelledby="previous-hires-tab" style="text-align: center;">
+          <% if @developers.present? %>
             <% @developers.each do |developer| %>
               <%= link_to developer_path(developer) do %>
                   <div class="developer-card">
@@ -190,9 +202,9 @@
                     </div>
                     <div class="developer-card-right">
                       <h3><%= developer.location %></h3>
-                      <div class="d-flex skill-tags">
+                      <div class="skill-tags-holder">
                         <% developer.developer_skills.each do |developer_skill| %>
-                          <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+                          <div class="skill-tag" style="font-size: 12px">
                             <%= developer_skill.skill.name %>
                           </div>
                         <% end %>
@@ -202,6 +214,11 @@
                 </div>
               <% end %>
             <% end %>
+          <% else %>
+            <h2>You haven't hired any developers yet.</h2>
+            <p>Click "Post a Job" above, or click below to search through the available developers!</p>
+            <%= link_to "View Available Developers", "/search?search_type=Developers&query=", class: "btn btn-flat" %>
+          <% end %>
           </ul>
         </div>
       </div>

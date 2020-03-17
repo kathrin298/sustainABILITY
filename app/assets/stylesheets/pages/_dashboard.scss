@@ -33,12 +33,13 @@
   align-items: center;
   padding: 15px 30px;
   margin-bottom: 30px;
+  border-radius: 20px;
   &:hover {
     background-color: #F4F4F4;
   }
 }
 
-#received-applications a, #previous-hires a, #submitted-applications a, #posted-jobs a, #previous-jobs a {
+#received-applications a, #previous-hires a, #submitted-applications a, #posted-jobs a, #previous-jobs a, .link-wrapper a {
   text-decoration: none;
 }
 
@@ -119,3 +120,20 @@
     height: 45px;
   }
 }
+
+.skill-tags-holder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.skill-tag {
+  background-color: #343A41;
+  padding: 0.25rem;
+  color: white;
+  margin: 0 0.25rem;
+  font-size: 12px;
+  border-radius: 6px;
+  margin-top: 5px;
+}
+

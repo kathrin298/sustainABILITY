@@ -1,4 +1,5 @@
 <div class="container my-5">
+<<<<<<< HEAD
   <div class="title-container">
     <div class="title-container-left">
       <h1>Position: <%= @job.job_title %></h1>
@@ -60,62 +61,123 @@
     <% if @job.company.user == current_user %>
       <%= link_to 'Add skill', new_job_job_skill_path(@job), class: "btn-flat skill" %>
     <% end %>
+=======
+  <div class="card-trip">
+    <div class="title-container">
+      <div class="title-container-left">
+        <h1>Position: <%= @job.job_title %></h1>
+        <p><%= link_to @job.company.name, company_path(@job.company) %>  <i class="fas fa-compass" style="font-size: 0.7rem;"> </i> <%= @job.location %></p>
+        <p class="date">
+          <% if (Date.today - @job.created_at.to_date).to_i == 0 %>
+            Posted today
+          <% else %>
+            Posted <%= (Date.today - @job.created_at.to_date).to_i %> days ago
+          <% end %>
+        </p>
+>>>>>>> master
 
-    <div class="d-flex justify-content-start flex-wrap mb-3" style="background-color: transparent;">
-      <% @job.job_skills.each do |job_skill| %>
-        <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
-          <%= job_skill.skill.name %>
-          <% if @job.company.user == current_user %>
-            <%= link_to job_job_skill_path(@job, job_skill), method: :delete, class: "delete-skill-btn" do %>
-               <i class="fas fa-times-circle"></i>
-            <% end %>
+      </div>
+      <!-- Buttons -->
+      <div class="title-container-right">
+        <div style="display: flex; flex-direction: column; align-content: space-between;">
+          <% if policy(@job).edit? %>
+            <%= link_to 'Edit job', edit_job_path(@job), class: "btn btn-flat message mt-0" %>
+          <% end %>
+          <% if policy(@job).destroy? %>
+            <%= link_to 'Delete job', job_path(@job), method: :delete, class: "btn btn-flat message mt-2" %>
           <% end %>
         </div>
-      <% end %>
-    </div>
-  </div>
-
-
-<!-- company info -->
-  <div class="company-container">
-    <div class="company-info">
-
-      <div>
-        <% if @job.company.photo.attached? %>
-          <%= cl_image_tag @job.company.photo.key, height: 200, width: 200, crop: :thumb %>
+        <% if @developer_application %>
+          <p>You have already applied to this job. View your <%= link_to 'application', application_path(@developer_application) %></p>
         <% else %>
-          <%= image_tag "blank_company_logo.png", class: "avatar-huge" %>
+          <% if current_user && current_user.developer %>
+            <%= link_to 'Apply now', new_job_application_path(@job), class: "btn btn-flat message mt-0" %>
+          <% elsif !current_user %>
+            <p>Please <%= link_to "login", new_user_session_path %> or create an account to apply for this job</p>
+          <% end %>
         <% end %>
       </div>
+    </div>
 
-      <div class="info-text">
-        <h3>Company: <%= link_to @job.company.name, company_path(@job.company) %></h3>
-        <p>Industry: <%= @job.company.industry %></p>
-        <p>Mission: <%= @job.company.mission %></p>
-      </div>
-
-      <div class="company-socials">
-        <p>Website: <%= @job.company.website %></p>
-        <div class="company-icons">
-
+    <div class="job-info-container">
+      <!-- job description -->
+      <div class="description">
+        <h4>Job Description</h4>
+        <p><%= @job.job_description %> </p>
+        <br>
+      <!-- Application info for hiring company -->
+        <div class="application-questions">
+          <% if policy(@job).edit? %>
+            <h4>Application questions</h4>
+            <ol>
+              <% @questions.each do |question| %>
+                <li> <%= question.content %> <%= link_to 'edit', edit_question_path(question) %> <%= link_to 'delete', question_path(question), method: :delete %></li>
+              <% end %>
+            </ol>
+            <%= link_to 'Add new question', new_job_question_path(@job), class: "btn-flat btn" %>
+          <% end %>
         </div>
       </div>
+
+      <!-- quick info section -->
+      <div class="quick-info">
+        <p>Start date: <%= @job.start_date %> </p>
+        <p>Duration: <%= @job.duration %> </p>
+        <p>Remote:
+        <% if @job.remote%>
+          Yes</p>
+        <% else %>
+          No</p>
+        <% end %>
+
+        <!-- skills section -->
+        <% unless @job.job_skills.empty? %>
+          <p>Skills:</p>
+        <% end %>
+        <div class="d-flex justify-content-start flex-wrap mb-3" style="background-color: transparent;">
+          <% @job.job_skills.each do |job_skill| %>
+            <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+              <%= job_skill.skill.name %>
+              <% if @job.company.user == current_user %>
+                <%= link_to job_job_skill_path(@job, job_skill), method: :delete, class: "delete-skill-btn" do %>
+                   <i class="fas fa-times-circle"></i>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <% if @job.company.user == current_user %>
+          <%= link_to 'Add skill', new_job_job_skill_path(@job), class: "btn-flat btn" %>
+        <% end %>
+      </div>
     </div>
   </div>
 
-  <!-- Application info for hiring company -->
-  <div class="application-questions">
-    <% if policy(@job).edit? %>
-      <h4>Application questions</h4>
-      <%= link_to 'Add new question', new_job_question_path(@job) %>
-      <ol>
-        <% @questions.each do |question| %>
-          <li> <%= question.content %> <%= link_to 'edit', edit_question_path(question) %> <%= link_to 'delete', question_path(question), method: :delete %></li>
-        <% end %>
-      </ol>
+
+  <!-- company info -->
+  <h2>Company:</h2>
+  <div class="link-wrapper">
+    <%= link_to company_path(@job.company) do %>
+      <div class="company-container">
+        <div class="developer-card">
+          <% if @job.company.photo.attached? %>
+            <%= cl_image_tag @job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+          <% else %>
+            <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
+          <% end %>
+          <div class="developer-card-info">
+            <div class="developer-card-left">
+              <h2><%= @job.company.name %></h2>
+              <h3>Industry: <%= @job.company.industry %></h3>
+              <p>Mission: <%= @job.company.mission.truncate(150) %></p>
+            </div>
+            <div class="developer-card-right">
+              <h3>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
-
-
   </div>
-
 </div>
