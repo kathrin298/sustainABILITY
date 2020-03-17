@@ -26,7 +26,7 @@
             <% if job.job_skills.present? %>
               <h2>Required skills:</h2>
               <div class="search-page-skill-tags-holder">
-                <% job.job_skills.first(6).each do |job_skill| %>
+                <% job.job_skills.first(5).each do |job_skill| %>
                   <div class="skill-tag">
                     <%= job_skill.skill.name %>
                   </div>
