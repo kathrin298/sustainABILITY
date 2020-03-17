@@ -4,6 +4,13 @@ class DevelopersController < ApplicationController
 
   def index
     @developers = policy_scope(Developer).order(created_at: :desc)
+    @available_developers = []
+    Developer.where(hireable:'Currently available').each do |developer|
+      @available_developers << developer
+    end
+    Developer.where(hireable:'Open to offers').each do |developer|
+      @available_developers << developer
+    end
   end
 
   def show
