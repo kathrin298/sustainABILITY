@@ -8,13 +8,17 @@ class JobSkillsController < ApplicationController
 
   def create
     skip_authorization
-    @job_skill = JobSkill.new(job_skill_params)
-    @job_skill.job = @job
-    if @job_skill.save
-      redirect_to job_path(@job)
-    else
-      render 'new'
+    params[:job_skill][:skill_id].each do |item|
+      if item =~ /\d/
+        @job_skill = JobSkill.new(skill_id: item.to_i, job: @job)
+        @job_skill.save
+      elsif item =~ /\w/
+        @skill = Skill.new(name: item)
+        @job_skill = JobSkill.new(skill: @skill, job: @job)
+        @job_skill.save
+      end
     end
+    redirect_to job_path(@job)
   end
 
   def destroy

@@ -19,4 +19,24 @@ class Company < ApplicationRecord
 
   # validates :photo, presence: true
   validates :name, :mission, :industry, presence: true
+
+  include PgSearch::Model
+  pg_search_scope :search_all_companies,
+    against: [ :name, :mission, :industry, :bio ],
+    using: {
+      tsearch: { prefix: true }
+    }
+
+  pg_search_scope :search_companies_by_location,
+    against: [ :location ],
+    using: {
+      tsearch: { prefix: true }
+    }
+
+
+  pg_search_scope :search_companies_by_mission,
+    against: [ :mission, :bio, :industry ],
+    using: {
+      tsearch: { prefix: true }
+    }
 end

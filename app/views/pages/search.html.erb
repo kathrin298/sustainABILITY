@@ -2,15 +2,21 @@
 
   <% if params[:search_type] == "company_mission" %>
     <% params[:search_type] = "Companies" %>
+  <% elsif params[:search_type] == "jobs" %>
+    <% params[:search_type] = "Jobs" %>
+  <% elsif params[:search_type] == "company_location" %>
+    <% params[:search_type] = "Companies" %>
   <% end %>
 
+  <!-- search bar -->
   <div class="serp-searchbar">
     <%= form_tag search_path, method: :get do %>
       <%= select_tag(:search_type, options_for_select([["Developers","Developers"],
-                  ["Companies","Companies"]], params[:search_type] ), class:"select") %>&nbsp;&nbsp;&nbsp;
+                  ["Companies","Companies"], ["Jobs","Jobs"]], params[:search_type] ), class:"select") %>&nbsp;&nbsp;&nbsp;
       <%= text_field_tag :query,
         params[:query],
         class: "form-control d-flex",
+        onfocus: "this.value=''",
         placeholder: "search..."
       %>
       <%= button_tag(type: 'submit', class: "btn") do %>
@@ -19,29 +25,22 @@
     <% end %>
   </div>
 
-
-  <% if params[:search_type] == 'Companies' %>
-    <% if params[:query] == ""  %>
-      <h2 style="padding: 20px;">All companies</h2>
-    <% else %>
-      <h2 style="padding: 20px;">Showing <%= pluralize @results.size, 'company' %> matching your query "<%= params[:query] %>"</h2>
+  <div style="padding: 20px;" class="d-flex justify-content-between">
+    <h2 id="serp_headline"> <%= @serp_headline %></h2>
+    <% if params[:search_type] == "Developers" %>
+      <h5> <%= check_box_tag :serpcheckbox %> Only show available developers </h5>
     <% end %>
-  <% else %>
-    <% if params[:query] == ""   %>
-      <h2 style="padding: 20px;">All developers</h2>
-    <% else %>
-      <h2 style="padding: 20px;">Showing <%= pluralize @results.size, 'developer' %> matching your query "<%= params[:query] %>"</h2
-    <% end %>
-  <% end %>
+  </div>
 
 
+  <!-- Actual search results listing -->
   <% @results.each do |result| %>
-    <% if result.respond_to?(:name) %>
+    <% if result.class == Company %>
       <%= render 'pages/company_serp', company: result %>
-    <% else %>
+    <% elsif result.class == Developer %>
       <%= render 'pages/developer_serp', developer: result %>
+    <% elsif result.class == Job %>
+        <%= render 'pages/jobs_serp', job: result %>
     <% end %>
   <% end %>
-
 </div>
-
