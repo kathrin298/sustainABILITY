@@ -4,15 +4,18 @@
 
       <h2>Sign up</h2>
 
-      <p class="my-4">Please select whether you are joining sustainABLE as a developer or as a company. For developers,
-      we recommend signing up through your Github account. </p>
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= f.error_notification %>
 
+        <p class="my-4">Please choose an option</p>
+
         <div class="radio-btns">
           <%= f.collection_radio_buttons :type, [['Developer', 'Developer Sign up'], ['Company', 'Company Sign up']],  :first, :last%>
         </div>
+
+
+        <p class="my-4 d-none" id="signup-p-1">For developers, we recommend signing up through your Github account </p>
 
         <%- if devise_mapping.omniauthable? %>
           <%- resource_class.omniauth_providers.each do |provider| %>
@@ -25,7 +28,8 @@
           <% end %>
         <% end %>
 
-        <p class="my-4"> Or to sign up using your email, please use the form below. </p>
+        <p class="my-4 d-none" id="signup-p-2"> Please sign up using the form below </p>
+        <p class="my-4 d-none" id="signup-p-3"> Or to sign up using your email, please use the form below </p>
 
         <div class="form-inputs">
           <%= f.input :email,
@@ -57,16 +61,19 @@
 <script>
   const devLabel = document.getElementsByTagName('LABEL')[0];
   const compLabel = document.getElementsByTagName('LABEL')[1];
-  const signUpBtn = document.getElementById("sign-up-btn");
-  console.log(devLabel, compLabel)
-  compLabel.checked = true;
 
   devLabel.addEventListener('click', (e) => {
     document.getElementById("github-login").classList.remove('d-none');
-    signUpBtn.style.opacity = 1
+    document.getElementById("signup-p-1").classList.remove('d-none');
+    document.getElementById("signup-p-2").classList.add('d-none');
+    document.getElementById("signup-p-3").classList.remove('d-none');
+    document.getElementById("sign-up-btn").style.opacity = 1
   });
   compLabel.addEventListener('click', (e) => {
     document.getElementById("github-login").classList.add('d-none');
-    signUpBtn.style.opacity = 1
+    document.getElementById("signup-p-1").classList.add('d-none');
+    document.getElementById("signup-p-2").classList.remove('d-none');
+    document.getElementById("signup-p-3").classList.add('d-none');
+    document.getElementById("sign-up-btn").style.opacity = 1
   });
 </script>
