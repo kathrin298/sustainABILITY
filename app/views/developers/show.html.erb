@@ -51,20 +51,24 @@
             <% end %>
           <% else %>
             <% if current_user.present? %>
+              <% if @developer.website.present?  %>
+                <%= link_to "#{"https://" if !@developer.linkedin.include?('http')}#{@developer.website}", class: "btn btn-flat w-100" do %>
+                  View my website
+                <% end %>
+              <% end %>
               <% if current_user.company && current_user.company.favourites.include?(@developer) %>
                 <%= link_to developer_favourite_path(current_user.company.developer_favourites.find_by(developer: @developer)), method: :delete, class: 'btn btn-flat', style: 'font-size:0.88rem' do %>
                   <i class="fas fa-ban fa-lg"></i> Remove from favourites
                 <% end %>
               <% else %>
-                <%= link_to developer_developer_favourites_path(@developer), method: :post, class: "btn btn-flat favourite w-100" do %>
-                  <i class="far fa-heart fa-lg"></i> Add to favourites</a>
+                <% if current_user.company.present? %>
+                  <%= link_to developer_developer_favourites_path(@developer), method: :post, class: "btn btn-flat btn-delete w-100" do %>
+                    <i class="far fa-heart fa-lg"></i> Add to favourites</a>
+                  <% end %>
                 <% end %>
               <% end %>
-              <a class="btn btn-flat message w-100" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
-            <% end %>
-            <% if @developer.website.present?  %>
-              <%= link_to "#{"https://" if !@developer.linkedin.include?('http')}#{@developer.website}", class: "btn btn-flat w-100" do %>
-                View my website
+              <% if current_user.company.present? %>
+                <a class="btn btn-flat btn-delete w-100" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
               <% end %>
             <% end %>
           <% end %>
@@ -75,7 +79,7 @@
       </div>
     <div class="row" style="margin-left: 15px;">
       <div class="bio col-9">
-        <h5><strong>Bio:</strong></h5> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum maxime aperiam, laudantium quibusdam laboriosam iste reprehenderit. Numquam, nobis quaerat adipisci voluptatum omnis. Saepe illo quasi sint iusto consequuntur vero labore. <%= @developer.bio %></p>
+        <h5><strong>Bio:</strong></h5><%= @developer.bio %>
       </div>
       <div class="col-3" style="padding-left: 0">
         <div class="d-flex flex-column align-items-center w-100">
