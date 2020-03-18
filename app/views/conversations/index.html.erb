@@ -10,14 +10,14 @@
               <a class="nav-link <%= 'active' if @conversations.first == conversation %>" id= "conversation-<%= conversation.id %>-tab" data-toggle="pill" href="#conversation-<%= conversation.id %>" role="tab" aria-controls="conversation-<%= conversation.id %>" aria-selected="<%= @conversations.first == conversation ? true : false %>">
                 <div class="conversation">
                   <% if conversation.company.photo.attached? %>
-                    <%= cl_image_tag conversation.company.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar mx-3" %>
+                    <%= cl_image_tag conversation.company.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar" %>
                   <% else %>
-                    <%= image_tag "blank_company_logo.png", class: "avatar mx-3", style: "height: 40px" %>
+                    <%= image_tag "blank_company_logo.png", class: "avatar", style: "height: 40px" %>
                   <% end %>
 
-                  <div>
+                  <div class= "ml-2">
                     <div class="conversation-header">
-                      <p><%= conversation.company.name %></p>
+                      <p><%= conversation.company.name.truncate(20) %></p>
                       <p class="date"> <%= conversation.messages.last.message_time %> </p>
                     </div>
                     <p class="message-preview"><%= conversation.messages.last.content.truncate(50) %></p>
@@ -30,12 +30,12 @@
               <a class="nav-link" id="conversation-<%= conversation.id %>-tab" data-toggle="pill" href="#conversation-<%= conversation.id %>" role="tab" aria-controls="conversation-<%= conversation.id %>" aria-selected="<%= @conversations.first == conversation ? true : false %>">
                 <div class="conversation">
                   <% if conversation.developer.photo.attached? %>
-                    <%= cl_image_tag conversation.developer.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar mx-3" %>
+                    <%= cl_image_tag conversation.developer.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar" %>
                   <% else %>
-                    <%= image_tag "user.jpg", class: "avatar mx-3", style: "height: 40px" %>
+                    <%= image_tag "user.jpg", class: "avatar", style: "height: 40px" %>
                   <% end %>
 
-                  <div>
+                  <div class= "ml-2">
                     <div class="conversation-header">
                       <p><%= conversation.developer.first_name.capitalize %> <%= conversation.developer.last_name.capitalize %></p>
                       <p class="date"> <%= conversation.messages.last.message_time %> </p>
