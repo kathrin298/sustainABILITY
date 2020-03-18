@@ -1,0 +1,11 @@
+<div class="container p-5 w-50">
+  <h1>
+    Send a message to
+    <% if current_user.company %>
+      <%= @conversation.developer.first_name %>
+    <% else %>
+      <%= @conversation.company.name %>
+    <% end %>
+   </h1>
+  <%= render 'form', conversation: @conversation, message: @message %>
+</div>

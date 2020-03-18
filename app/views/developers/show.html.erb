@@ -64,7 +64,7 @@
                     <% end %>
                   <% end %>
                   <a class="btn btn-flat message w-100 mb-3" href="#"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                  <a class="btn btn-flat message w-100 mb-3" href="#"><i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+                  <%= link_to 'Send message', conversations_path(developer_id: params[:id], company_id: current_user.company), method: :post, class: "btn btn-flat message w-100 mb-3" %>
                 </div>
               <% end %>
               <div class="d-flex flex-column align-items-center w-100">
