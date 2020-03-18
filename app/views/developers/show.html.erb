@@ -2,130 +2,130 @@
   <div class="card-trip mb-4">
     <div class="row my-5">
       <div class="col-3">
-          <div class="d-flex flex-column align-items-center justify-content-center">
-            <% if @developer.photo.attached? %>
-              <%= cl_image_tag @developer.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
-            <% else %>
-              <%= image_tag "user.jpg", class: "avatar-huge" %>
-            <% end %>
-              <div class="d-flex justify-content-center icon-wrapper mt-2">
-                <% if @developer.github.present?  %>
-                  <%= link_to("#{"https://" if !@developer.github.include?('http')}#{@developer.github}") do %>
-                    <i class="fab fa-github fa-2x mr-3"></i>
-                  <% end %>
-                <% end %>
-                <% if @developer.facebook.present?  %>
-                  <%= link_to("#{"https://" if !@developer.facebook.include?('http')}#{@developer.facebook}") do %>
-                    <i class="fab fa-facebook fa-2x mr-3"></i>
-                  <% end %>
-                <% end %>
-                <% if @developer.twitter.present?  %>
-                  <%= link_to("#{"https://" if !@developer.twitter.include?('http')}#{@developer.twitter}") do %>
-                    <i class="fab fa-twitter fa-2x mr-3"></i>
-                  <% end %>
-                <% end %>
-                <% if @developer.linkedin.present?  %>
-                  <%= link_to("#{"https://" if !@developer.linkedin.include?('http')}#{@developer.linkedin}") do %>
-                    <i class="fab fa-linkedin fa-2x"></i>
-                  <% end %>
-                <% end %>
-              </div>
-          </div>
-        </div>
-        <div class="col-6">
-            <h2><%= @developer.first_name %> <%= @developer.last_name %></h2>
-            <p><strong>Location:</strong> <%= @developer.location %></p>
-            <p><strong>Interests:</strong> <%= @developer.interests %></p>
-            <p><strong>Slogan:</strong> <%= @developer.slogan %></p>
-            <p><strong>Hireable:</strong> <%= @developer.hireable %></p>
-
-          </div>
-          <div class="col-3">
-            <div class="d-flex flex-column justify-content-start align-items-start text-center">
-              <% if current_user.present? && current_user.developer == @developer %>
-                <div class="d-row my-2">
-                  <div class="mt-0">
-                  </div>
-                </div>
-                <div class="d-flex flex-column align-items-start w-100">
-                  <% if policy(@developer).edit? %>
-                    <%= link_to 'Edit profile', edit_developer_path(@developer), class: "btn btn-flat btn-delete w-100 mb-3" %>
-                  <% end %>
-                  <% if policy(@developer).destroy? %>
-                    <%= link_to "Delete Account", registration_path(:user),
-                      method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }, class: "btn btn-flat btn-delete w-100 mb-3"  %>
-                  <% end %>
-                </div>
-              <% else %>
-                <div class="d-flex flex-column align-items-start my-2 w-100">
-                  <% if @developer.website.present?  %>
-                    <%= link_to "#{"https://" if !@developer.linkedin.include?('http')}#{@developer.website}", class: "btn btn-flat w-100 mb-3" do %>
-                      View my website
-                    <% end %>
-                  <% end %>
-                  <a class="btn btn-flat message w-100 mb-3" href="#"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                  <%= link_to 'Send message', conversations_path(developer_id: params[:id], company_id: current_user.company), method: :post, class: "btn btn-flat message w-100 mb-3" %>
-                </div>
+        <div class="d-flex flex-column align-items-center justify-content-center">
+          <% if @developer.photo.attached? %>
+            <%= cl_image_tag @developer.photo.key, height: 200, width: 200, crop: :thumb, class: "avatar-huge"  %>
+          <% else %>
+            <%= image_tag "user.jpg", class: "avatar-huge" %>
+          <% end %>
+          <div class="d-flex justify-content-center icon-wrapper mt-2">
+            <% if @developer.github.present?  %>
+              <%= link_to("#{"https://" if !@developer.github.include?('http')}#{@developer.github}") do %>
+                <i class="fab fa-github fa-2x mr-3"></i>
               <% end %>
-              <div class="d-flex flex-column align-items-center w-100">
-                <% if @developer.user == current_user %>
-                  <%= link_to 'Add skill', new_developer_developer_skill_path(@developer), class: "btn-flat w-100 mb-3" %>
-                <% end %>
-
-                <div class="d-flex flex-column w-100">
-                  <span class="text-center font-weight-bold">My Skills</span>
-                  <hr class="w-100">
-                  <div class="d-flex justify-content-start flex-wrap mb-3" style="background-color: transparent;">
-                    <% @developer.developer_skills.each do |developer_skill| %>
-                      <div class="rounded bg-dark p-2 text-white d-inline mr-2 mt-2">
-                        <%= developer_skill.skill.name %>
-                        <% if @developer.user == current_user %>
-                          <%= link_to developer_developer_skill_path(@developer, developer_skill), method: :delete, class: "delete-skill-btn" do %>
-                             <i class="fas fa-times-circle"></i>
-                          <% end %>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <% end %>
+            <% if @developer.facebook.present?  %>
+              <%= link_to("#{"https://" if !@developer.facebook.include?('http')}#{@developer.facebook}") do %>
+                <i class="fab fa-facebook fa-2x mr-3"></i>
+              <% end %>
+            <% end %>
+            <% if @developer.twitter.present?  %>
+              <%= link_to("#{"https://" if !@developer.twitter.include?('http')}#{@developer.twitter}") do %>
+                <i class="fab fa-twitter fa-2x mr-3"></i>
+              <% end %>
+            <% end %>
+            <% if @developer.linkedin.present?  %>
+              <%= link_to("#{"https://" if !@developer.linkedin.include?('http')}#{@developer.linkedin}") do %>
+                <i class="fab fa-linkedin fa-2x"></i>
+              <% end %>
+            <% end %>
           </div>
-    </div>
-      <div class="row">
-        <div class="bio col-8">
-          <h5><strong>Bio:</strong></h5> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum maxime aperiam, laudantium quibusdam laboriosam iste reprehenderit. Numquam, nobis quaerat adipisci voluptatum omnis. Saepe illo quasi sint iusto consequuntur vero labore. <%= @developer.bio %></p>
         </div>
       </div>
-      <% if @hired_jobs.present? %>
-
-       <% if current_user && @hired_jobs.find { |job| job.company == current_user.company } %>
-        <%= link_to 'Add review', new_application_review_path(@hired_jobs.first), class: "btn btn-flat message" %>
-      <% end %>
-        <div class="p-5 mx-auto p-5 ">
-
-          <% if @reviews.present? %>
-          <div class="d-flex justify-content-between align-items-center">
-            <h2><strong>Reviews</strong></h2>
-           <h4><span><%= @developer.average_rating %>/5</span>
-           <span><i class="fas fa-star"></i></span>
-           </div></h4>
-            <% @reviews.each do |review| %>
-            <div class="mx-auto border p-3 reviews-container">
-              <div class="d-flex justify-content-between">
-                <h4><%= review.title %> </h4>
-                <div class="d-flex">
-                <p class="mr-2"><%= review.rating %>/5</p>
-                <span><i class="fas fa-star"></i></span>
+      <div class="col-6">
+        <h2><%= @developer.first_name %> <%= @developer.last_name %></h2>
+        <p><strong>Location:</strong> <%= @developer.location %></p>
+        <p><strong>Interests:</strong> <%= @developer.interests %></p>
+        <p><strong>Slogan:</strong> <%= @developer.slogan %></p>
+        <p><strong>Hireable:</strong> <%= @developer.hireable %></p>
+      </div>
+      <div class="col-3">
+        <div class="d-flex flex-column justify-content-around align-items-center w-100 h-100">
+          <% if current_user.present? && current_user.developer == @developer %>
+            <% if policy(@developer).edit? %>
+              <%= link_to 'Edit profile', edit_developer_path(@developer), class: "btn btn-flat w-100" %>
+            <% end %>
+            <% if policy(@developer).destroy? %>
+              <%= link_to "Delete Account", registration_path(:user),
+                method: :delete, data: { confirm: "Are you sure you want to delete your developer account?" }, class: "btn btn-flat w-100"  %>
+            <% end %>
+          <% else %>
+            <% if @developer.website.present?  %>
+              <%= link_to "#{"https://" if !@developer.linkedin.include?('http')}#{@developer.website}", class: "btn btn-flat w-100" do %>
+                View my website
+              <% end %>
+            <% end %>
+            <% if current_user.present? %>
+              <% if current_user.company && current_user.company.favourites.include?(@developer) %>
+                <%= link_to developer_favourite_path(current_user.company.developer_favourites.find_by(developer: @developer)), method: :delete, class: 'btn btn-flat', style: 'font-size:0.88rem' do %>
+                  <i class="fas fa-ban fa-lg"></i> Remove from favourites
+                <% end %>
+              <% end %>
+              <% if current_user.company.present? && !current_user.company.favourites.include?(@developer) %>
+                <%= link_to developer_developer_favourites_path(@developer), method: :post, class: "btn btn-flat btn-delete w-100" do %>
+                  <i class="far fa-heart fa-lg"></i> Add to favourites</a>
+                <% end %>
+              <% end %>
+            <%= link_to 'Send message', conversations_path(developer_id: params[:id], company_id: current_user.company), method: :post, class: "btn btn-flat btn-delete w-100" %>
+            <% end %>
                 </div>
+          <% end %>
+          <% if @developer.user == current_user %>
+            <%= link_to 'Add skill', new_developer_developer_skill_path(@developer), class: "btn btn-flat w-100 mb-3", style: "text-align:center" %>
+          <% end %>
+        </div>
+      </div>
+    <div class="row" style="margin-left: 15px;">
+      <div class="bio col-9">
+        <h5><strong>Bio:</strong></h5><%= @developer.bio %>
+      </div>
+      <div class="col-3" style="padding-left: 0">
+        <div class="d-flex flex-column align-items-center w-100">
+          <span class="text-center font-weight-bold">My Skills</span>
+          <hr class="w-100">
+          <div class="d-flex justify-content-start flex-wrap mb-3">
+            <% @developer.developer_skills.each do |developer_skill| %>
+              <div class="rounded bg-dark p-2 text-white d-inline mr-2 mt-2">
+                <%= developer_skill.skill.name %>
+                <% if @developer.user == current_user %>
+                  <%= link_to developer_developer_skill_path(@developer, developer_skill), method: :delete, class: "delete-skill-btn" do %>
+                     <i class="fas fa-times-circle"></i>
+                  <% end %>
+                <% end %>
               </div>
-            <p><%= review.content %> </p>
-
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+      <% if @hired_jobs.present? %>
+        <% if current_user && @hired_jobs.find { |job| job.company == current_user.company } %>
+          <%= link_to 'Add review', new_application_review_path(@hired_jobs.first), class: "btn btn-flat message" %>
+        <% end %>
+        <div class="p-5 w-100">
+          <% if @reviews.present? %>
+            <div class="d-flex justify-content-between align-items-center">
+              <h2><strong>Reviews</strong></h2>
+              <h4><span><%= @developer.average_rating %>/5</span>
+              <span><i class="fas fa-star"></i></span>
+              </h4>
             </div>
+            <% @reviews.each do |review| %>
+              <div class="mx-auto border p-3 reviews-container">
+                <div class="d-flex justify-content-between">
+                  <h4><%= review.title %> </h4>
+                  <div class="d-flex">
+                    <p class="mr-2"><%= review.rating %>/5</p>
+                    <span><i class="fas fa-star"></i></span>
+                  </div>
+                </div>
+                <p><%= review.content %> </p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
-    <% end %>
-    <% end %>
-  </div>
+</div>
 </div>
   <% if @hired_jobs.present? %>
     <h2>Current & past jobs</h2>
@@ -153,5 +153,4 @@
       </div>
     <% end %>
   <% end %>
-</div>
 
