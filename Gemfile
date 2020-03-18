@@ -20,6 +20,7 @@ gem 'pundit'
 gem 'jquery-slick-rails'
 gem 'jquery-rails'
 gem 'cloudinary', '~> 1.12.0'
+gem 'omniauth-github'
 gem 'pg_search', '~> 2.3.0'
 
 
