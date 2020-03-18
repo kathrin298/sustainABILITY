@@ -18,26 +18,38 @@
          <!-- button for send message and add favrite, and social media icon -->
         <div class="col-3">
           <div id="company-links-holder">
-            <% if @company.website.present?  %>
-              <div id="company-button-holder">
-                <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center", style: 'width:201px' %>
-              </div>
-            <% end %>
-            <% unless @company.user == current_user || current_user.company %>
-                <a class="btn btn-flat message px-0" href="#" style="width: 201px;"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                <%= link_to 'Send message', conversations_path(company_id: params[:id], developer_id: current_user.developer), method: :post, class: "btn btn-flat message px-0", style: 'width:201px' %>
-            <% end %>
-            <% if policy(@company).edit? %>
-              <div id="company-button-holder">
-                <%= link_to "Edit Account", edit_company_path(@company), class: "d-block btn-flat btn-delete text-center" %>
-              </div>
-            <% end %>
-            <% if policy(@company).destroy? %>
-              <div id="company-button-holder">
-                <%= link_to "Delete Account", registration_path(:user), class: "d-block btn-delete text-center",
-                  method: :delete, data: { confirm: "Are you sure you want to delete your company account?" }  %>
-              </div>
-            <% end %>
+              <% if @company.website.present?  %>
+                <div id="company-button-holder" style="width: 100%">
+                  <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center 2-100" %>
+                </div>
+              <% end %>
+            <% unless @company.user == current_user %>
+              <% if current_user.developer && current_user.developer.favourites.include?(@company) %>
+                <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat', style: "font-size:0.88rem" do %>
+                  <i class="fas fa-ban fa-lg"></i> Remove from favorites
+                <% end %>
+                <% else %>
+                  <% if current_user.developer.present? %>
+                    <%= link_to company_company_favourites_path(@company), method: :post, class: "btn btn-flat btn-delete w-100" do %>
+                      <i class="far fa-heart fa-lg"></i> Add to favorites
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <% if current_user.developer.present? %>
+                <%= link_to 'Send message', conversations_path(company_id: params[:id], developer_id: current_user.developer), method: :post, class: "btn btn-flat btn-delete w-100" %>
+                <% end %>
+                <% end %>
+              <% if policy(@company).edit? %>
+                <div id="company-button-holder" style="width: 100%;">
+                  <%= link_to "Edit Account", edit_company_path(@company), class: "btn btn-flat btn-delete w-100" %>
+                </div>
+              <% end %>
+              <% if policy(@company).destroy? %>
+                <div id="company-button-holder" style="width: 100%;">
+                  <%= link_to "Delete Account", registration_path(:user), class: "btn btn-flat btn-delete w-100",
+                    method: :delete, data: { confirm: "Are you sure you want to delete your company account?" }  %>
+                </div>
+              <% end %>
           </div>
         </div>
     </div>

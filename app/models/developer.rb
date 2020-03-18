@@ -26,8 +26,7 @@ class Developer < ApplicationRecord
     }
 
   has_many :company_favourites, dependent: :destroy
-  has_many :developer_favourites, dependent: :destroy
-
+  has_many :favourites, through: :company_favourites, source: :company
   has_many :developer_skills, dependent: :destroy
   has_many :skills, through: :developer_skills, dependent: :destroy
 
@@ -41,12 +40,7 @@ class Developer < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :hireable, inclusion: { in: HIREABLE_OPTIONS }, presence: true
 
-  def social_icon(social_link)
-     # should return some html code(?) based on the return of a regex
-     # that finds which social site the list object belongs to
-  end
-
-   def average_rating
+  def average_rating
     if !reviews.empty?
       (reviews.sum(:rating) / reviews.size.to_f).round(1)
     else

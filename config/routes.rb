@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {registrations: 'registrations'}
+  devise_for :users, controllers: {registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+
   root to: 'companies#index'
   get 'about', to: 'pages#about', as: :about
   get 'dashboard', to: 'pages#dashboard', as: :dashboard
@@ -7,11 +8,16 @@ Rails.application.routes.draw do
 
   resources :developers do
     resources :developer_skills, only: [:new, :create, :destroy]
+    resources :developer_favourites, only: [:create]
   end
 
   resources :companies do
     resources :jobs, only: [:new, :create]
+    resources :company_favourites, only: [:create]
   end
+
+  resources :developer_favourites, only: [:index, :destroy]
+  resources :company_favourites, only: [:index, :destroy]
 
   resources :jobs, only: [:show, :index, :edit, :update, :destroy] do
     resources :applications, only: [:new, :create]
@@ -32,8 +38,6 @@ Rails.application.routes.draw do
     resources :messages, only: [:new, :create]
   end
 
-  resources :developer_favorites, only: [:index]
-  resources :company_favorites, only: [:index]
   resources :skills, only: [:new, :create, :destroy]
   resources :answers, only: [:create]
 end
