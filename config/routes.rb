@@ -33,7 +33,10 @@ Rails.application.routes.draw do
     resources :answers, only: [:update]
   end
 
-  resources :conversations, only: [:index, :create, :destroy]
+  resources :conversations, only: [:index, :create, :destroy] do
+    resources :messages, only: [:new, :create]
+  end
+
   resources :skills, only: [:new, :create, :destroy]
   resources :answers, only: [:create]
 end

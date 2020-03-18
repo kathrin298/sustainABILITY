@@ -18,6 +18,7 @@
          <!-- button for send message and add favrite, and social media icon -->
         <div class="col-3">
           <div id="company-links-holder">
+
               <% if @company.website.present?  %>
                 <div id="company-button-holder" style="width: 100%">
                   <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center 2-100" %>
