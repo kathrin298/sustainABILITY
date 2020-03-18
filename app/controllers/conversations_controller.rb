@@ -1,7 +1,12 @@
 class ConversationsController < ApplicationController
   def index
     # @users = User.all
-    @conversations = Conversation.all.sort_by { |conversation| conversation.messages.last.created_at}.reverse!
+    if current_user.developer
+      @conversations = Conversation.where(developer: current_user.developer).sort_by { |conversation| conversation.messages.last.created_at}.reverse!
+    else
+      @conversations = Conversation.where(company: current_user.company).sort_by { |conversation| conversation.messages.last.created_at}.reverse!
+    end
+    @message = Message.new
   end
 
   def create
