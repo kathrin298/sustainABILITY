@@ -7,10 +7,20 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
-  height: 500px;
+  height: 450px;
+  overflow-y: scroll;
 }
 
-form {
+.conversations-container {
+  height: 450px;
+  overflow-y: scroll;
+}
+
+.nav {
+  flex-wrap: unset;
+}
+
+#message-form {
   display:flex;
 
   .field {
@@ -18,7 +28,7 @@ form {
   }
 }
 
-textarea.form-control {
+#message-box {
   border-radius: 20px;
   height: 40px;
 }
@@ -44,11 +54,30 @@ textarea.form-control {
   font-weight: 100;
 }
 
+.message-holder-right {
+  display: flex;
+  text-align: left;
+  justify-content: flex-end;
+  position: relative;
+
+  .date {
+  position: absolute;
+  top: -22px;
+}
+}
+
+.message-holder-left {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
 .send-messages {
-  background-color: $blue;
+  background-color: #39A0DB;
   padding: 5px 15px;
   border-radius: 20px;
   color: white;
+  max-width: 60%;
 }
 
 .received-messages {
@@ -56,6 +85,7 @@ textarea.form-control {
   padding: 5px 15px;
   border-radius: 20px;
   color: white;
+  max-width: 60%;
 }
 
 .tab-content {

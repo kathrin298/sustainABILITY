@@ -25,7 +25,7 @@
             <% end %>
             <% unless @company.user == current_user || current_user.company %>
                 <a class="btn btn-flat message px-0" href="#" style="width: 201px;"><i class="far fa-heart fa-lg"></i> Add to favorites</a>
-                <%= link_to 'Send message', conversations_path(company_id: params[:id], developer_id: current_user.developer), method: :post, class: "btn btn-flat message px-0" %>
+                <%= link_to 'Send message', conversations_path(company_id: params[:id], developer_id: current_user.developer), method: :post, class: "btn btn-flat message px-0", style: 'width:201px' %>
             <% end %>
             <% if policy(@company).edit? %>
               <div id="company-button-holder">

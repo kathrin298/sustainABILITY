@@ -69,7 +69,7 @@
               <% end %>
               <div class="d-flex flex-column align-items-center w-100">
                 <% if @developer.user == current_user %>
-                  <%= link_to 'Add skill', new_developer_developer_skill_path(@developer), class: "btn-flat w-100 mb-3" %>
+                  <%= link_to 'Add skill', new_developer_developer_skill_path(@developer), class: "btn-flat w-100 mb-3", style: 'width:201px' %>
                 <% end %>
 
                 <div class="d-flex flex-column w-100">

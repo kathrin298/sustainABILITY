@@ -53,17 +53,23 @@
             <div class="tab-pane fade <%= 'show active' if @conversations.first == conversation %>" id="conversation-<%= conversation.id %>" role="tabpanel" aria-labelledby="conversation-<%= conversation.id %>-tab">
               <% conversation.messages.each do |message| %>
                 <% if message.user == current_user %>
-                  <p class="send-messages text-right"><%= message.content %></p>
+                  <div class="message-holder-right">
+                    <p class="date"><%= message.message_time %></p>
+                    <p class="send-messages"><%= message.content %></p>
+                  </div>
                   <br>
                 <% else %>
-                  <p class="received-messages text-left"><%= message.content %></p>
+                  <div class="message-holder-left">
+                    <p class="date"><%= message.message_time %></p>
+                    <p class="received-messages"><%= message.content %></p>
+                  </div>
                   <br>
                 <% end %>
               <% end %>
-              <%= form_for([conversation, @message]) do |f| %>
+              <%= form_for [conversation, @message], html: { id: 'message-form' } do |f| %>
                 <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
                 <div class="field">
-                  <%= f.text_area :content, class: "form-control" %>
+                  <%= f.text_area :content, class: "form-control", id: "message-box"%>
                 </div>
                 <div>
                   <%= f.submit "Send", class: "btn btn-flat" %>
