@@ -26,7 +26,7 @@
             <%= link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-dark my-2 w-100" do %>
               <div class="d-flex">
                 <i style="font-size: 22px; align-text: left;" class="fab fa-github"></i>
-                <span class="mx-auto">Log in up with <%= OmniAuth::Utils.camelize(provider) %></span>
+                <span class="mx-auto">Log in with <%= OmniAuth::Utils.camelize(provider) %></span>
               </div>
             <% end %>
           <% end %>
