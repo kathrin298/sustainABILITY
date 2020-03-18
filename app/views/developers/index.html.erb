@@ -29,7 +29,7 @@
       <h1>Find a developer in <strong>your city</strong>:</h1>
     </div>
     <div class="carousel">
-      <% @developers.sample(10).each do |developer| %>
+      <% @available_developers.sample(10).each do |developer| %>
         <%= link_to developer_path(developer) do %>
           <div class="landing-page-card d-block">
             <% if developer.photo.attached? %>
@@ -60,7 +60,7 @@
       <h1>Search developers by <strong style="color: white">programming language</strong>:</h1>
     </div>
     <div class="carousel">
-      <% @developers.sample(10).each do |developer| %>
+      <% @available_developers.sample(10).each do |developer| %>
         <%= link_to developer_path(developer) do %>
           <div class="landing-page-card d-block">
             <% if developer.photo.attached? %>
@@ -89,7 +89,7 @@
       <h1>Or by developers whose <strong>values</strong> align with your startup's mission:</h1>
     </div>
     <div class="carousel">
-      <% @developers.sample(10).each do |developer| %>
+      <% @available_developers.sample(10).each do |developer| %>
         <%= link_to developer_path(developer) do %>
           <div class="landing-page-card d-block">
             <% if developer.photo.attached? %>

@@ -64,6 +64,7 @@
 .edit {
   background-color: #39A0DB;
   margin-top: 40px;
+  margin-right: 50px;
 
   &:hover {
     background-color: #40B2F4;
@@ -75,6 +76,7 @@
 .delete {
   background-color: #D64041;
   margin-top: 16px;
+  margin-right: 20px;
   &:hover {
     background-color: #F14849;
     color: white;
@@ -147,7 +149,6 @@
 
 .favourite {
   background-color: #D64041;
-  font-size: 0.90rem;
   &:hover {
     background-color: #F04849;
     color: white;
@@ -156,8 +157,16 @@
 
 .message {
   background-color: #39A0DB;
-  font-size: 0.95rem;
   &:hover {
+    background-color: #3FB0F1;
+    color: white;
+  }
+}
+
+.apply {
+  margin-bottom: 36px;
+  background-color: #39A0DB;
+   &:hover {
     background-color: #3FB0F1;
     color: white;
   }
@@ -165,7 +174,7 @@
 
 .website {
   background-color: $green;
-  // margin-top: 20px;
+  margin-top: 20px;
   font-size: 0.95rem;
   &:hover {
     background-color: #FBD133;
@@ -196,9 +205,7 @@
   display: inline-block;
   color: white;
   padding: 8px 24px;
-  border-radius: 8px;
   background: gray;
-  width: 192px;
   height: 42px;
   transition: background 0.3s ease;
   font-size: 0.9rem;
