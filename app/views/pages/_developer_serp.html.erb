@@ -1,4 +1,4 @@
-<div class="serp-card-holder">
+<div class="serp-card-holder" data-hireable="<%= developer.hireable %>">
   <%= link_to developer_path(developer) do %>
       <div class="developer-card">
       <% if developer.photo.attached? %>
@@ -26,3 +26,4 @@
     </div>
   <% end %>
 </div>
+
