@@ -99,7 +99,7 @@
             <% end %>
             <div class="card-info">
               <h1><%= developer.first_name %> <%= developer.last_name %></h1>
-              <p>Interest: <%= developer.interests.truncate(60) %></p>
+              <p>Interest: <%= developer.interests.truncate(60) if developer.interests.present? %></p>
             </div>
           </div>
         <% end %>
