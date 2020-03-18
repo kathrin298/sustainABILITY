@@ -147,9 +147,8 @@
   }
 }
 
-.favorite {
+.favourite {
   background-color: #D64041;
-  font-size: 0.90rem;
   &:hover {
     background-color: #F04849;
     color: white;
@@ -158,8 +157,6 @@
 
 .message {
   background-color: #39A0DB;
-  font-size: 0.95rem;
-  margin-top: 20px;
   &:hover {
     background-color: #3FB0F1;
     color: white;
@@ -209,7 +206,6 @@
   color: white;
   padding: 8px 24px;
   background: gray;
-  width: 192px;
   height: 42px;
   transition: background 0.3s ease;
   font-size: 0.9rem;

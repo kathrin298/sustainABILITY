@@ -8,11 +8,16 @@ Rails.application.routes.draw do
 
   resources :developers do
     resources :developer_skills, only: [:new, :create, :destroy]
+    resources :developer_favourites, only: [:create]
   end
 
   resources :companies do
     resources :jobs, only: [:new, :create]
+    resources :company_favourites, only: [:create]
   end
+
+  resources :developer_favourites, only: [:index, :destroy]
+  resources :company_favourites, only: [:index, :destroy]
 
   resources :jobs, only: [:show, :index, :edit, :update, :destroy] do
     resources :applications, only: [:new, :create]
@@ -29,9 +34,10 @@ Rails.application.routes.draw do
     resources :answers, only: [:update]
   end
 
-  resources :conversations, only: [:index, :create, :destroy]
-  resources :developer_favorites, only: [:index]
-  resources :company_favorites, only: [:index]
+  resources :conversations, only: [:index, :create, :destroy] do
+    resources :messages, only: [:new, :create]
+  end
+
   resources :skills, only: [:new, :create, :destroy]
   resources :answers, only: [:create]
 end
