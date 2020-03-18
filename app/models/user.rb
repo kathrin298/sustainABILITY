@@ -18,8 +18,14 @@ class User < ApplicationRecord
                           last_name: auth.info.name.split[-1],
                           location: auth.extra.raw_info.location,
                           hireable: "Currently available",
-                          github:  auth.info.urls.GitHub,
-                          website: auth.info.urls.Blog)
+                          website: auth.info.urls.Blog,
+                          bio: "",
+                          slogan: "",
+                          github: auth.info.urls.GitHub,
+                          interests: "",
+                          facebook: "",
+                          twitter: "",
+                          linkedin: "")
       dev.user = user
       dev.save
     end
