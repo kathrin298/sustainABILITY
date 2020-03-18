@@ -75,11 +75,11 @@
           <% end %>
         </div>
       </div>
-    <div class="row" style="margin-left: 15px;">
-      <div class="bio col-9">
+
+      <div class="col-9" style="padding-left: 30px">
         <h5><strong>Bio:</strong></h5><%= @developer.bio %>
       </div>
-      <div class="col-3" style="padding-left: 0">
+      <div class="col-3" style="padding-left: 15px">
         <div class="d-flex flex-column align-items-center w-100">
           <span class="text-center font-weight-bold">My Skills</span>
           <hr class="w-100">
@@ -97,7 +97,7 @@
           </div>
         </div>
       </div>
-    </div>
+
       <% if @hired_jobs.present? %>
         <% if current_user && @hired_jobs.find { |job| job.company == current_user.company } %>
           <%= link_to 'Add review', new_application_review_path(@hired_jobs.first), class: "btn btn-flat message" %>
