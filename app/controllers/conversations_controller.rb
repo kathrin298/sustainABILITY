@@ -1,6 +1,5 @@
 class ConversationsController < ApplicationController
   def index
-    # @users = User.all
     if current_user.developer
       @conversations = Conversation.where(developer: current_user.developer).sort_by { |conversation| conversation.messages.last.created_at}.reverse!
     else
