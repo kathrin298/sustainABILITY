@@ -26,7 +26,7 @@
               <% end %>
             <% unless @company.user == current_user %>
               <% if current_user.developer && current_user.developer.favourites.include?(@company) %>
-                <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat', style: "font-size:0.88rem" do %>
+                <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat-remove', style: "font-size:0.88rem" do %>
                   <i class="fas fa-ban fa-lg"></i> Remove from favorites
                 <% end %>
                 <% else %>
