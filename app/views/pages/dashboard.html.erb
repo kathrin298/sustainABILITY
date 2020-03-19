@@ -25,7 +25,7 @@
                 <%= link_to company_path(company) do %>
                   <div class="developer-card">
                     <% if company.photo.attached? %>
-                      <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                      <%= cl_image_tag company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
                     <% else %>
                       <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
                     <% end %>
