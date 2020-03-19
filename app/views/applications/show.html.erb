@@ -7,7 +7,7 @@
       </div>
       <!-- application status -->
       <% if @application.status == 'accepted' %>
-        <p class="button green">Status: <%= @application.status %></p>
+        <p class="tag green">Status: <%= @application.status %></p>
       <% elsif @application.status == 'rejected'%>
         <p class="tag red">Status: <%= @application.status %></p>
       <% else %>
