@@ -23,22 +23,20 @@
                   <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center 2-100" %>
                 </div>
               <% end %>
-            <% unless policy(@company).edit? %>
-              <% if current_user %>
-                <% if current_user.developer && current_user.developer.favourites.include?(@company) %>
-                  <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat', style: "font-size:0.88rem" do %>
-                    <i class="fas fa-ban fa-lg"></i> Remove from favorites
-                  <% end %>
-                  <% else %>
-                    <% if current_user.developer.present? %>
-                      <%= link_to company_company_favourites_path(@company), method: :post, class: "btn btn-flat btn-delete w-100" do %>
-                        <i class="far fa-heart fa-lg"></i> Add to favorites
-                      <% end %>
+            <% unless @company.user == current_user %>
+              <% if current_user.developer && current_user.developer.favourites.include?(@company) %>
+                <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat-remove', style: "font-size:0.88rem" do %>
+                  <i class="fas fa-ban fa-lg"></i> Remove from favorites
+                <% end %>
+                <% else %>
+                  <% if current_user.developer.present? %>
+                    <%= link_to company_company_favourites_path(@company), method: :post, class: "btn btn-flat btn-delete w-100" do %>
+                      <i class="far fa-heart fa-lg"></i> Add to favorites
                     <% end %>
                   <% end %>
-                  <% if current_user.developer.present? %>
-                    <%= link_to 'Send message', conversations_path(company_id: params[:id], developer_id: current_user.developer), method: :post, class: "btn btn-flat btn-delete w-100" %>
-                  <% end %>
+                <% end %>
+                <% if current_user.developer.present? %>
+                  <%= link_to 'Send message', conversations_path(company_id: params[:id], developer_id: current_user.developer), method: :post, class: "btn btn-flat btn-delete w-100" %>
                 <% end %>
               <% end %>
               <% if policy(@company).edit? %>

@@ -18,12 +18,25 @@
   padding: 8px 24px;
   border-radius: 20px;
   background: $green;
-  // width: 192px;
-  // height: 42px;
   transition: background 0.3s ease;
 }
 
 .btn-flat:hover {
+  background-color: #559C5E;
+  color: white;
+}
+
+.btn-flat-remove {
+  display: inline-block;
+  color: white;
+  width: 100%;
+  padding: 9.5px 29px;
+  border-radius: 20px;
+  background: $green;
+  transition: background 0.3s ease;
+}
+
+.btn-flat-remove:hover {
   background-color: #559C5E;
   color: white;
 }

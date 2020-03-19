@@ -12,7 +12,7 @@
           <div id="search-page-job-card-headers">
             <h3><i class="fas fa-compass"></i> <%= job.location %></h3>
           </div>
-          <p><%= job.job_description.truncate(150) %></p>
+          <p><%= job.job_description.truncate(150) if job.job_description.present? %></p>
         </div>
         <div class="search-page-job-card-right">
           <h3>

@@ -32,7 +32,7 @@
                     <div class="developer-card-info">
                       <div class="developer-card-left">
                         <h2><%= company.name %></h2>
-                        <p><%= company.bio.truncate(150) %></p>
+                        <p><%= company.bio.truncate(150) if company.bio.present? %></p>
                       </div>
                       <div class="developer-card-right">
                         <h3><%= company.location %></h3>
@@ -62,7 +62,7 @@
                   <div class="developer-card-left">
                     <h2><%= application.job.job_title %></h2>
                     <h3>Status: <%= application.status.capitalize %></h3>
-                    <p><%= application.job.job_description.truncate(150) %></p>
+                    <p><%= application.job.job_description.truncate(150) if application.job.job_description.present? %></p>
                   </div>
                   <div class="developer-card-right">
                     <h3>Company: <%= application.job.company.name %></h3>
@@ -96,7 +96,7 @@
                   <div class="developer-card-info">
                     <div class="developer-card-left">
                       <h2><%= job.job_title %></h2>
-                      <p><%= job.job_description.truncate(150) %></p>
+                      <p><%= job.job_description.truncate(150) if job.job_description.present? %></p>
                     </div>
                     <div class="developer-card-right">
                       <h3>Company: <%= job.company.name %></h3>
@@ -144,7 +144,7 @@
                       <div class="developer-card-left">
                         <h2><%= developer.first_name.capitalize %> <%= developer.last_name.capitalize %></h2>
                         <h3><%= developer.slogan.present? ? developer.slogan : "No title provided" %></h3>
-                        <p><%= developer.bio.truncate(150) %></p>
+                        <p><%= developer.bio.truncate(150) if developer.bio.present? %></p>
                       </div>
                       <div class="developer-card-right">
                         <h3><%= developer.location %></h3>
@@ -180,7 +180,7 @@
                     <div class="developer-card-left">
                       <h2><%= job.job_title %></h2>
                       <h3>Status: <%= job.active ? "Active" : "Closed" %></h3>
-                      <p><%= job.job_description.truncate(150) %></p>
+                      <p><%= job.job_description.truncate(150) if job.job_description.present? %></p>
                     </div>
                     <div class="developer-card-right">
                       <h3>
@@ -221,7 +221,7 @@
                     <div class="developer-card-left">
                       <h2><%= application.developer.first_name.capitalize %> <%= application.developer.last_name.capitalize %></h2>
                       <h3><%= application.developer.slogan.present? ? application.developer.slogan : "No title provided" %></h3>
-                      <p><%= application.developer.bio.truncate(150) %></p>
+                      <p><%= application.developer.bio.truncate(150) if application.developer.bio.present? %></p>
                     </div>
                     <div class="developer-card-right">
                       <h3><%= application.job.job_title %></h3>
@@ -257,7 +257,7 @@
                     <div class="developer-card-left">
                       <h2><%= developer.first_name.capitalize %> <%= developer.last_name.capitalize %></h2>
                       <h3><%= developer.slogan.present? ? developer.slogan : "No title provided" %></h3>
-                      <p><%= developer.bio.truncate(150) %></p>
+                      <p><%= developer.bio.truncate(150) if developer.bio.present? %></p>
                     </div>
                     <div class="developer-card-right">
                       <h3><%= developer.location %></h3>
