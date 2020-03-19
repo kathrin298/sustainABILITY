@@ -91,7 +91,7 @@ class PagesController < ApplicationController
   end
 
   def filter_active_jobs(results)
-    results.select { |result| result.applications.where(status: "accepted").length==0}
+    results.select { |result| result.active}
   end
 
   private
