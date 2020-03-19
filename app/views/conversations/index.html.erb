@@ -50,7 +50,7 @@
         <!-- messages for each conversation -->
         <div class="messages-container tab-content" id="conversation-tabContent">
           <% @conversations.each do |conversation| %>
-            <div class="tab-pane fade <%= 'show active' if @conversations.first == conversation %>" id="conversation-<%= conversation.id %>" role="tabpanel" aria-labelledby="conversation-<%= conversation.id %>-tab">
+            <div style="overflow-y: scroll;" class="tab-pane fade <%= 'show active' if @conversations.first == conversation %>" id="conversation-<%= conversation.id %>" role="tabpanel" aria-labelledby="conversation-<%= conversation.id %>-tab">
               <% conversation.messages.each do |message| %>
                 <% if message.user == current_user %>
                   <div class="message-holder-right">
