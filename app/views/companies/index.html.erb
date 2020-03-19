@@ -61,7 +61,7 @@
       <h1>Search jobs by <strong style="color: white">programming language</strong>:</h1>
     </div>
     <div class="carousel">
-      <% @jobs.sample(10).each do |job| %>
+      <% @available_jobs.sample(10).each do |job| %>
         <%= link_to job_path(job) do %>
           <div class="landing-page-card d-block">
             <% if job.company.photo.attached? %>

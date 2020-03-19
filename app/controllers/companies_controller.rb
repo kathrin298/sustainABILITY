@@ -5,6 +5,8 @@ class CompaniesController < ApplicationController
   def index
     @companies = policy_scope(Company).order(created_at: :desc)
     @jobs = policy_scope(Job).order(created_at: :desc)
+    @available_jobs = []
+    Job.where(active: true).map { |job| @available_jobs << job }
   end
 
   def show; end

@@ -24,19 +24,21 @@
                 </div>
               <% end %>
             <% unless @company.user == current_user %>
-              <% if current_user.developer && current_user.developer.favourites.include?(@company) %>
-                <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat-remove', style: "font-size:0.88rem" do %>
-                  <i class="fas fa-ban fa-lg"></i> Remove from favorites
-                <% end %>
-                <% else %>
-                  <% if current_user.developer.present? %>
-                    <%= link_to company_company_favourites_path(@company), method: :post, class: "btn btn-flat btn-delete w-100" do %>
-                      <i class="far fa-heart fa-lg"></i> Add to favorites
+              <% if @current_user.present? %>
+                <% if current_user.developer && current_user.developer.favourites.include?(@company) %>
+                  <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat-remove', style: "font-size:0.88rem" do %>
+                    <i class="fas fa-ban fa-lg"></i> Remove from favorites
+                  <% end %>
+                  <% else %>
+                    <% if current_user.developer.present? %>
+                      <%= link_to company_company_favourites_path(@company), method: :post, class: "btn btn-flat btn-delete w-100" do %>
+                        <i class="far fa-heart fa-lg"></i> Add to favorites
+                      <% end %>
                     <% end %>
                   <% end %>
-                <% end %>
-                <% if current_user.developer.present? %>
-                  <%= link_to 'Send message', conversations_path(company_id: params[:id], developer_id: current_user.developer), method: :post, class: "btn btn-flat btn-delete w-100" %>
+                  <% if current_user.developer.present? %>
+                    <%= link_to 'Send message', conversations_path(company_id: params[:id], developer_id: current_user.developer), method: :post, class: "btn btn-flat btn-delete w-100" %>
+                  <% end %>
                 <% end %>
               <% end %>
               <% if policy(@company).edit? %>
@@ -68,38 +70,40 @@
     <div id="company-jobs-holder">
       <h1>Jobs at this company:</h1>
       <% @company.jobs.each do |job| %>
-        <div id="company-job-card-holder">
-          <%= link_to job_path(job) do  %>
-              <div class="developer-card">
-                <% if @company.photo.attached? %>
-                  <%= cl_image_tag @company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
-                <% else %>
-                  <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
-                <% end %>
-                <div class="developer-card-info">
-                  <div class="developer-card-left">
-                    <h2><%= job.job_title %></h2>
-                    <h3>Status: <%= job.active? ? "Accepting applications" : "Position closed" %></h3>
-                    <p><%= job.job_description.truncate(150) %></p>
-                  </div>
-                  <div class="developer-card-right">
-                    <h3>
-                      <% if (Date.today - job.created_at.to_date).to_i == 0 %>
-                        Posted today
-                      <% elsif (Date.today - job.created_at.to_date).to_i == 1 %>
-                        Posted 1 day ago
-                      <% else %>
-                        Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
-                      <% end %>
-                    </h3>
-                    <div class="skill-tags">
-                      <!-- Skill tags code goes here -->
+        <% if job.active %>
+          <div id="company-job-card-holder">
+            <%= link_to job_path(job) do  %>
+                <div class="developer-card">
+                  <% if @company.photo.attached? %>
+                    <%= cl_image_tag @company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                  <% else %>
+                    <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
+                  <% end %>
+                  <div class="developer-card-info">
+                    <div class="developer-card-left">
+                      <h2><%= job.job_title %></h2>
+                      <h3>Status: <%= job.active? ? "Accepting applications" : "Position closed" %></h3>
+                      <p><%= job.job_description.truncate(150) %></p>
+                    </div>
+                    <div class="developer-card-right">
+                      <h3>
+                        <% if (Date.today - job.created_at.to_date).to_i == 0 %>
+                          Posted today
+                        <% elsif (Date.today - job.created_at.to_date).to_i == 1 %>
+                          Posted 1 day ago
+                        <% else %>
+                          Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
+                        <% end %>
+                      </h3>
+                      <div class="skill-tags">
+                        <!-- Skill tags code goes here -->
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-          <% end %>
-        </div>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
 </div>
