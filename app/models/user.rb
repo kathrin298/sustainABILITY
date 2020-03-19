@@ -25,10 +25,12 @@ class User < ApplicationRecord
                           interests: "",
                           facebook: "",
                           twitter: "",
-                          linkedin: "")
+                          linkedin: "",
+                          github_username: auth.info.nickname)
       dev.user = user
       dev.save
     end
+
   end
 
   # def self.new_with_session(params, session)

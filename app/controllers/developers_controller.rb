@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class DevelopersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :find_developer, only: [:show, :edit, :update, :destroy]
@@ -45,6 +47,11 @@ class DevelopersController < ApplicationController
     else
       render 'edit'
     end
+    if @developer.github && !@developer.github.blank?
+      @developer.github_public_repos = JSON.parse(open("https://api.github.com/users/#{@developer.github_username}/repos").read).size
+      @developer.github_followers = JSON.parse(open("https://api.github.com/users/#{@developer.github_username}/followers").read).size
+      @developer.save
+    end
   end
 
   def destroy; end
@@ -53,7 +60,8 @@ class DevelopersController < ApplicationController
 
   def developer_params
     params.require(:developer).permit(:first_name, :last_name,  :photo, :location, :bio, :slogan, :interests,
-                                      :hireable, :websites, :social_links, :user, :github_profile_url)
+                                      :hireable, :websites, :social_links, :user, :github_profile_url,
+                                      :welcome_message, :github_public_repos, :github_avatar_url, :github_username, :github_followers)
   end
 
   def find_developer

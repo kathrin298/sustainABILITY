@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_105521) do
+ActiveRecord::Schema.define(version: 2020_03_18_111500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,11 @@ ActiveRecord::Schema.define(version: 2020_03_15_105521) do
     t.string "twitter"
     t.string "linkedin"
     t.string "website"
+    t.boolean "welcome_message", default: true
+    t.integer "github_public_repos"
+    t.string "github_avatar_url"
+    t.string "github_username"
+    t.integer "github_followers"
     t.index ["user_id"], name: "index_developers_on_user_id"
   end
 
