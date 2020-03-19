@@ -27,6 +27,7 @@ class User < ApplicationRecord
                           twitter: "",
                           linkedin: "")
       dev.user = user
+      raise
       dev.save
     end
   end
