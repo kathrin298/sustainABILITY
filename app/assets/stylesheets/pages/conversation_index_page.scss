@@ -1,6 +1,10 @@
 .inbox-container {
   display: flex;
-  border-radius: 20px;
+  border-radius: 15px;
+}
+
+#inbox-card-trip {
+  padding: 0;
 }
 
 .messages-container {
@@ -11,6 +15,10 @@
   width: 73%;
   position: relative;
   padding-bottom: 50px;
+  background-color: rgba(234, 233, 233, 0.7);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+
 }
 
 .conversations-container {
@@ -26,7 +34,7 @@
 #message-form {
   display:flex;
   position: absolute;
-  bottom: 0;
+  bottom: 15px;
   .field {
   flex-grow: 1;
   }
@@ -101,13 +109,13 @@
 .nav-pills .nav-link.active {
   background-color: #eae9e9;
   color: black;
-  border-radius: 20px;
+  border-left-radius: 15px;
   border: none;
 }
 
 .nav-pills .nav-link {
   border-bottom: 1px solid #c0c0c070;
-  border-radius: 20px;
+  border-radius: 15px;
   padding: 0.5rem 0.5rem;
 }
 .new_message {
