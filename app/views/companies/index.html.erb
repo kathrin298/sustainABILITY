@@ -27,7 +27,7 @@
 <div class="green-carousel">
   <div class="container">
     <div class="carousel-title">
-      <h1>Find a startup in <strong>your city</strong>:</h1>
+      <h1>Find a startup whose <strong>mission</strong> aligns with your values:</h1>
     </div>
     <div class="carousel">
       <% @companies.sample(10).each do |company| %>
@@ -40,18 +40,14 @@
             <% end %>
             <div class="card-info">
               <h1><%= company.name %></h1>
-              <p>
-                Location:
-                <br>
-                <%= company.location %>
-              </p>
+              <p class="mission">Mission: <%= company.mission.truncate(60) %></p>
             </div>
           </div>
         <% end %>
       <% end %>
     </div>
     <div class="carousel-search-bar">
-      <%= render 'pages/searchbar', search_type: 'company_location', btn_class: "btn btn-flat-reverse", placeholder: "New York, London, Berlin..." %>
+      <%= render 'pages/searchbar', search_type: 'company_mission', btn_class: "btn btn-flat-reverse", placeholder: "Climate Change, Ocean Pollution..." %>
     </div>
   </div>
 </div>
@@ -89,7 +85,7 @@
 <div class="green-carousel">
   <div class="container">
     <div class="carousel-title">
-      <h1>Or by startups whose <strong>mission</strong> aligns with your values:</h1>
+      <h1>Or look for startups in <strong>your city</strong>:</h1>
     </div>
     <div class="carousel">
       <% @companies.sample(10).each do |company| %>
@@ -102,14 +98,18 @@
             <% end %>
             <div class="card-info">
               <h1><%= company.name %></h1>
-              <p class="mission">Mission: <%= company.mission.truncate(60) %></p>
+              <p>
+                Location:
+                <br>
+                <%= company.location %>
+              </p>
             </div>
           </div>
         <% end %>
       <% end %>
     </div>
     <div class="carousel-search-bar">
-      <%= render 'pages/searchbar', search_type: 'company_mission', btn_class: "btn btn-flat-reverse", placeholder: "Climate Change, Ocean Pollution..." %>
+      <%= render 'pages/searchbar', search_type: 'company_location', btn_class: "btn btn-flat-reverse", placeholder: "New York, London, Berlin..." %>
     </div>
   </div>
 </div>
