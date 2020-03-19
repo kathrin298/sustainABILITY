@@ -12,48 +12,6 @@
   opacity: 1;
 }
 
-.btn-flat {
-  display: inline-block;
-  color: white;
-  padding: 8px 24px;
-  border-radius: 20px;
-  background: $green;
-  transition: background 0.3s ease;
-}
-
-.btn-flat:hover {
-  background-color: #559C5E;
-  color: white;
-}
-
-.btn-flat-remove {
-  display: inline-block;
-  color: white;
-  width: 100%;
-  padding: 9.5px 29px;
-  border-radius: 20px;
-  background: $green;
-  transition: background 0.3s ease;
-}
-
-.btn-flat-remove:hover {
-  background-color: #559C5E;
-  color: white;
-}
-
-.btn-flat-reverse {
-  color: $green;
-  padding: 8px 24px;
-  border-radius: 20px;
-  background: white;
-  transition: background 0.3s ease;
-}
-
-.btn-flat-reverse:hover {
-  background-color: #F4F4F4;
-  color: #67B353;
-}
-
 .btn-gradient {
   color: white;
   padding: 8px 24px;
@@ -195,14 +153,46 @@
   }
 }
 
-
 .btn-flat {
   display: inline-block;
   color: white;
   padding: 8px 24px;
-  border-radius: 8px;
+  border-radius: 20px;
   background: $green;
   transition: background 0.3s ease;
+}
+
+.btn-flat:hover {
+  background-color: #559C5E;
+  color: white;
+}
+
+.btn-flat-remove {
+  display: inline-block;
+  color: white;
+  width: 100%;
+  padding: 9.5px 29px;
+  border-radius: 20px;
+  background: $green;
+  transition: background 0.3s ease;
+}
+
+.btn-flat-remove:hover {
+  background-color: #559C5E;
+  color: white;
+}
+
+.btn-flat-reverse {
+  color: $green;
+  padding: 8px 24px;
+  border-radius: 20px;
+  background: white;
+  transition: background 0.3s ease;
+}
+
+.btn-flat-reverse:hover {
+  background-color: #F4F4F4;
+  color: #67B353;
 }
 
 .btn-reject {
