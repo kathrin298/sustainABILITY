@@ -20,29 +20,31 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="favourite-companies" role="tabpanel" aria-labelledby="favourite-companies-list" style="text-align: center;">
           <% if current_user.developer.favourites.present? %>
-            <% current_user.developer.favourites.each do |company| %>
-              <div class="serp-card-holder">
-                <%= link_to company_path(company) do %>
-                  <div class="developer-card">
-                    <% if company.photo.attached? %>
-                      <%= cl_image_tag company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
-                    <% else %>
-                      <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
-                    <% end %>
-                    <div class="developer-card-info">
-                      <div class="developer-card-left">
-                        <h2><%= company.name %></h2>
-                        <p><%= company.bio.truncate(150) if company.bio.present? %></p>
-                      </div>
-                      <div class="developer-card-right">
-                        <h3><%= company.location %></h3>
-                        <h2>Industry: <%= company.industry %></h2>
+            <% favourite_companies = current_user.developer.favourites %>
+            <% favourite_companies = favourite_companies.sort_by { |company| company.created_at }.reverse %>
+              <% favourite_companies.each do |company| %>
+                <div class="serp-card-holder">
+                  <%= link_to company_path(company) do %>
+                    <div class="developer-card">
+                      <% if company.photo.attached? %>
+                        <%= cl_image_tag company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                      <% else %>
+                        <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
+                      <% end %>
+                      <div class="developer-card-info">
+                        <div class="developer-card-left">
+                          <h2><%= company.name %></h2>
+                          <p><%= company.bio.truncate(150) if company.bio.present? %></p>
+                        </div>
+                        <div class="developer-card-right">
+                          <h3><%= company.location %></h3>
+                          <h2>Industry: <%= company.industry %></h2>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
+                  <% end %>
+                </div>
+              <% end %>
           <% else %>
             <h2>You don't have any companies saved to favorites</h2>
             <%= link_to "View All Companies", "/search?search_type=Companies&query=", class: "btn btn-flat" %>
@@ -131,36 +133,38 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="favourite-developers" role="tabpanel" aria-labelledby="favourite-developers-list" style="text-align: center;">
           <% if current_user.company.favourites.present? %>
-            <% current_user.company.favourites.each do |developer| %>
-              <div class="serp-card-holder">
-                <%= link_to developer_path(developer) do %>
-                  <div class="developer-card">
-                    <% if developer.photo.attached? %>
-                      <%= cl_image_tag developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
-                    <% else %>
-                      <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
-                    <% end %>
-                    <div class="developer-card-info">
-                      <div class="developer-card-left">
-                        <h2><%= developer.first_name.capitalize %> <%= developer.last_name.capitalize %></h2>
-                        <h3><%= developer.slogan.present? ? developer.slogan : "No title provided" %></h3>
-                        <p><%= developer.bio.truncate(150) if developer.bio.present? %></p>
-                      </div>
-                      <div class="developer-card-right">
-                        <h3><%= developer.location %></h3>
-                        <div class="skill-tags-holder">
-                          <% developer.developer_skills.each do |developer_skill| %>
-                            <div class="skill-tag" style="font-size: 12px">
-                              <%= developer_skill.skill.name %>
-                            </div>
-                          <% end %>
+            <% company_favourites = current_user.company.favourites %>
+            <% company_favourites = company_favourites.sort_by { |developer| developer.created_at }.reverse %>
+              <% company_favourites.each do |developer| %>
+                <div class="serp-card-holder">
+                  <%= link_to developer_path(developer) do %>
+                    <div class="developer-card">
+                      <% if developer.photo.attached? %>
+                        <%= cl_image_tag developer.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+                      <% else %>
+                        <%= image_tag "user.jpg", id: "dashboard-card-avatar" %>
+                      <% end %>
+                      <div class="developer-card-info">
+                        <div class="developer-card-left">
+                          <h2><%= developer.first_name.capitalize %> <%= developer.last_name.capitalize %></h2>
+                          <h3><%= developer.slogan.present? ? developer.slogan : "No title provided" %></h3>
+                          <p><%= developer.bio.truncate(150) if developer.bio.present? %></p>
+                        </div>
+                        <div class="developer-card-right">
+                          <h3><%= developer.location %></h3>
+                          <div class="skill-tags-holder">
+                            <% developer.developer_skills.each do |developer_skill| %>
+                              <div class="skill-tag" style="font-size: 12px">
+                                <%= developer_skill.skill.name %>
+                              </div>
+                            <% end %>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
+                  <% end %>
+                </div>
+              <% end %>
           <% else %>
             <h2>You don't have any developers saved to favorites</h2>
             <%= link_to "View All Developers", "/search?search_type=Developers&query=", class: "btn btn-flat" %>

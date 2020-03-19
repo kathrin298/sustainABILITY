@@ -7,23 +7,28 @@ class PagesController < ApplicationController
   def dashboard
     @company = current_user.company
     @jobs = Job.where(company: @company)
+    @jobs = @jobs.sort_by { |job| job.created_at }.reverse
     @applications = Application.where(developer: current_user.developer)
+    @applications = @applications.sort_by { |application| application.created_at }.reverse
     @developer = current_user.developer
     @developer_jobs = []
     Application.where(status:'accepted', developer: @developer).each do |application|
       @developer_jobs << application.job
     end
+    @developer_jobs = @developer_jobs.sort_by { |job| job.created_at }.reverse
     @developers = []
     Application.where(status:'accepted', job: @jobs).each do |application|
       @developers << application.developer
       @developers.flatten
     end
+    @developers = @developers.sort_by { |developer| developer.created_at }.reverse
     @received_applications = []
     @jobs.each do |job|
       job.applications.each do |application|
         @received_applications << application if application.status == 'pending'
       end
     end
+    @received_applications = @received_applications.sort_by { |application| application.created_at }.reverse
   end
 
   def search
