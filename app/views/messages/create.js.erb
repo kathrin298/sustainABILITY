@@ -1,0 +1,21 @@
+function refreshForm() {
+  const newMessageForm = document.querySelector('.show.active #message-box');
+  newMessageForm.value = ""
+}
+
+function addMessage(messageHTML) {
+  const messages = document.querySelector('.show.active');
+  messages.insertAdjacentHTML('beforeend', messageHTML);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function updateDOM() {
+  let messageHTML = "<div class='message-holder-right'><p class='date'><%= @message.message_time %></p><p class='send-messages'><%= @message.content %></p></div><br>"
+  addMessage(messageHTML);
+  refreshForm();
+}
+
+updateDOM();
+
+
+

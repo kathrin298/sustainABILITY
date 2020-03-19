@@ -12,12 +12,14 @@ const hideDevs = () => {
 
 const initDevFilter = () => {
   let checkbox = document.getElementById("serpcheckbox");
-  checkbox.checked = true;
-  hideDevs();
+  if (checkbox) {
+    checkbox.checked = true;
+    hideDevs();
 
-  checkbox.addEventListener('change', function() {
-      hideDevs();
-  });
+    checkbox.addEventListener('change', function() {
+        hideDevs();
+    });
+  }
 }
 
 export { initDevFilter, hideDevs };
