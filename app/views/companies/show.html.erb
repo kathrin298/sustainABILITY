@@ -18,7 +18,6 @@
          <!-- button for send message and add favrite, and social media icon -->
         <div class="col-3">
           <div id="company-links-holder">
-
               <% if @company.website.present?  %>
                 <div id="company-button-holder" style="width: 100%">
                   <%= link_to "Company Website", "#{"https://" if !@company.website.include?('http')}#{@company.website}", class: "d-block btn btn-flat text-center 2-100" %>
@@ -26,7 +25,7 @@
               <% end %>
             <% unless @company.user == current_user %>
               <% if current_user.developer && current_user.developer.favourites.include?(@company) %>
-                <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat', style: "font-size:0.88rem" do %>
+                <%= link_to company_favourite_path(current_user.developer.company_favourites.find_by(company: @company)), method: :delete, class: 'btn btn-flat-remove', style: "font-size:0.88rem" do %>
                   <i class="fas fa-ban fa-lg"></i> Remove from favorites
                 <% end %>
                 <% else %>
@@ -37,17 +36,17 @@
                   <% end %>
                 <% end %>
                 <% if current_user.developer.present? %>
-                  <a class="btn btn-flat btn-delete w-100" href="#"> <i class="fab fa-telegram-plane fa-lg"></i> Send message</a>
+                  <%= link_to 'Send message', conversations_path(company_id: params[:id], developer_id: current_user.developer), method: :post, class: "btn btn-flat btn-delete w-100" %>
                 <% end %>
-                <% end %>
+              <% end %>
               <% if policy(@company).edit? %>
-                <div id="company-button-holder">
-                  <%= link_to "Edit Account", edit_company_path(@company), class: "d-block btn-flat btn-delete text-center" %>
+                <div id="company-button-holder" style="width: 100%;">
+                  <%= link_to "Edit Account", edit_company_path(@company), class: "btn btn-flat btn-delete w-100" %>
                 </div>
               <% end %>
               <% if policy(@company).destroy? %>
-                <div id="company-button-holder">
-                  <%= link_to "Delete Account", registration_path(:user), class: "d-block btn-delete text-center",
+                <div id="company-button-holder" style="width: 100%;">
+                  <%= link_to "Delete Account", registration_path(:user), class: "btn btn-flat btn-delete w-100",
                     method: :delete, data: { confirm: "Are you sure you want to delete your company account?" }  %>
                 </div>
               <% end %>
