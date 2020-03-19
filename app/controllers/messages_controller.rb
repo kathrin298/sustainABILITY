@@ -1,11 +1,6 @@
 class MessagesController < ApplicationController
   before_action :find_conversation
 
-  # def index
-  #   @messages = @conversation.messages
-  #   @message = @conversation.messages.new
-  # end
-
   def new
     @message = @conversation.messages.new
   end
