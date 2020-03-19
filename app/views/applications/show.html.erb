@@ -2,7 +2,7 @@
   <div class="card-application-show">
     <div class="application-info">
       <div>
-        <h2>Your application for <%= @application.job.job_title %> </h2>
+        <h2>Application for <%= @application.job.job_title %> </h2>
         <p>By <%= link_to "#{@application.developer.first_name.capitalize} #{@application.developer.last_name.capitalize}", developer_path(@application.developer) %></p>
       </div>
       <!-- application status -->
