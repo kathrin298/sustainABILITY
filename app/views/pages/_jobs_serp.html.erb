@@ -1,41 +1,43 @@
-<div id="search-page-job-card-holder">
-  <%= link_to job_path(job) do %>
-    <div class="search-page-job-card">
-      <% if job.company.photo.attached? %>
-        <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
-      <% else %>
-        <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
-      <% end %>
-      <div class="search-page-job-card-info">
-        <div class="search-page-job-card-left">
-            <h2><%= job.job_title %></h2>
-          <div id="search-page-job-card-headers">
-            <h3><i class="fas fa-compass"></i> <%= job.location %></h3>
+<% if job.active %>
+  <div id="search-page-job-card-holder">
+    <%= link_to job_path(job) do %>
+      <div class="search-page-job-card">
+        <% if job.company.photo.attached? %>
+          <%= cl_image_tag job.company.photo.key, height: 90, width: 90,  id: "dashboard-card-avatar" %>
+        <% else %>
+          <%= image_tag "blank_company_logo.png", id: "dashboard-card-avatar" %>
+        <% end %>
+        <div class="search-page-job-card-info">
+          <div class="search-page-job-card-left">
+              <h2><%= job.job_title %></h2>
+            <div id="search-page-job-card-headers">
+              <h3><i class="fas fa-compass"></i> <%= job.location %></h3>
+            </div>
+            <p><%= job.job_description.truncate(150) if job.job_description.present? %></p>
           </div>
-          <p><%= job.job_description.truncate(150) if job.job_description.present? %></p>
-        </div>
-        <div class="search-page-job-card-right">
-          <h3>
-            <% if (Date.today - job.created_at.to_date).to_i == 0 %>
-              Posted today
-            <% else %>
-              Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
-            <% end %>
-          </h3>
-          <div id="skill-holder">
-            <% if job.job_skills.present? %>
-              <h2>Required skills:</h2>
-              <div class="search-page-skill-tags-holder">
-                <% job.job_skills.first(5).each do |job_skill| %>
-                  <div class="skill-tag">
-                    <%= job_skill.skill.name %>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
+          <div class="search-page-job-card-right">
+            <h3>
+              <% if (Date.today - job.created_at.to_date).to_i == 0 %>
+                Posted today
+              <% else %>
+                Posted <%= (Date.today - job.created_at.to_date).to_i %> days ago
+              <% end %>
+            </h3>
+            <div id="skill-holder">
+              <% if job.job_skills.present? %>
+                <h2>Required skills:</h2>
+                <div class="search-page-skill-tags-holder">
+                  <% job.job_skills.first(5).each do |job_skill| %>
+                    <div class="skill-tag">
+                      <%= job_skill.skill.name %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>
