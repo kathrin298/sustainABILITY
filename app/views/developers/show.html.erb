@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="card-trip mb-4">
     <div class="row my-5">
@@ -55,10 +56,14 @@
                 View my website
               <% end %>
             <% end %>
-            <% if current_user.present? %>
-              <% if current_user.company && current_user.company.favourites.include?(@developer) %>
-                <%= link_to developer_favourite_path(current_user.company.developer_favourites.find_by(developer: @developer)), method: :delete, class: 'btn btn-flat', style: 'font-size:0.88rem' do %>
-                  <i class="fas fa-ban fa-lg"></i> Remove from favourites
+              <% if @developer.user == current_user %>
+                <%= link_to 'Add skill', new_developer_developer_skill_path(@developer), class: "btn-flat w-100 mb-3", style: 'width:201px' %>
+              <% end %>
+              <% if current_user.present? %>
+                <% if current_user.company && current_user.company.favourites.include?(@developer) %>
+                  <%= link_to developer_favourite_path(current_user.company.developer_favourites.find_by(developer: @developer)), method: :delete, class: 'btn btn-flat', style: 'font-size:0.88rem' do %>
+                    <i class="fas fa-ban fa-lg"></i> Remove from favourites
+                  <% end %>
                 <% end %>
               <% end %>
               <% if current_user.company.present? && !current_user.company.favourites.include?(@developer) %>
@@ -66,9 +71,8 @@
                   <i class="far fa-heart fa-lg"></i> Add to favourites</a>
                 <% end %>
               <% end %>
-            <%= link_to 'Send message', conversations_path(developer_id: params[:id], company_id: current_user.company), method: :post, class: "btn btn-flat btn-delete w-100" %>
-            <% end %>
-                </div>
+              <%= link_to 'Send message', conversations_path(developer_id: params[:id], company_id: current_user.company), method: :post, class: "btn btn-flat btn-delete w-100" if current_user.company.present? %>
+
           <% end %>
           <% if @developer.user == current_user %>
             <%= link_to 'Add skill', new_developer_developer_skill_path(@developer), class: "btn btn-flat w-100 mb-3", style: "text-align:center" %>

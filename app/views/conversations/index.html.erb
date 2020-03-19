@@ -1,79 +1,86 @@
 <div class="container">
   <div class="card-trip">
     <h1>Your Messages</h1>
-    <div class="inbox-container">
-      <div class="conversations-container nav flex-column nav-pills" id="conversation-tab" role="tablist" aria-orientation="vertical">
-        <% @conversations.each do |conversation| %>
-          <!-- conversations for developers -->
-          <% if conversation.developer == current_user.developer %>
-            <a class="nav-link <%= 'active' if @conversations.first == conversation %>" id= "conversation-<%= conversation.id %>-tab" data-toggle="pill" href="#conversation-<%= conversation.id %>" role="tab" aria-controls="conversation-<%= conversation.id %>" aria-selected="<%= @conversations.first == conversation ? true : false %>">
-              <div class="conversation">
-                <% if conversation.company.photo.attached? %>
-                  <%= cl_image_tag conversation.company.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar mx-3" %>
-                <% else %>
-                  <%= image_tag "blank_company_logo.png", class: "avatar mx-3" %>
-                <% end %>
+    <% if !@conversations.empty? %>
+      <div class="inbox-container">
+        <div class="conversations-container nav flex-column nav-pills" id="conversation-tab" role="tablist" aria-orientation="vertical">
+          <% @conversations.each do |conversation| %>
+            <!-- conversations for developers -->
+            <% if conversation.developer == current_user.developer %>
+              <a class="nav-link <%= 'active' if @conversations.first == conversation %>" id= "conversation-<%= conversation.id %>-tab" data-toggle="pill" href="#conversation-<%= conversation.id %>" role="tab" aria-controls="conversation-<%= conversation.id %>" aria-selected="<%= @conversations.first == conversation ? true : false %>">
+                <div class="conversation">
+                  <% if conversation.company.photo.attached? %>
+                    <%= cl_image_tag conversation.company.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar" %>
+                  <% else %>
+                    <%= image_tag "blank_company_logo.png", class: "avatar", style: "height: 40px" %>
+                  <% end %>
 
-                <div>
-                  <div class="conversation-header">
-                    <p><%= conversation.company.name %></p>
-                    <p class="date"> <%= conversation.messages.last.message_time %> </p>
+                  <div class= "ml-2">
+                    <div class="conversation-header">
+                      <p><%= conversation.company.name.truncate(20) %></p>
+                      <p class="date"> <%= conversation.messages.last.message_time %> </p>
+                    </div>
+                    <p class="message-preview"><%= conversation.messages.last.content.truncate(50) %></p>
                   </div>
-                  <p class="message-preview"><%= conversation.messages.last.content.truncate(50) %></p>
                 </div>
-              </div>
-            </a>
-          <% end %>
-          <!-- conversations for companies -->
-          <% if conversation.company == current_user.company %>
-            <a class="nav-link" id="conversation-<%= conversation.id %>-tab" data-toggle="pill" href="#conversation-<%= conversation.id %>" role="tab" aria-controls="conversation-<%= conversation.id %>" aria-selected="<%= @conversations.first == conversation ? true : false %>">
-              <div class="conversation">
-                <% if conversation.developer.photo.attached? %>
-                  <%= cl_image_tag conversation.developer.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar mx-3" %>
-                <% else %>
-                  <%= image_tag "user.jpg", class: "avatar mx-3" %>
-                <% end %>
+              </a>
+            <% end %>
+            <!-- conversations for companies -->
+            <% if conversation.company == current_user.company %>
+              <a class="nav-link" id="conversation-<%= conversation.id %>-tab" data-toggle="pill" href="#conversation-<%= conversation.id %>" role="tab" aria-controls="conversation-<%= conversation.id %>" aria-selected="<%= @conversations.first == conversation ? true : false %>">
+                <div class="conversation">
+                  <% if conversation.developer.photo.attached? %>
+                    <%= cl_image_tag conversation.developer.photo.key, height: 40, width: 40, crop: :thumb, class: "avatar" %>
+                  <% else %>
+                    <%= image_tag "user.jpg", class: "avatar", style: "height: 40px" %>
+                  <% end %>
 
-                <div>
-                  <div class="conversation-header">
-                    <p><%= conversation.developer.first_name.capitalize %> <%= conversation.developer.last_name.capitalize %></p>
-                    <p class="date"> <%= conversation.messages.last.message_time %> </p>
+                  <div class= "ml-2">
+                    <div class="conversation-header">
+                      <p><%= conversation.developer.first_name.capitalize %> <%= conversation.developer.last_name.capitalize %></p>
+                      <p class="date"> <%= conversation.messages.last.message_time %> </p>
+                    </div>
+                    <p class="message-preview"><%= conversation.messages.last.content.truncate(50) %></p>
                   </div>
-                  <p class="message-preview"><%= conversation.messages.last.content.truncate(50) %></p>
                 </div>
-              </div>
-            </a>
+              </a>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-      <!-- messages for each conversation -->
-      <div class="messages-container tab-content" id="conversation-tabContent">
-        <% @conversations.each do |conversation| %>
-          <div class="tab-pane fade <%= 'show active' if @conversations.first == conversation %>" id="conversation-<%= conversation.id %>" role="tabpanel" aria-labelledby="conversation-<%= conversation.id %>-tab">
-            <% conversation.messages.each do |message| %>
-              <% if message.user == current_user %>
-                <p class="send-messages text-right"><%= message.content %></p>
-                <br>
-              <% else %>
-                <p class="received-messages text-left"><%= message.content %></p>
-                <br>
+        </div>
+        <!-- messages for each conversation -->
+        <div class="messages-container tab-content" id="conversation-tabContent">
+          <% @conversations.each do |conversation| %>
+            <div style="overflow-y: scroll;" class="tab-pane fade <%= 'show active' if @conversations.first == conversation %>" id="conversation-<%= conversation.id %>" role="tabpanel" aria-labelledby="conversation-<%= conversation.id %>-tab">
+              <% conversation.messages.each do |message| %>
+                <% if message.user == current_user %>
+                  <div class="message-holder-right">
+                    <p class="date"><%= message.message_time %></p>
+                    <p class="send-messages"><%= message.content %></p>
+                  </div>
+                  <br>
+                <% else %>
+                  <div class="message-holder-left">
+                    <p class="date"><%= message.message_time %></p>
+                    <p class="received-messages"><%= message.content %></p>
+                  </div>
+                  <br>
+                <% end %>
               <% end %>
-            <% end %>
-            <%= form_for([conversation, @message]) do |f| %>
-              <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-              <div class="field">
-                <%= f.text_area :content, class: "form-control" %>
-              </div>
-              <div>
-                <%= f.submit "Send", class: "btn btn-flat" %>
-              </div>
-            <% end %>
-          </div>
-
-
-
-        <% end %>
+              <%= form_for [conversation, @message], html: { id: 'message-form' } do |f| %>
+                <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+                <div class="field">
+                  <%= f.text_area :content, class: "form-control", id: "message-box"%>
+                </div>
+                <div>
+                  <%= f.submit "Send", class: "btn btn-flat" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <p>You currently don't have any messages to display.</p>
+    <% end %>
   </div>
 </div>
