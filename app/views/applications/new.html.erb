@@ -1,18 +1,71 @@
 <div class="container">
-  <h5 style="text-align: right; color: blue">Your Application for: <strong><%= @job.job_title %></strong> </h5>
-  <h4 style="padding: 15px 0">Please answer the following questions:</h4>
+  <div class="card-trip mb-0">
+    <div class="title-container">
+      <div class="title-container-left">
+        <h1>Position: <%= @job.job_title %></h1>
+        <p><%= link_to @job.company.name, company_path(@job.company), style:"color: #39A0DB" %>  <i class="fas fa-compass" style="font-size: 0.7rem;"> </i> <%= @job.location %></p>
+        <p class="date">
+          <% if (Date.today - @job.created_at.to_date).to_i == 0 %>
+            Posted today
+          <% else %>
+            Posted <%= (Date.today - @job.created_at.to_date).to_i %> days ago
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="job-info-container">
+      <!-- job description -->
+      <div class="description">
+        <h4>Job Description</h4>
+        <p><%= @job.job_description %> </p>
+        <br>
+      </div>
+      <!-- quick info section -->
+      <div class="quick-info">
+        <p>Start date: <%= @job.start_date %> </p>
+        <p>Duration: <%= @job.duration %> </p>
+        <p>Remote:
+        <% if @job.remote%>
+          Yes</p>
+        <% else %>
+          No</p>
+        <% end %>
+
+        <!-- skills section -->
+        <% unless @job.job_skills.empty? %>
+          <p>Skills:</p>
+        <% end %>
+        <div class="d-flex justify-content-start flex-wrap mb-3" style="background-color: transparent;">
+          <% @job.job_skills.each do |job_skill| %>
+            <div class="bg-dark p-2 text-white d-inline mr-2 mt-2">
+              <%= job_skill.skill.name %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- job application form -->
+<div class="container">
+  <div class="card-trip">
+    <h4 style="color: #39A0DB">Your Application for: <strong><%= @job.job_title %></strong> at <%= @job.company.name %></h4>
+    <h5 style="padding: 0;">Please answer the following questions:</h5>
     <form action="/answers" method="post">
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <div class="row">
         <% @job.questions.each_with_index do |question, index| %>
           <div class="col-12">
-            <%= question.content %>
+            <p><%= question.content %></p>
             <textarea class="form-control application-form" rows="5" cols="60" name="question[<%= question.id %>]"></textarea>
           </div>
         <% end %>
       </div>
       <input class="btn-flat" type="submit">
     </form>
+  </div>
 </div>
 
