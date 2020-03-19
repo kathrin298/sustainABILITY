@@ -33,10 +33,10 @@
         </div>
       </div>
       <div class="col-6">
-        <h2><%= @developer.first_name %> <%= @developer.last_name %></h2>
+        <h2 style="margin-bottom: 0.2rem;"><%= @developer.first_name %> <%= @developer.last_name %></h2>
+        <h4 style="margin-top: 0; margin-bottom: 1rem; opacity: 0.5;"><%= @developer.slogan %></h4>
         <p><strong>Location:</strong> <%= @developer.location %></p>
         <p><strong>Interests:</strong> <%= @developer.interests %></p>
-        <p><strong>Slogan:</strong> <%= @developer.slogan %></p>
         <p><strong>Hireable:</strong> <%= @developer.hireable %></p>
       </div>
       <div class="col-3">
