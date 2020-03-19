@@ -3,7 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta property="og:title" content="SustainABLE">
+    <meta property="og:description" content="Improve your coding and support mission-driven companies, or support your mission with like-minded developers">
+    <meta property="og:image" content="<%= image_url('og_image.png') %>">
+    <meta property="og:url" content="http://sustain-able.herokuapp.com/">
+
+    <%= favicon_link_tag asset_path('favicon.png') %>
+
     <title>SustainABLE</title>
+    <meta name="description" content="Improve your coding and support mission-driven companies, or support your mission with like-minded developers"/>
+    <meta name="author" content="SustainABLE">
+
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
