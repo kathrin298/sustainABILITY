@@ -1,28 +1,79 @@
-<div class="container p-5 w-50">
-  <h2>Sign up</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-4 mx-auto">
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= f.error_notification %>
+      <h2>Sign up</h2>
 
-    <div class="form-inputs">
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "email" }%>
-      <%= f.input :password,
-                  required: true,
-                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                  input_html: { autocomplete: "new-password" } %>
-      <%= f.input :password_confirmation,
-                  required: true,
-                  input_html: { autocomplete: "new-password" } %>
-      <%= f.collection_radio_buttons :type, [['Developer', 'Developer'], ['Company', 'Company']], :first, :last %>
+
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+
+        <p class="my-4">Please choose an option</p>
+
+        <div class="radio-btns">
+          <%= f.collection_radio_buttons :type, [['Developer', 'Developer Sign up'], ['Company', 'Company Sign up']],  :first, :last%>
+        </div>
+
+
+        <p class="my-4 d-none" id="signup-p-1">For developers, we recommend signing up through your Github account </p>
+
+        <%- if devise_mapping.omniauthable? %>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= link_to omniauth_authorize_path(resource_name, provider), id: "github-login",  class: "btn btn-dark my-2 w-100 d-none" do %>
+              <div class="d-flex">
+                <i style="font-size: 22px; align-text: left;" class="fab fa-github"></i>
+                <span class="mx-auto">Sign up with <%= OmniAuth::Utils.camelize(provider) %></span>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <p class="my-4 d-none" id="signup-p-2"> Please sign up using the form below </p>
+        <p class="my-4 d-none" id="signup-p-3"> Or to sign up using your email, please use the form below </p>
+
+        <div class="form-inputs">
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }%>
+          <%= f.input :password,
+                      required: true,
+                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: { autocomplete: "new-password" } %>
+        </div>
+
+
+        <div class="form-actions">
+          <%= f.button :submit, "Next step", class: "btn btn-success w-100", id: "sign-up-btn" %>
+        </div>
+      <% end %>
+
+      <%#= render "devise/shared/links" %>
+
+
     </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Sign up", class: "btn btn-success" %>
-    </div>
-  <% end %>
-
-  <%= render "devise/shared/links" %>
+  </div>
 </div>
+
+<script>
+  const devLabel = document.getElementsByTagName('LABEL')[0];
+  const compLabel = document.getElementsByTagName('LABEL')[1];
+
+  devLabel.addEventListener('click', (e) => {
+    document.getElementById("github-login").classList.remove('d-none');
+    document.getElementById("signup-p-1").classList.remove('d-none');
+    document.getElementById("signup-p-2").classList.add('d-none');
+    document.getElementById("signup-p-3").classList.remove('d-none');
+    document.getElementById("sign-up-btn").style.opacity = 1
+  });
+  compLabel.addEventListener('click', (e) => {
+    document.getElementById("github-login").classList.add('d-none');
+    document.getElementById("signup-p-1").classList.add('d-none');
+    document.getElementById("signup-p-2").classList.remove('d-none');
+    document.getElementById("signup-p-3").classList.add('d-none');
+    document.getElementById("sign-up-btn").style.opacity = 1
+  });
+</script>
