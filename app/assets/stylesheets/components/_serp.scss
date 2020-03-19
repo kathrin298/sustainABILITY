@@ -40,9 +40,10 @@
   }
 
   select {
-    padding: 7px;
-    background-color: #54B371;
+    padding: 15px;
+    background-color: $green;
     color: white;
+    height: 36px;
     option {
       color: black;
       background-color: white;
