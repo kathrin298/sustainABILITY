@@ -60,7 +60,7 @@ class DevelopersController < ApplicationController
 
   def developer_params
     params.require(:developer).permit(:first_name, :last_name,  :photo, :location, :bio, :slogan, :interests,
-                                      :hireable, :websites, :social_links, :user, :github_profile_url,
+                                      :hireable, :website, :github, :twitter, :facebook, :linkedin, :user,
                                       :welcome_message, :github_public_repos, :github_avatar_url, :github_username, :github_followers)
   end
 
