@@ -3,7 +3,7 @@
     <div class="title-container">
       <div class="title-container-left">
         <h1>Position: <%= @job.job_title %></h1>
-        <p><%= link_to @job.company.name, company_path(@job.company) %>  <i class="fas fa-compass" style="font-size: 0.7rem;"> </i> <%= @job.location %></p>
+        <p><%= link_to @job.company.name, company_path(@job.company), style:"color: #39A0DB" %>  <i class="fas fa-compass" style="font-size: 0.7rem;"> </i> <%= @job.location %></p>
         <p class="date">
           <% if (Date.today - @job.created_at.to_date).to_i == 0 %>
             Posted today
