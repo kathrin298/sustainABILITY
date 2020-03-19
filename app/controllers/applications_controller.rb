@@ -30,7 +30,25 @@ class ApplicationsController < ApplicationController
   def update
     authorize @application
     @application.update(application_params)
-    redirect_to application_path(@application)
+    if @application.status == 'accepted'
+      if Conversation.between(@application.developer, @application.job.company).present?
+        @conversation = Conversation.between(@application.developer, @application.job.company).first
+      else
+        @conversation = Conversation.create(developer: @application.developer, company: @application.job.company)
+      end
+      @message = Message.new(content: "Thank you for your application. We're happy to tell you that we accepted it and look forward to working with you!", user: current_user, conversation: @conversation)
+      @message.save
+      redirect_to conversations_path
+    elsif @application.status == 'rejected'
+      if Conversation.between(@application.developer, @application.job.company).present?
+        @conversation = Conversation.between(@application.developer, @application.job.company).first
+      else
+        @conversation = Conversation.create(developer: @application.developer, company: @application.job.company)
+      end
+      @message = Message.new(content: 'Thank you for your application. We are sorry to inform you that we had to reject it. All the best for your future endeavours!', user: current_user, conversation: @conversation)
+      @message.save
+      redirect_to conversations_path
+    end
   end
 
   private
