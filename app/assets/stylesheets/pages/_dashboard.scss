@@ -121,6 +121,23 @@
   }
 }
 
+.company-card-right {
+  width: 40%;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h3 {
+    font-size: 18px;
+    margin: 0;
+    opacity: 0.5;
+  }
+  p {
+    font-size: 15px;
+    margin: 0;
+  }
+}
+
 .skill-tags-holder {
   display: flex;
   flex-wrap: wrap;
