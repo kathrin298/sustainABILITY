@@ -144,9 +144,9 @@
                 <h2><%= job.job_title %></h2>
                 <p><%= job.job_description.truncate(150) %></p>
               </div>
-              <div class="developer-card-right">
-                <h3>Company: <%= job.company.name %></h3>
-                <h2>Industry: <%= job.company.industry %></h2>
+              <div class="company-card-right">
+                <h3 style="font-size: 20px;">Company: <%= job.company.name %></h3>
+                <h3 style="font-size: 16px; opacity: 0.8;">Industry: <%= job.company.industry %></h3>
               </div>
             </div>
           </div>
