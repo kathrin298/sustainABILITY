@@ -11,9 +11,9 @@
           <h2><%= company.name %></h2>
           <p><%= company.bio.truncate(150) if company.bio.present? %></p>
         </div>
-        <div class="developer-card-right">
+        <div class="company-card-right">
           <h3><%= company.location if company.location.present? %></h3>
-          <h2>Industry: <%= company.industry %></h2>
+          <h3>Open positions: <%= company.jobs.count %></h3>
         </div>
       </div>
     </div>
